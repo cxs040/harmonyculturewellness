@@ -480,26 +480,33 @@ const FIGURES = {
    FIGURE MODAL — show famous passage
    ════════════════════════════════════════ */
 function showFigure(figId) {
-  const fig = FIGURES[figId];
-  if (!fig) return;
+  const fig   = FIGURES[figId];
+  const modal = document.getElementById('fig-modal');
+  const overlay = document.getElementById('fig-overlay');
+  if (!fig || !modal || !overlay) return;
 
-  document.getElementById('fig-name-zh').textContent    = fig.nameZh;
-  document.getElementById('fig-name-en').textContent    = fig.nameEn;
-  document.getElementById('fig-dynasty-zh').textContent = fig.dynastyZh;
-  document.getElementById('fig-dynasty-en').textContent = fig.dynastyEn;
-  document.getElementById('fig-cat-badge').textContent  = fig.catLabelZh + ' · ' + fig.catLabelEn;
-  document.getElementById('fig-quote-zh').textContent   = '「' + fig.quoteZh + '」';
-  document.getElementById('fig-quote-en').textContent   = fig.quoteEn;
-  document.getElementById('fig-src-zh').textContent     = fig.sourceZh;
-  document.getElementById('fig-src-en').textContent     = fig.sourceEn;
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('fig-name-zh',    fig.nameZh);
+  set('fig-name-en',    fig.nameEn);
+  set('fig-dynasty-zh', fig.dynastyZh);
+  set('fig-dynasty-en', fig.dynastyEn);
+  set('fig-cat-badge',  fig.catLabelZh + ' · ' + fig.catLabelEn);
+  set('fig-quote-zh',   '「' + fig.quoteZh + '」');
+  set('fig-quote-en',   fig.quoteEn);
+  set('fig-src-zh',     fig.sourceZh);
+  set('fig-src-en',     fig.sourceEn);
 
   const btn = document.getElementById('fig-explore-btn');
-  btn.querySelector('.fig-btn-zh').textContent = '探索' + fig.catLabelZh + ' →';
-  btn.querySelector('.fig-btn-en').textContent = 'Explore ' + fig.catLabelEn + ' →';
-  btn.onclick = () => { closeFigure(); navigateTo(fig.section); };
+  if (btn) {
+    const zh = btn.querySelector('.fig-btn-zh');
+    const en = btn.querySelector('.fig-btn-en');
+    if (zh) zh.textContent = '探索' + fig.catLabelZh + ' →';
+    if (en) en.textContent = 'Explore ' + fig.catLabelEn + ' →';
+    btn.onclick = () => { closeFigure(); navigateTo(fig.section); };
+  }
 
-  document.getElementById('fig-modal').classList.add('open');
-  document.getElementById('fig-overlay').classList.add('open');
+  modal.classList.add('open');
+  overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
