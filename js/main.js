@@ -167,3 +167,154 @@ document.addEventListener('DOMContentLoaded', () => {
   loadSectionShelves();
   loadDocumentArchive();
 });
+
+/* ════════════════════════════════════════
+   FEATURE 1 — DARK MODE TOGGLE
+   ════════════════════════════════════════ */
+(function initDarkMode() {
+  const btn  = document.getElementById('dark-toggle');
+  const body = document.body;
+  const saved = localStorage.getItem('darkMode');
+  if (saved === 'on') {
+    body.classList.add('dark');
+    btn.textContent = '☀';
+  }
+  btn.addEventListener('click', () => {
+    const isDark = body.classList.toggle('dark');
+    btn.textContent = isDark ? '☀' : '☽';
+    localStorage.setItem('darkMode', isDark ? 'on' : 'off');
+  });
+})();
+
+/* ════════════════════════════════════════
+   FEATURE 2 — FONT SIZE CONTROLS
+   ════════════════════════════════════════ */
+(function initFontSize() {
+  const SIZES  = ['font-small', 'font-medium', 'font-large'];
+  const body   = document.body;
+  let idx      = parseInt(localStorage.getItem('fontSizeIdx') || '1', 10);
+
+  function applySize() {
+    body.classList.remove(...SIZES);
+    body.classList.add(SIZES[idx]);
+    localStorage.setItem('fontSizeIdx', idx);
+  }
+
+  applySize();
+
+  document.getElementById('font-decrease').addEventListener('click', () => {
+    if (idx > 0) { idx--; applySize(); }
+  });
+  document.getElementById('font-increase').addEventListener('click', () => {
+    if (idx < SIZES.length - 1) { idx++; applySize(); }
+  });
+})();
+
+/* ════════════════════════════════════════
+   FEATURE 3 — BACK TO TOP
+   ════════════════════════════════════════ */
+(function initBackToTop() {
+  const btn = document.getElementById('back-to-top');
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 300);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+/* ════════════════════════════════════════
+   FEATURE 4 — QUOTE OF THE DAY
+   ════════════════════════════════════════ */
+(function initQuoteOfDay() {
+  const quotes = [
+    { text: '學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？',    source: '《論語·學而》· 孔子' },
+    { text: '道可道，非常道；名可名，非常名。',                   source: '《道德經》第一章 · 老子' },
+    { text: '知己知彼，百戰不殆。',                               source: '《孫子兵法》· 孫子' },
+    { text: '天下興亡，匹夫有責。',                               source: '《日知錄》· 顧炎武' },
+    { text: '窮則獨善其身，達則兼善天下。',                       source: '《孟子·盡心上》· 孟子' },
+    { text: '不以物喜，不以己悲。',                               source: '《岳陽樓記》· 范仲淹' },
+    { text: '人有悲歡離合，月有陰晴圓缺，此事古難全。',           source: '《水調歌頭》· 蘇軾' },
+    { text: '海內存知己，天涯若比鄰。',                           source: '《送杜少府之任蜀州》· 王勃' },
+    { text: '千里之行，始於足下。',                               source: '《道德經》第六十四章 · 老子' },
+    { text: '博學之，審問之，慎思之，明辨之，篤行之。',           source: '《禮記·中庸》' },
+    { text: '路漫漫其修遠兮，吾將上下而求索。',                   source: '《離騷》· 屈原' },
+    { text: '知之者不如好之者，好之者不如樂之者。',               source: '《論語·雍也》· 孔子' },
+  ];
+
+  const now     = new Date();
+  const start   = new Date(now.getFullYear(), 0, 0);
+  const dayOfYr = Math.floor((now - start) / 86400000);
+  const q       = quotes[dayOfYr % quotes.length];
+
+  const block = document.getElementById('quote-of-day');
+  if (!block) return;
+  block.querySelector('.qod-text').textContent   = '「' + q.text + '」';
+  block.querySelector('.qod-source').textContent = '— ' + q.source;
+})();
+
+/* ════════════════════════════════════════
+   FEATURE 5 — SHARE POEM
+   ════════════════════════════════════════ */
+function sharePoem(cardId) {
+  const card = document.getElementById(cardId);
+  if (!card) return;
+
+  const titleEl  = card.querySelector('.poem-title');
+  const authorEl = card.querySelector('.poem-author');
+  const linesEl  = card.querySelector('.poem-lines.zh') ||
+                   card.querySelector('.poem-lines');
+
+  const title  = titleEl  ? titleEl.textContent.trim()  : '';
+  const author = authorEl ? authorEl.textContent.trim() : '';
+  const lines  = linesEl  ? linesEl.innerText.trim()    : '';
+  const text   = `${title}\n${author}\n\n${lines}\n\n— 中華哲學文學典籍`;
+
+  if (navigator.share) {
+    navigator.share({ title, text }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(text).then(() => showToast()).catch(() => {
+      // fallback for environments without clipboard API
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed'; ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast();
+    });
+  }
+}
+
+function showToast() {
+  const toast = document.getElementById('share-toast');
+  if (!toast) return;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+/* ════════════════════════════════════════
+   FEATURE 6 — PRINT POEM
+   ════════════════════════════════════════ */
+function printPoem(cardId) {
+  // Remove any previous print-target
+  document.querySelectorAll('.poem-card.print-target')
+    .forEach(c => c.classList.remove('print-target'));
+
+  const card = document.getElementById(cardId);
+  if (!card) return;
+
+  // Ensure poetry section is 'active' for print CSS to work
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('poetry').classList.add('active');
+
+  card.classList.add('print-target');
+  window.print();
+
+  // Restore nav state after print dialog closes
+  card.classList.remove('print-target');
+  navigateTo('poetry');
+}

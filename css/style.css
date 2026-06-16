@@ -775,3 +775,285 @@ body {
   .title-zh              { font-size: 1.05rem; letter-spacing: 0.12em; }
   .doc-gallery           { grid-template-columns: 1fr; }
 }
+
+/* ════════════════════════════════════════
+   FEATURE 1 — DARK MODE
+   ════════════════════════════════════════ */
+body.dark {
+  --parch:      #1A1610;
+  --parch-lt:   #221E17;
+  --parch-dk:   #141007;
+  --cream:      #1E1A13;
+  --ink:        #E8DCC8;
+  --ink-soft:   #B5A88E;
+}
+body.dark {
+  background-color: var(--parch);
+  background-image: none;
+}
+body.dark .scroll-wrap {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.5), inset 0 0 80px rgba(0,0,0,0.2);
+}
+body.dark .how-to-box { background: rgba(201,169,110,0.06); }
+body.dark .principle-row,
+body.dark .feature-card,
+body.dark .poem-card,
+body.dark .doc-card,
+body.dark .pdf-btn    { background: var(--parch-lt); }
+body.dark .era-card   { background: var(--parch-lt); border-color: var(--gold-dark); }
+
+/* ════════════════════════════════════════
+   FEATURE 1+2 — HEADER CONTROLS ROW
+   ════════════════════════════════════════ */
+.header-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 1rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(201,169,110,0.25);
+}
+.utility-controls {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+.util-btn {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s;
+  border-radius: 2px;
+  line-height: 1.4;
+}
+.util-btn:hover { background: var(--gold); color: var(--ink); }
+.dark-toggle-btn { font-size: 1rem; padding: 0.15rem 0.55rem; }
+
+/* ════════════════════════════════════════
+   FEATURE 2 — FONT SIZE CLASSES
+   ════════════════════════════════════════ */
+body.font-small  { font-size: 14px; }
+body.font-medium { font-size: 16px; }
+body.font-large  { font-size: 19px; }
+
+/* ════════════════════════════════════════
+   FEATURE 3 — BACK TO TOP
+   ════════════════════════════════════════ */
+#back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 44px;
+  height: 44px;
+  background: var(--gold);
+  color: var(--ink);
+  border: 2px solid var(--gold-dark);
+  border-radius: 3px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 500;
+  transform: translateY(8px);
+}
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+#back-to-top:hover {
+  background: var(--gold-bright);
+}
+
+/* ════════════════════════════════════════
+   FEATURE 4 — QUOTE OF THE DAY
+   ════════════════════════════════════════ */
+.qod-block {
+  background: linear-gradient(135deg, rgba(139,26,26,0.06), rgba(201,169,110,0.1));
+  border: 1px solid var(--gold-dark);
+  border-left: 4px solid var(--gold-bright);
+  border-radius: 0 3px 3px 0;
+  padding: 1.2rem 1.6rem;
+  margin: 1.4rem 0;
+}
+.qod-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.qod-text {
+  font-size: 1.05rem;
+  line-height: 1.9;
+  color: var(--ink);
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+.qod-source {
+  font-size: 0.8rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.1em;
+}
+
+/* ════════════════════════════════════════
+   FEATURE 5 — POEM SHARE/PRINT BUTTONS
+   ════════════════════════════════════════ */
+.poem-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(201,169,110,0.3);
+}
+.poem-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: transparent;
+  border: 1px solid var(--gold-dark);
+  color: var(--gold-dark);
+  padding: 0.3rem 0.75rem;
+  font-size: 0.78rem;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.poem-action-btn:hover {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+}
+.poem-action-btn .ti { font-size: 0.9rem; }
+
+/* ════════════════════════════════════════
+   FEATURE 5 — SHARE TOAST
+   ════════════════════════════════════════ */
+.share-toast {
+  position: fixed;
+  bottom: 5rem;
+  right: 2rem;
+  background: var(--ink);
+  color: var(--parch-lt);
+  padding: 0.6rem 1.2rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+  z-index: 600;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+}
+.share-toast.show { opacity: 1; }
+
+/* ════════════════════════════════════════
+   FEATURE 6 — PRINT STYLES
+   ════════════════════════════════════════ */
+@media print {
+  /* Hide everything */
+  body > *                   { display: none !important; }
+  /* Show only the marked poem card */
+  .site-header,
+  .main-nav,
+  .site-footer,
+  #back-to-top,
+  .share-toast               { display: none !important; }
+  .main-content              { display: block !important; max-width: 100%; padding: 0; margin: 0; }
+  .page                      { display: none !important; }
+  #poetry.page               { display: block !important; }
+  .poem-grid                 { display: block !important; }
+  .poem-card                 { display: none !important; }
+  .poem-card.print-target    { display: block !important; border: none; padding: 2rem; box-shadow: none; }
+  .poem-card.print-target .poem-actions { display: none !important; }
+  .scroll-wrap               { border: none; box-shadow: none; }
+  .scroll-wrap::before,
+  .scroll-wrap::after        { display: none; }
+  .scroll-top-bar            { display: none; }
+  .pdf-shelf                 { display: none !important; }
+  .border-stripe             { display: none !important; }
+}
+
+/* ════════════════════════════════════════
+   FEATURE 7 — DYNASTY TIMELINE
+   ════════════════════════════════════════ */
+.timeline-scroll {
+  display: flex;
+  gap: 1.2rem;
+  overflow-x: auto;
+  padding: 1rem 0.25rem 1.2rem;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+.timeline-scroll::-webkit-scrollbar { height: 6px; }
+.timeline-scroll::-webkit-scrollbar-track { background: var(--parch-dk); border-radius: 3px; }
+.timeline-scroll::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 3px; }
+
+.era-card {
+  flex: 0 0 220px;
+  background: linear-gradient(160deg, var(--parch-lt), var(--parch));
+  border: 1px solid var(--gold-dark);
+  border-top: 4px solid var(--red);
+  border-radius: 3px;
+  padding: 1.2rem 1rem;
+  scroll-snap-align: start;
+  transition: border-top-color 0.2s, box-shadow 0.2s;
+}
+.era-card:hover {
+  border-top-color: var(--gold-bright);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+.era-period {
+  font-size: 0.7rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+.era-name-zh {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+}
+.era-name-en {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+.era-figures {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.era-fig-btn {
+  background: transparent;
+  border: 1px solid rgba(201,169,110,0.35);
+  color: var(--ink-soft);
+  padding: 0.28rem 0.6rem;
+  font-size: 0.8rem;
+  border-radius: 2px;
+  width: 100%;
+  text-align: left;
+  letter-spacing: 0.04em;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.era-fig-btn:hover {
+  background: var(--gold);
+  color: var(--ink);
+  border-color: var(--gold);
+}

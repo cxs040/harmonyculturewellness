@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/iconfont/tabler-icons.min.css">
 </head>
 <body class="lang-zh">
 
@@ -24,10 +25,17 @@
       </div>
       <div class="seal">藏</div>
     </div>
-    <div class="lang-toggle">
-      <button class="lang-btn active" data-lang="zh">中文</button>
-      <span class="lang-sep">｜</span>
-      <button class="lang-btn" data-lang="en">English</button>
+    <div class="header-controls">
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="zh">中文</button>
+        <span class="lang-sep">｜</span>
+        <button class="lang-btn" data-lang="en">English</button>
+      </div>
+      <div class="utility-controls">
+        <button class="util-btn font-size-btn" id="font-decrease" aria-label="Decrease font size" title="Smaller text">A-</button>
+        <button class="util-btn font-size-btn" id="font-increase" aria-label="Increase font size" title="Larger text">A+</button>
+        <button class="util-btn dark-toggle-btn" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☽</button>
+      </div>
     </div>
   </header>
 
@@ -54,6 +62,10 @@
         <span class="nav-chn">典籍文件</span>
         <span class="nav-rom">Documents</span>
       </a></li>
+      <li><a href="#" class="nav-link" data-section="timeline">
+        <span class="nav-chn">年表</span>
+        <span class="nav-rom">Timeline</span>
+      </a></li>
     </ul>
   </nav>
 
@@ -79,6 +91,16 @@
             philosophy, literature, and art. From the legendary sage-kings through the great dynasties, its
             thinkers and poets have left an immortal legacy for all of humanity.
           </p>
+          <!-- Quote of the Day -->
+          <div id="quote-of-day" class="qod-block">
+            <div class="qod-label">
+              <span class="zh">每日名言</span>
+              <span class="en">Quote of the Day</span>
+            </div>
+            <blockquote class="qod-text"></blockquote>
+            <p class="qod-source"></p>
+          </div>
+
           <div class="gold-rule"><span>✦</span></div>
           <div class="feature-grid">
             <div class="feature-card" onclick="navigateTo('confucianism')">
@@ -272,7 +294,7 @@
         </div>
         <div class="scroll-body">
           <div class="poem-grid">
-            <div class="poem-card">
+            <div class="poem-card" id="poem-jingye">
               <div class="poem-title">
                 <span class="zh">靜夜思</span>
                 <span class="en">Thoughts on a Quiet Night</span>
@@ -290,8 +312,12 @@
                 Raising my head I gaze at the bright moon,<br>
                 Bowing my head I think of my distant home.
               </div>
+              <div class="poem-actions">
+                <button class="poem-action-btn" onclick="sharePoem('poem-jingye')" title="Share"><i class="ti ti-share"></i> <span class="zh">分享</span><span class="en">Share</span></button>
+                <button class="poem-action-btn" onclick="printPoem('poem-jingye')" title="Print"><i class="ti ti-printer"></i> <span class="zh">列印</span><span class="en">Print</span></button>
+              </div>
             </div>
-            <div class="poem-card">
+            <div class="poem-card" id="poem-chunwang">
               <div class="poem-title">
                 <span class="zh">春望</span>
                 <span class="en">Spring View</span>
@@ -309,8 +335,12 @@
                 Moved by the times, flowers draw tears;<br>
                 Grieving separation, birds startle the heart.
               </div>
+              <div class="poem-actions">
+                <button class="poem-action-btn" onclick="sharePoem('poem-chunwang')" title="Share"><i class="ti ti-share"></i> <span class="zh">分享</span><span class="en">Share</span></button>
+                <button class="poem-action-btn" onclick="printPoem('poem-chunwang')" title="Print"><i class="ti ti-printer"></i> <span class="zh">列印</span><span class="en">Print</span></button>
+              </div>
             </div>
-            <div class="poem-card">
+            <div class="poem-card" id="poem-shuidade">
               <div class="poem-title">
                 <span class="zh">水調歌頭</span>
                 <span class="en">Prelude to Water Melody</span>
@@ -332,8 +362,12 @@
                 The moon waxes and wanes — this has ever been so.<br>
                 I only wish for enduring life, to share this moonlight across a thousand miles.
               </div>
+              <div class="poem-actions">
+                <button class="poem-action-btn" onclick="sharePoem('poem-shuidade')" title="Share"><i class="ti ti-share"></i> <span class="zh">分享</span><span class="en">Share</span></button>
+                <button class="poem-action-btn" onclick="printPoem('poem-shuidade')" title="Print"><i class="ti ti-printer"></i> <span class="zh">列印</span><span class="en">Print</span></button>
+              </div>
             </div>
-            <div class="poem-card">
+            <div class="poem-card" id="poem-guanque">
               <div class="poem-title">
                 <span class="zh">登鸛雀樓</span>
                 <span class="en">Ascending Stork Tower</span>
@@ -350,6 +384,10 @@
                 The Yellow River flows into the sea.<br>
                 To exhaust the view a thousand miles distant,<br>
                 Ascend yet one more storey of the tower.
+              </div>
+              <div class="poem-actions">
+                <button class="poem-action-btn" onclick="sharePoem('poem-guanque')" title="Share"><i class="ti ti-share"></i> <span class="zh">分享</span><span class="en">Share</span></button>
+                <button class="poem-action-btn" onclick="printPoem('poem-guanque')" title="Print"><i class="ti ti-printer"></i> <span class="zh">列印</span><span class="en">Print</span></button>
               </div>
             </div>
           </div>
@@ -399,7 +437,100 @@
       </div>
     </section>
 
+    <!-- ── TIMELINE ── -->
+    <section id="timeline" class="page">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">歷史年表</h2>
+          <h2 class="en">Dynasty Timeline</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <p class="intro-text zh" style="text-indent:0">中華文明歷經數千年，諸子百家各展風華，以下為主要時代及其代表人物。</p>
+          <p class="intro-text en" style="text-indent:0">Chinese civilisation spans millennia. Explore the great eras and their defining voices.</p>
+          <div class="timeline-scroll">
+            <!-- Spring & Autumn -->
+            <div class="era-card">
+              <div class="era-period">770 – 476 BCE</div>
+              <div class="era-name-zh">春秋時代</div>
+              <div class="era-name-en">Spring &amp; Autumn</div>
+              <ul class="era-figures">
+                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">孔子 Confucius</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('taoism')">老子 Laozi</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">孫子 Sun Tzu</button></li>
+              </ul>
+            </div>
+            <!-- Warring States -->
+            <div class="era-card">
+              <div class="era-period">475 – 221 BCE</div>
+              <div class="era-name-zh">戰國時代</div>
+              <div class="era-name-en">Warring States</div>
+              <ul class="era-figures">
+                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">孟子 Mencius</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('taoism')">莊子 Zhuangzi</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">荀子 Xunzi</button></li>
+              </ul>
+            </div>
+            <!-- Han -->
+            <div class="era-card">
+              <div class="era-period">206 BCE – 220 CE</div>
+              <div class="era-name-zh">漢朝</div>
+              <div class="era-name-en">Han Dynasty</div>
+              <ul class="era-figures">
+                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">董仲舒 Dong Zhongshu</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('documents')">司馬遷 Sima Qian</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('documents')">班固 Ban Gu</button></li>
+              </ul>
+            </div>
+            <!-- Tang -->
+            <div class="era-card">
+              <div class="era-period">618 – 907 CE</div>
+              <div class="era-name-zh">唐朝</div>
+              <div class="era-name-en">Tang Dynasty</div>
+              <ul class="era-figures">
+                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">李白 Li Bai</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">杜甫 Du Fu</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">王之渙 Wang Zhihuan</button></li>
+              </ul>
+            </div>
+            <!-- Song -->
+            <div class="era-card">
+              <div class="era-period">960 – 1279 CE</div>
+              <div class="era-name-zh">宋朝</div>
+              <div class="era-name-en">Song Dynasty</div>
+              <ul class="era-figures">
+                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">蘇軾 Su Shi</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">朱熹 Zhu Xi</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">李清照 Li Qingzhao</button></li>
+              </ul>
+            </div>
+            <!-- Yuan-Ming-Qing -->
+            <div class="era-card">
+              <div class="era-period">1271 – 1912 CE</div>
+              <div class="era-name-zh">元明清</div>
+              <div class="era-name-en">Yuan · Ming · Qing</div>
+              <ul class="era-figures">
+                <li><button class="era-fig-btn" onclick="navigateTo('documents')">羅貫中 Luo Guanzhong</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('documents')">曹雪芹 Cao Xueqin</button></li>
+                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">王陽明 Wang Yangming</button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
+
+  <!-- ═══ BACK TO TOP ═══ -->
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">▲</button>
+
+  <!-- ═══ SHARE TOAST ═══ -->
+  <div id="share-toast" class="share-toast">
+    <span class="zh">已複製到剪貼板！</span>
+    <span class="en">Copied to clipboard!</span>
+  </div>
 
   <!-- ═══ PDF MODAL ═══ -->
   <div id="pdf-overlay" onclick="closePDF()"></div>
