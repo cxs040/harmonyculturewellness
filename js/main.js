@@ -511,9 +511,30 @@ function closeFigure() {
 
 /* ════════════════════════════════════════
    HANZIWRITER — home page stroke animations
+   Runs after full page load so external
+   scripts are guaranteed to be ready.
+   Uses dual CDN (jsdelivr → unpkg) so if
+   one is blocked the other takes over.
    ════════════════════════════════════════ */
-(function initHanziWriter() {
+function initHanziWriter() {
   if (typeof HanziWriter === 'undefined') return;
+
+  // Dual-CDN character data loader
+  const charDataLoader = (char, onComplete, onError) => {
+    const urls = [
+      `https://cdn.jsdelivr.net/npm/hanzi-writer-data@latest/${encodeURIComponent(char)}.json`,
+      `https://unpkg.com/hanzi-writer-data@latest/${encodeURIComponent(char)}.json`,
+    ];
+    let attempt = 0;
+    function tryNext() {
+      if (attempt >= urls.length) { onError(); return; }
+      fetch(urls[attempt++])
+        .then(r => { if (!r.ok) throw new Error('bad status'); return r.json(); })
+        .then(onComplete)
+        .catch(tryNext);
+    }
+    tryNext();
+  };
 
   const chars = [
     { id: 'hw-ren',  char: '仁' },
@@ -525,11 +546,18 @@ function closeFigure() {
   chars.forEach(({ id, char }) => {
     const el = document.getElementById(id);
     if (!el) return;
+
+    let settled = false;
+
+    // Safety net: if data never arrives in 5 s, restore text
+    const fallback = setTimeout(() => {
+      if (!settled) { settled = true; el.textContent = char; }
+    }, 5000);
+
     el.textContent = '';
 
-    let writer;
     try {
-      writer = HanziWriter.create(id, char, {
+      const writer = HanziWriter.create(id, char, {
         width: 80,
         height: 80,
         padding: 5,
@@ -540,15 +568,25 @@ function closeFigure() {
         delayBetweenStrokes: 150,
         delayBetweenLoops: 3000,
         loop: true,
-        onLoadCharDataError: () => { el.textContent = char; },
+        charDataLoader,
+        onLoadCharDataSuccess: () => { settled = true; clearTimeout(fallback); },
+        onLoadCharDataError:   () => { settled = true; clearTimeout(fallback); el.textContent = char; },
       });
       writer.animateCharacter();
       el.addEventListener('mouseenter', () => writer.animateCharacter());
     } catch (e) {
+      clearTimeout(fallback);
       el.textContent = char;
     }
   });
-})();
+}
+
+// Wait for full load so HanziWriter CDN script is guaranteed ready
+if (document.readyState === 'complete') {
+  initHanziWriter();
+} else {
+  window.addEventListener('load', initHanziWriter);
+}
 
 /* ════════════════════════════════════════
    SEARCH — index + modal

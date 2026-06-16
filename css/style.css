@@ -822,6 +822,8 @@ body.dark .era-card   { background: var(--parch-lt); border-color: var(--gold-da
 
 /* Prominent header search bar */
 .header-search-bar {
+  -webkit-appearance: none;
+  appearance: none;
   display: flex;
   align-items: center;
   gap: 0.7rem;
