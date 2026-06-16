@@ -98,8 +98,13 @@ function nextPage() {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (document.getElementById('pdf-modal').classList.contains('open')) closePDF();
-    if (document.getElementById('fig-modal').classList.contains('open')) closeFigure();
+    if (document.getElementById('pdf-modal').classList.contains('open'))    closePDF();
+    if (document.getElementById('fig-modal').classList.contains('open'))    closeFigure();
+    if (document.getElementById('search-modal').classList.contains('open')) closeSearch();
+  }
+  if (e.key === '/' && !['INPUT','TEXTAREA'].includes(document.activeElement.tagName)) {
+    e.preventDefault();
+    openSearch();
   }
   if (!document.getElementById('pdf-modal').classList.contains('open')) return;
   if (e.key === 'ArrowLeft')  prevPage();
@@ -542,6 +547,199 @@ function closeFigure() {
       el.addEventListener('mouseenter', () => writer.animateCharacter());
     } catch (e) {
       el.textContent = char;
+    }
+  });
+})();
+
+/* ════════════════════════════════════════
+   SEARCH — index + modal
+   ════════════════════════════════════════ */
+const SEARCH_INDEX = [
+  // ── Poems ──
+  { type:'poem', typeLabel:'詩詞 · Poem',
+    titleZh:'靜夜思', titleEn:'Thoughts on a Quiet Night',
+    metaZh:'李白 · 唐', metaEn:'Li Bai · Tang',
+    excerpt:'床前明月光，疑是地上霜。舉頭望明月，低頭思故鄉。',
+    section:'poetry', elementId:'poem-jingye' },
+  { type:'poem', typeLabel:'詩詞 · Poem',
+    titleZh:'春望', titleEn:'Spring View',
+    metaZh:'杜甫 · 唐', metaEn:'Du Fu · Tang',
+    excerpt:'國破山河在，城春草木深。感時花濺淚，恨別鳥驚心。',
+    section:'poetry', elementId:'poem-chunwang' },
+  { type:'poem', typeLabel:'詩詞 · Poem',
+    titleZh:'水調歌頭', titleEn:'Prelude to Water Melody',
+    metaZh:'蘇軾 · 宋', metaEn:'Su Shi · Song',
+    excerpt:'明月幾時有，把酒問青天。人有悲歡離合，月有陰晴圓缺。',
+    section:'poetry', elementId:'poem-shuidade' },
+  { type:'poem', typeLabel:'詩詞 · Poem',
+    titleZh:'登鸛雀樓', titleEn:'Ascending Stork Tower',
+    metaZh:'王之渙 · 唐', metaEn:'Wang Zhihuan · Tang',
+    excerpt:'白日依山盡，黃河入海流。欲窮千里目，更上一層樓。',
+    section:'poetry', elementId:'poem-guanque' },
+  // ── Confucianism ──
+  { type:'concept', typeLabel:'儒家 · Confucianism',
+    titleZh:'仁 · 仁愛', titleEn:'Rén · Benevolence',
+    excerpt:'愛人，人與人之間相互敬愛的道德情感。Love and compassion for others.',
+    section:'confucianism' },
+  { type:'concept', typeLabel:'儒家 · Confucianism',
+    titleZh:'義 · 正義', titleEn:'Yì · Righteousness',
+    excerpt:'行事合乎道德規範，以正義為準則。Acting in accordance with moral principles.',
+    section:'confucianism' },
+  { type:'concept', typeLabel:'儒家 · Confucianism',
+    titleZh:'禮 · 禮儀', titleEn:'Lǐ · Ritual Propriety',
+    excerpt:'禮儀規範，是社會秩序與和諧的基礎。Rites forming the foundation of harmonious society.',
+    section:'confucianism' },
+  { type:'concept', typeLabel:'儒家 · Confucianism',
+    titleZh:'智 · 智慧', titleEn:'Zhì · Wisdom',
+    excerpt:'明辨是非，擁有道德判斷力與洞察力。Discerning right from wrong; moral wisdom.',
+    section:'confucianism' },
+  { type:'concept', typeLabel:'儒家 · Confucianism',
+    titleZh:'信 · 誠信', titleEn:'Xìn · Integrity',
+    excerpt:'言而有信，誠實守諾，立身之本。Faithfulness, trustworthiness, keeping one\'s word.',
+    section:'confucianism' },
+  // ── Taoism ──
+  { type:'concept', typeLabel:'道家 · Taoism',
+    titleZh:'道 · 宇宙本源', titleEn:'Tào · The Way',
+    excerpt:'萬物之本，宇宙運行的根本規律。The fundamental principle underlying all existence.',
+    section:'taoism' },
+  { type:'concept', typeLabel:'道家 · Taoism',
+    titleZh:'德 · 內在德性', titleEn:'Dé · Virtue & Power',
+    excerpt:'順道而行所積累的內在力量與品德修為。Virtue accumulated through living with the Tao.',
+    section:'taoism' },
+  { type:'concept', typeLabel:'道家 · Taoism',
+    titleZh:'無為 · 自然而然', titleEn:'Wúwéi · Non-Action',
+    excerpt:'順應自然，不強行妄為；以柔克剛，以靜制動。Acting in harmony with natural flow.',
+    section:'taoism' },
+  { type:'concept', typeLabel:'道家 · Taoism',
+    titleZh:'樸 · 純樸自然', titleEn:'Pǔ · Simplicity',
+    excerpt:'返璞歸真，摒棄人為的繁瑣，回歸本真。Shedding artifice to rediscover authentic nature.',
+    section:'taoism' },
+  // ── Timeline figures (built from FIGURES) ──
+  ...Object.entries(FIGURES).map(([key, fig]) => ({
+    type: 'figure',
+    typeLabel: fig.dynastyZh + ' · ' + fig.dynastyEn,
+    titleZh: fig.nameZh, titleEn: fig.nameEn,
+    metaZh: fig.dynastyZh + '　' + fig.catLabelZh,
+    metaEn: fig.dynastyEn + ' · ' + fig.catLabelEn,
+    excerpt: fig.quoteZh,
+    section: fig.section, figureKey: key,
+  })),
+];
+
+function openSearch() {
+  document.getElementById('search-modal').classList.add('open');
+  document.getElementById('search-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('search-input').focus(), 50);
+}
+
+function closeSearch() {
+  document.getElementById('search-modal').classList.remove('open');
+  document.getElementById('search-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('search-input').value = '';
+  _renderHint();
+}
+
+function _shHighlight(text, q) {
+  if (!text || !q) return text || '';
+  const esc = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return text.replace(new RegExp(esc, 'gi'), m => `<mark class="sh">${m}</mark>`);
+}
+
+function _renderHint() {
+  document.getElementById('search-results').innerHTML =
+    `<p class="search-hint">
+       <span class="zh">輸入關鍵字搜尋詩詞、儒道思想、人物典故…</span>
+       <span class="en">Type to search poems, Confucian &amp; Taoist concepts, historical figures…</span>
+     </p>`;
+}
+
+let _searchResults = [];
+
+function _renderResults(results, q) {
+  const box = document.getElementById('search-results');
+  if (!results.length) {
+    box.innerHTML = q
+      ? `<p class="search-no-results">
+           <span class="zh">找不到「${q}」的相關結果</span>
+           <span class="en">No results for &ldquo;${q}&rdquo;</span>
+         </p>`
+      : _renderHint() || '';
+    return;
+  }
+  box.innerHTML = results.map((item, i) => {
+    const exc = (item.excerpt || '').length > 60
+      ? item.excerpt.substring(0, 60) + '…' : (item.excerpt || '');
+    return `<div class="search-result-item" tabindex="0" data-idx="${i}"
+                 onclick="handleSearchResult(${i})"
+                 onkeydown="if(event.key==='Enter')handleSearchResult(${i})">
+      <div class="sr-badge">${item.typeLabel}</div>
+      <div class="sr-main">
+        <div class="sr-title">
+          <span class="sr-zh">${_shHighlight(item.titleZh, q)}</span>
+          <span class="sr-en">${_shHighlight(item.titleEn, q)}</span>
+        </div>
+        ${item.metaZh ? `<div class="sr-meta">
+          <span class="sr-zh">${item.metaZh}</span>
+          <span class="sr-en">${item.metaEn || ''}</span>
+        </div>` : ''}
+        <div class="sr-excerpt">${_shHighlight(exc, q)}</div>
+      </div>
+      <span class="sr-arrow">→</span>
+    </div>`;
+  }).join('');
+}
+
+function handleSearchResult(idx) {
+  const item = _searchResults[idx];
+  if (!item) return;
+  closeSearch();
+  if (item.figureKey) {
+    navigateTo('timeline');
+    setTimeout(() => showFigure(item.figureKey), 150);
+  } else if (item.elementId) {
+    navigateTo(item.section);
+    setTimeout(() => {
+      const el = document.getElementById(item.elementId);
+      if (!el) return;
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('search-highlight');
+      setTimeout(() => el.classList.remove('search-highlight'), 2200);
+    }, 200);
+  } else {
+    navigateTo(item.section);
+  }
+}
+
+(function initSearch() {
+  const input   = document.getElementById('search-input');
+  const openBtn = document.getElementById('search-open');
+  if (openBtn) openBtn.addEventListener('click', openSearch);
+  _renderHint();
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { _searchResults = []; _renderHint(); return; }
+    _searchResults = SEARCH_INDEX.filter(item =>
+      [item.titleZh, item.titleEn, item.metaZh, item.metaEn, item.excerpt]
+        .some(f => f && f.toLowerCase().includes(q))
+    ).slice(0, 12);
+    _renderResults(_searchResults, q);
+  });
+
+  input.addEventListener('keydown', e => {
+    const items = document.querySelectorAll('.search-result-item');
+    const cur   = document.querySelector('.search-result-item:focus');
+    const idx   = cur ? parseInt(cur.dataset.idx) : -1;
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      (items[idx + 1] || items[0])?.focus();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      (items[idx - 1] || items[items.length - 1])?.focus();
+    } else if (e.key === 'Enter' && _searchResults.length) {
+      handleSearchResult(idx >= 0 ? idx : 0);
     }
   });
 })();

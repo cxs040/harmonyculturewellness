@@ -32,6 +32,7 @@
         <button class="lang-btn" data-lang="en">English</button>
       </div>
       <div class="utility-controls">
+        <button class="util-btn search-open-btn" id="search-open" aria-label="Search" title="Search (press /)"><i class="ti ti-search"></i></button>
         <button class="util-btn font-size-btn" id="font-decrease" aria-label="Decrease font size" title="Smaller text">A-</button>
         <button class="util-btn font-size-btn" id="font-increase" aria-label="Increase font size" title="Larger text">A+</button>
         <button class="util-btn dark-toggle-btn" id="dark-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">☽</button>
@@ -530,6 +531,19 @@
   <div id="share-toast" class="share-toast">
     <span class="zh">已複製到剪貼板！</span>
     <span class="en">Copied to clipboard!</span>
+  </div>
+
+  <!-- ═══ SEARCH ═══ -->
+  <div id="search-overlay"></div>
+  <div id="search-modal" role="search" aria-label="Search">
+    <div class="search-header">
+      <span class="search-icon"><i class="ti ti-search"></i></span>
+      <input type="text" id="search-input"
+             placeholder="搜尋詩詞・典籍・人物  /  Search poems, texts, figures…"
+             autocomplete="off" spellcheck="false">
+      <button class="search-close" onclick="closeSearch()" aria-label="Close search">✕</button>
+    </div>
+    <div id="search-results"></div>
   </div>
 
   <!-- ═══ FIGURE MODAL ═══ -->
