@@ -660,12 +660,20 @@ function handleSearchResult(idx) {
 (function initVoiceSearch() {
   const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
   const btn = document.getElementById('voice-search-btn');
-  if (!SpeechRecognition || !btn) return;
+  if (!btn) return;
 
-  btn.style.display = 'flex';
+  btn.style.display = 'flex'; // always show
+
+  if (!SpeechRecognition) {
+    // iOS Safari / unsupported: focus input so the keyboard (with its mic) appears
+    btn.addEventListener('click', () => {
+      setTimeout(() => document.getElementById('search-input')?.focus(), 80);
+    });
+    return;
+  }
 
   const recognition = new SpeechRecognition();
-  recognition.continuous    = false;
+  recognition.continuous     = false;
   recognition.interimResults = false;
   recognition.maxAlternatives = 1;
 
