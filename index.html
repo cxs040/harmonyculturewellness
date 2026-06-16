@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Chinese Philosophy and Literary Archives — Preserving millennia of cultural wisdom">
+  <title>中華哲學文學典籍 | Chinese Philosophy & Literary Archives</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="lang-zh">
+
+  <!-- Top decorative border -->
+  <div class="border-stripe"></div>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="seal">印</div>
+      <div class="header-title">
+        <h1 class="title-zh">中華哲學文學典籍</h1>
+        <p class="title-en">Chinese Philosophy &amp; Literary Archives</p>
+      </div>
+      <div class="seal">藏</div>
+    </div>
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="zh">中文</button>
+      <span class="lang-sep">｜</span>
+      <button class="lang-btn" data-lang="en">English</button>
+    </div>
+  </header>
+
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav class="main-nav">
+    <ul>
+      <li><a href="#" class="nav-link active" data-section="home">
+        <span class="nav-chn">首頁</span>
+        <span class="nav-rom">Home</span>
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="confucianism">
+        <span class="nav-chn">儒家</span>
+        <span class="nav-rom">Confucianism</span>
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="taoism">
+        <span class="nav-chn">道家</span>
+        <span class="nav-rom">Taoism</span>
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="poetry">
+        <span class="nav-chn">詩詞</span>
+        <span class="nav-rom">Poetry</span>
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="documents">
+        <span class="nav-chn">典籍文件</span>
+        <span class="nav-rom">Documents</span>
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main-content">
+
+    <!-- ── HOME ── -->
+    <section id="home" class="page active">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">歡迎 · 引言</h2>
+          <h2 class="en">Welcome · Introduction</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <p class="intro-text zh">
+            中華文化，源遠流長，博大精深。自三皇五帝以降，歷夏商周秦漢唐宋元明清，數千年文明傳承，
+            凝聚了無數哲人的智慧與藝術的精華，為人類文明留下了不朽的遺產。
+          </p>
+          <p class="intro-text en">
+            Chinese civilization stretches back thousands of years, accumulating an unparalleled treasury of
+            philosophy, literature, and art. From the legendary sage-kings through the great dynasties, its
+            thinkers and poets have left an immortal legacy for all of humanity.
+          </p>
+          <div class="gold-rule"><span>✦</span></div>
+          <div class="feature-grid">
+            <div class="feature-card" onclick="navigateTo('confucianism')">
+              <div class="char-icon">仁</div>
+              <h3 class="zh">儒家思想</h3>
+              <h3 class="en">Confucianism</h3>
+              <p class="zh">仁義禮智信，修身齊家治國平天下</p>
+              <p class="en">Benevolence, righteousness, and ritual propriety</p>
+            </div>
+            <div class="feature-card" onclick="navigateTo('taoism')">
+              <div class="char-icon">道</div>
+              <h3 class="zh">道家思想</h3>
+              <h3 class="en">Taoism</h3>
+              <p class="zh">道可道，非常道。無為而治，順應自然</p>
+              <p class="en">The eternal Way — effortless action in harmony with nature</p>
+            </div>
+            <div class="feature-card" onclick="navigateTo('poetry')">
+              <div class="char-icon">詩</div>
+              <h3 class="zh">詩詞文學</h3>
+              <h3 class="en">Poetry &amp; Literature</h3>
+              <p class="zh">唐詩宋詞，千古傳誦，風雅之極致</p>
+              <p class="en">Tang poetry and Song lyrics — timeless verses across the ages</p>
+            </div>
+            <div class="feature-card" onclick="navigateTo('documents')">
+              <div class="char-icon">卷</div>
+              <h3 class="zh">典籍文件庫</h3>
+              <h3 class="en">Document Archive</h3>
+              <p class="zh">瀏覽上傳的典籍文件，探求文化精髓</p>
+              <p class="en">Browse uploaded PDF texts to explore cultural essence</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CONFUCIANISM ── -->
+    <section id="confucianism" class="page">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">儒家思想</h2>
+          <h2 class="en">Confucianism</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <blockquote class="quote-block">
+            <p class="zh">"學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？"</p>
+            <p class="en">"Is it not pleasant to learn with constant perseverance? Is it not delightful to have friends coming from distant quarters?"</p>
+            <footer class="zh">— 《論語·學而》</footer>
+            <footer class="en">— Analects of Confucius, Book I</footer>
+          </blockquote>
+          <div class="section-heading">
+            <h3 class="zh">五常：核心德目</h3>
+            <h3 class="en">The Five Constants</h3>
+          </div>
+          <div class="principle-list">
+            <div class="principle-row">
+              <span class="p-char">仁</span>
+              <div>
+                <strong class="zh">仁 · 仁愛</strong>
+                <strong class="en">Rén · Benevolence</strong>
+                <p class="zh">愛人，人與人之間相互敬愛的道德情感</p>
+                <p class="en">Love and compassion for others; the highest moral virtue</p>
+              </div>
+            </div>
+            <div class="principle-row">
+              <span class="p-char">義</span>
+              <div>
+                <strong class="zh">義 · 正義</strong>
+                <strong class="en">Yì · Righteousness</strong>
+                <p class="zh">行事合乎道德規範，以正義為準則</p>
+                <p class="en">Acting in accordance with moral principles and justice</p>
+              </div>
+            </div>
+            <div class="principle-row">
+              <span class="p-char">禮</span>
+              <div>
+                <strong class="zh">禮 · 禮儀</strong>
+                <strong class="en">Lǐ · Ritual Propriety</strong>
+                <p class="zh">禮儀規範，是社會秩序與和諧的基礎</p>
+                <p class="en">Rites and rituals that form the foundation of harmonious society</p>
+              </div>
+            </div>
+            <div class="principle-row">
+              <span class="p-char">智</span>
+              <div>
+                <strong class="zh">智 · 智慧</strong>
+                <strong class="en">Zhì · Wisdom</strong>
+                <p class="zh">明辨是非，擁有道德判斷力與洞察力</p>
+                <p class="en">Discerning right from wrong; moral wisdom and insight</p>
+              </div>
+            </div>
+            <div class="principle-row">
+              <span class="p-char">信</span>
+              <div>
+                <strong class="zh">信 · 誠信</strong>
+                <strong class="en">Xìn · Integrity</strong>
+                <p class="zh">言而有信，誠實守諾，立身之本</p>
+                <p class="en">Faithfulness, trustworthiness, and keeping one's word</p>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-shelf">
+            <h3 class="zh">相關典籍</h3>
+            <h3 class="en">Related Texts</h3>
+            <div class="pdf-row">
+              <div class="pdf-btn" onclick="openPDF('pdfs/lunyu.pdf','論語 — Analects of Confucius')">
+                <span>📜</span>
+                <span class="zh">論語</span><span class="en">The Analects</span>
+              </div>
+              <div class="pdf-btn" onclick="openPDF('pdfs/daxue.pdf','大學 — The Great Learning')">
+                <span>📜</span>
+                <span class="zh">大學</span><span class="en">The Great Learning</span>
+              </div>
+              <div class="pdf-btn" onclick="openPDF('pdfs/zhongyong.pdf','中庸 — The Doctrine of the Mean')">
+                <span>📜</span>
+                <span class="zh">中庸</span><span class="en">The Doctrine of the Mean</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TAOISM ── -->
+    <section id="taoism" class="page">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">道家思想</h2>
+          <h2 class="en">Taoism</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <blockquote class="quote-block">
+            <p class="zh">"道可道，非常道；名可名，非常名。無名天地之始，有名萬物之母。"</p>
+            <p class="en">"The Tao that can be told is not the eternal Tao; the name that can be named is not the eternal name. The nameless is the origin of heaven and earth; the named is the mother of ten thousand things."</p>
+            <footer class="zh">— 《道德經》第一章 · 老子</footer>
+            <footer class="en">— Tao Te Ching, Chapter I · Laozi</footer>
+          </blockquote>
+          <div class="section-heading">
+            <h3 class="zh">核心概念</h3>
+            <h3 class="en">Core Concepts</h3>
+          </div>
+          <div class="principle-list">
+            <div class="principle-row">
+              <span class="p-char">道</span>
+              <div>
+                <strong class="zh">道 · 宇宙本源</strong>
+                <strong class="en">Tào · The Way</strong>
+                <p class="zh">萬物之本，宇宙運行的根本規律，不可言說，只可體悟</p>
+                <p class="en">The fundamental principle underlying all existence; the natural order of the universe beyond words</p>
+              </div>
+            </div>
+            <div class="principle-row">
+              <span class="p-char">德</span>
+              <div>
+                <strong class="zh">德 · 內在德性</strong>
+                <strong class="en">Dé · Virtue &amp; Power</strong>
+                <p class="zh">順道而行所積累的內在力量與品德修為</p>
+                <p class="en">The power and virtue accumulated through living in harmony with the Tao</p>
+              </div>
+            </div>
+            <div class="principle-row">
+              <span class="p-char">無</span>
+              <div>
+                <strong class="zh">無為 · 自然而然</strong>
+                <strong class="en">Wúwéi · Non-Action</strong>
+                <p class="zh">順應自然，不強行妄為；以柔克剛，以靜制動</p>
+                <p class="en">Acting in harmony with the natural flow; yielding and softness overcome the forceful and rigid</p>
+              </div>
+            </div>
+            <div class="principle-row">
+              <span class="p-char">樸</span>
+              <div>
+                <strong class="zh">樸 · 純樸自然</strong>
+                <strong class="en">Pǔ · Simplicity</strong>
+                <p class="zh">返璞歸真，摒棄人為的繁瑣，回歸本真</p>
+                <p class="en">Returning to simplicity; shedding artifice to rediscover one's authentic nature</p>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-shelf">
+            <h3 class="zh">相關典籍</h3>
+            <h3 class="en">Related Texts</h3>
+            <div class="pdf-row">
+              <div class="pdf-btn" onclick="openPDF('pdfs/daodejing.pdf','道德經 — Tao Te Ching')">
+                <span>📜</span>
+                <span class="zh">道德經</span><span class="en">Tao Te Ching</span>
+              </div>
+              <div class="pdf-btn" onclick="openPDF('pdfs/zhuangzi.pdf','莊子 — Zhuangzi')">
+                <span>📜</span>
+                <span class="zh">莊子</span><span class="en">Zhuangzi</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── POETRY ── -->
+    <section id="poetry" class="page">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">詩詞文學</h2>
+          <h2 class="en">Poetry &amp; Literature</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <div class="poem-grid">
+            <div class="poem-card">
+              <div class="poem-title">
+                <span class="zh">靜夜思</span>
+                <span class="en">Thoughts on a Quiet Night</span>
+              </div>
+              <div class="poem-author">
+                <span class="zh">李白 · 唐</span>
+                <span class="en">Li Bai · Tang Dynasty</span>
+              </div>
+              <div class="poem-lines zh">
+                床前明月光，<br>疑是地上霜。<br>舉頭望明月，<br>低頭思故鄉。
+              </div>
+              <div class="poem-lines en">
+                Before my bed the moonlight gleams,<br>
+                I wonder if it is frost on the ground.<br>
+                Raising my head I gaze at the bright moon,<br>
+                Bowing my head I think of my distant home.
+              </div>
+            </div>
+            <div class="poem-card">
+              <div class="poem-title">
+                <span class="zh">春望</span>
+                <span class="en">Spring View</span>
+              </div>
+              <div class="poem-author">
+                <span class="zh">杜甫 · 唐</span>
+                <span class="en">Du Fu · Tang Dynasty</span>
+              </div>
+              <div class="poem-lines zh">
+                國破山河在，<br>城春草木深。<br>感時花濺淚，<br>恨別鳥驚心。
+              </div>
+              <div class="poem-lines en">
+                The nation is broken; mountains and rivers remain.<br>
+                Spring comes to the city; grass and trees grow deep.<br>
+                Moved by the times, flowers draw tears;<br>
+                Grieving separation, birds startle the heart.
+              </div>
+            </div>
+            <div class="poem-card">
+              <div class="poem-title">
+                <span class="zh">水調歌頭</span>
+                <span class="en">Prelude to Water Melody</span>
+              </div>
+              <div class="poem-author">
+                <span class="zh">蘇軾 · 宋</span>
+                <span class="en">Su Shi · Song Dynasty</span>
+              </div>
+              <div class="poem-lines zh">
+                明月幾時有，把酒問青天。<br>
+                不知天上宮闕，今夕是何年。<br>
+                人有悲歡離合，月有陰晴圓缺，<br>
+                此事古難全。但願人長久，千里共嬋娟。
+              </div>
+              <div class="poem-lines en">
+                How long has the bright moon been there?<br>
+                I raise my cup to ask the blue sky.<br>
+                People have joys and sorrows, partings and reunions;<br>
+                The moon waxes and wanes — this has ever been so.<br>
+                I only wish for enduring life, to share this moonlight across a thousand miles.
+              </div>
+            </div>
+            <div class="poem-card">
+              <div class="poem-title">
+                <span class="zh">登鸛雀樓</span>
+                <span class="en">Ascending Stork Tower</span>
+              </div>
+              <div class="poem-author">
+                <span class="zh">王之渙 · 唐</span>
+                <span class="en">Wang Zhihuan · Tang Dynasty</span>
+              </div>
+              <div class="poem-lines zh">
+                白日依山盡，<br>黃河入海流。<br>欲窮千里目，<br>更上一層樓。
+              </div>
+              <div class="poem-lines en">
+                The white sun descends behind the mountains;<br>
+                The Yellow River flows into the sea.<br>
+                To exhaust the view a thousand miles distant,<br>
+                Ascend yet one more storey of the tower.
+              </div>
+            </div>
+          </div>
+          <div class="pdf-shelf">
+            <h3 class="zh">詩詞典籍</h3>
+            <h3 class="en">Poetry Collections</h3>
+            <div class="pdf-row">
+              <div class="pdf-btn" onclick="openPDF('pdfs/tangshi.pdf','唐詩三百首 — Three Hundred Tang Poems')">
+                <span>📜</span>
+                <span class="zh">唐詩三百首</span><span class="en">Three Hundred Tang Poems</span>
+              </div>
+              <div class="pdf-btn" onclick="openPDF('pdfs/shijing.pdf','詩經 — Book of Songs')">
+                <span>📜</span>
+                <span class="zh">詩經</span><span class="en">Book of Songs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DOCUMENTS ── -->
+    <section id="documents" class="page">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">典籍文件庫</h2>
+          <h2 class="en">Document Archive</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <div class="how-to-box">
+            <h3 class="zh">如何新增PDF文件</h3>
+            <h3 class="en">How to Add PDF Documents</h3>
+            <ol class="zh">
+              <li>將PDF文件放入 <code>pdfs/</code> 資料夾</li>
+              <li>在 <code>js/documents.js</code> 中新增文件資訊（中文標題、英文標題、分類）</li>
+              <li>提交並推送至GitHub，文件即會自動出現在此頁面</li>
+            </ol>
+            <ol class="en">
+              <li>Place your PDF files in the <code>pdfs/</code> folder</li>
+              <li>Add document info in <code>js/documents.js</code> (Chinese title, English title, category)</li>
+              <li>Commit and push to GitHub — documents will appear here automatically</li>
+            </ol>
+          </div>
+          <div id="doc-gallery" class="doc-gallery">
+            <!-- populated by js/documents.js -->
+          </div>
+          <div id="doc-empty" class="doc-empty" style="display:none">
+            <p class="zh">尚未新增任何文件。請依照上方說明新增PDF文件。</p>
+            <p class="en">No documents added yet. Follow the instructions above to add PDF files.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══ PDF MODAL ═══ -->
+  <div id="pdf-overlay" onclick="closePDF()"></div>
+  <div id="pdf-modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <h3 id="pdf-modal-title">Document</h3>
+      <button class="modal-close-btn" onclick="closePDF()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="pdf-nav">
+        <button onclick="prevPage()" class="pdf-nav-btn">◀ <span class="zh">上頁</span><span class="en">Prev</span></button>
+        <span id="pdf-page-info">1 / 1</span>
+        <button onclick="nextPage()" class="pdf-nav-btn"><span class="zh">下頁</span><span class="en">Next</span> ▶</button>
+      </div>
+      <canvas id="pdf-canvas"></canvas>
+      <p class="pdf-hint zh">📌 PDF文件需上傳至 <code>pdfs/</code> 資料夾後方可檢視</p>
+      <p class="pdf-hint en">📌 PDF files must be placed in the <code>pdfs/</code> folder to be viewable</p>
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="site-footer">
+    <div class="border-stripe"></div>
+    <p class="zh">中華哲學文學典籍 · 傳承千年文化智慧</p>
+    <p class="en">Chinese Philosophy &amp; Literary Archives · Preserving Millennia of Cultural Wisdom</p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="js/documents.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
