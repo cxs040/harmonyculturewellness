@@ -176,6 +176,92 @@ const POEMS = [
     ],
   },
 
+  {
+    id: 'poem-liangzhou',
+    titleZh: '涼州詞',       titleEn: 'Liangzhou Ci',
+    authorZh: '王之渙 · 唐', authorEn: 'Wang Zhihuan · Tang Dynasty',
+    linesZh: ['黃河遠上白雲間，', '一片孤城萬仞山。', '羌笛何須怨楊柳，', '春風不度玉門關。'],
+    linesEn: [
+      'The Yellow River winds far up among the white clouds;',
+      'A solitary city stands amid ten-thousand-fathom peaks.',
+      'Why should the Qiang flute grieve with the tune of willows?',
+      'Spring breezes never cross beyond the Jade Gate Pass.',
+    ],
+  },
+
+  {
+    id: 'poem-lushan',
+    titleZh: '望廬山瀑布',   titleEn: 'Gazing at the Waterfall of Mount Lu',
+    authorZh: '李白 · 唐',   authorEn: 'Li Bai · Tang Dynasty',
+    linesZh: ['日照香爐生紫煙，', '遙看瀑布掛前川。', '飛流直下三千尺，', '疑是銀河落九天。'],
+    linesEn: [
+      'Sunlight on Incense Burner Peak conjures violet mist;',
+      'Far off I watch the waterfall hang before the river.',
+      'The torrent plunges straight down three thousand feet —',
+      'I wonder if the Milky Way has fallen from the ninth heaven.',
+    ],
+  },
+
+  {
+    id: 'poem-denggao',
+    titleZh: '登高',         titleEn: 'Ascending the Heights',
+    authorZh: '杜甫 · 唐',   authorEn: 'Du Fu · Tang Dynasty',
+    linesZh: [
+      '風急天高猿嘯哀，渚清沙白鳥飛回。',
+      '無邊落木蕭蕭下，不盡長江滾滾來。',
+      '萬里悲秋常作客，百年多病獨登臺。',
+      '艱難苦恨繁霜鬢，潦倒新停濁酒杯。',
+    ],
+    linesEn: [
+      'Sharp wind, high sky — gibbons cry in sorrow; clear islet, white sand — birds circle and return.',
+      'Endless falling leaves rustle down; the boundless Yangtze rolls on without cease.',
+      'Ten thousand li from home I grieve in autumn yet again; a hundred years of illness, I climb alone.',
+      'Hardship and bitter regret have thickened the frost at my temples; worn down, I set aside my cup of wine.',
+    ],
+  },
+
+  {
+    id: 'poem-xilin',
+    titleZh: '題西林壁',     titleEn: 'Inscription on the Wall of West Forest Temple',
+    authorZh: '蘇軾 · 宋',   authorEn: 'Su Shi · Song Dynasty',
+    linesZh: ['橫看成嶺側成峰，', '遠近高低各不同。', '不識廬山真面目，', '只緣身在此山中。'],
+    linesEn: [
+      'Viewed from the front it forms a range; from the side, a peak —',
+      'Near and far, high and low, each perspective differs.',
+      'Why can I not tell the true face of Mount Lu?',
+      'Only because I myself am standing within the mountain.',
+    ],
+  },
+
+  {
+    id: 'poem-rumengling',
+    titleZh: '如夢令',       titleEn: 'As If in a Dream',
+    authorZh: '李清照 · 宋', authorEn: 'Li Qingzhao · Song Dynasty',
+    linesZh: [
+      '昨夜雨疏風驟，濃睡不消殘酒。',
+      '試問卷簾人，卻道海棠依舊。',
+      '知否？知否？應是綠肥紅瘦。',
+    ],
+    linesEn: [
+      'Last night sparse rain and fierce wind; deep sleep could not dispel the lingering wine.',
+      'I asked the one who rolled up the blind — "The crabapple blossoms are still the same."',
+      'But do you know? Do you know? The green leaves must be lush, the red petals thin.',
+    ],
+  },
+
+  {
+    id: 'poem-guanshuyougan',
+    titleZh: '觀書有感',     titleEn: 'Reflections on Reading',
+    authorZh: '朱熹 · 宋',   authorEn: 'Zhu Xi · Song Dynasty',
+    linesZh: ['半畝方塘一鑑開，', '天光雲影共徘徊。', '問渠那得清如許？', '為有源頭活水來。'],
+    linesEn: [
+      'Half an acre of square pond opens like a mirror;',
+      'Sky-light and cloud shadows linger and drift together.',
+      'How is it that this pond stays so crystal clear?',
+      'Because living water flows ceaselessly from its source.',
+    ],
+  },
+
 ];
 
 
