@@ -47,11 +47,11 @@ const DOCUMENTS = {
   /* ── 典籍 Documents ─────────────────────────────────────
      Works by: 孫子 · 司馬遷 · 班固 · 羅貫中 · 曹雪芹       */
   documents: [
-    { file: 'sunzi.pdf',       titleZh: '孫子兵法', titleEn: 'The Art of War'                 },
-    { file: 'shiji.pdf',       titleZh: '史記',     titleEn: 'Records of the Grand Historian' },
-    { file: 'hanshu.pdf',      titleZh: '漢書',     titleEn: 'Book of Han'                    },
-    { file: 'sanguo.pdf',      titleZh: '三國演義', titleEn: 'Romance of the Three Kingdoms'  },
-    { file: 'hongloumeng.pdf', titleZh: '紅樓夢',   titleEn: 'Dream of the Red Chamber'       },
+    { file: 'sunzi.pdf',       titleZh: '孫子兵法', titleEn: 'The Art of War',                 url: 'https://ctext.org/art-of-war/zh'      },
+    { file: 'shiji.pdf',       titleZh: '史記',     titleEn: 'Records of the Grand Historian', url: 'https://ctext.org/shiji/zh'            },
+    { file: 'hanshu.pdf',      titleZh: '漢書',     titleEn: 'Book of Han',                    url: 'https://ctext.org/han-shu/zh'          },
+    { file: 'sanguo.pdf',      titleZh: '三國演義', titleEn: 'Romance of the Three Kingdoms',  url: 'https://ctext.org/sanguo-yanyi/zh'     },
+    { file: 'hongloumeng.pdf', titleZh: '紅樓夢',   titleEn: 'Dream of the Red Chamber',       url: 'https://ctext.org/hongloumeng/zh'      },
   ],
 
 };

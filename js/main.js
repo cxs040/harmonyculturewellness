@@ -114,16 +114,27 @@ document.addEventListener('keydown', e => {
 
 /* ── Build a clickable PDF card ── */
 function makePdfCard(section, doc) {
-  const path  = `pdfs/${section}/${doc.file}`;
-  const title = `${doc.titleZh} — ${doc.titleEn}`;
-  const btn   = document.createElement('div');
+  const btn = document.createElement('div');
   btn.className = 'pdf-btn';
-  btn.onclick   = () => openPDF(path, title);
-  btn.innerHTML = `
-    <span>📜</span>
-    <span class="zh">${doc.titleZh}</span>
-    <span class="en">${doc.titleEn}</span>
-  `;
+  if (doc.url) {
+    btn.classList.add('pdf-btn-external');
+    btn.onclick = () => window.open(doc.url, '_blank', 'noopener');
+    btn.innerHTML = `
+      <span>📜</span>
+      <span class="zh">${doc.titleZh}</span>
+      <span class="en">${doc.titleEn}</span>
+      <span class="pdf-ext-icon">↗</span>
+    `;
+  } else {
+    const path  = `pdfs/${section}/${doc.file}`;
+    const title = `${doc.titleZh} — ${doc.titleEn}`;
+    btn.onclick = () => openPDF(path, title);
+    btn.innerHTML = `
+      <span>📜</span>
+      <span class="zh">${doc.titleZh}</span>
+      <span class="en">${doc.titleEn}</span>
+    `;
+  }
   return btn;
 }
 
@@ -162,14 +173,20 @@ function loadDocumentArchive() {
     documents:    '典籍 · Classics',
   };
 
-  gallery.innerHTML = all.map(doc => `
-    <div class="doc-card" onclick="openPDF('pdfs/${doc.section}/${doc.file}', '${doc.titleZh} — ${doc.titleEn}')">
-      <div class="doc-icon">📜</div>
-      <div class="doc-title-zh zh">${doc.titleZh}</div>
-      <div class="doc-title-en en">${doc.titleEn}</div>
-      <div class="doc-cat">${sectionLabel[doc.section]}</div>
-    </div>
-  `).join('');
+  gallery.innerHTML = all.map(doc => {
+    const onclick = doc.url
+      ? `window.open('${doc.url}','_blank','noopener')`
+      : `openPDF('pdfs/${doc.section}/${doc.file}', '${doc.titleZh} — ${doc.titleEn}')`;
+    const extBadge = doc.url ? '<span class="doc-ext-badge">↗ ctext.org</span>' : '';
+    return `
+      <div class="doc-card${doc.url ? ' doc-external' : ''}" onclick="${onclick}">
+        <div class="doc-icon">📜</div>
+        <div class="doc-title-zh zh">${doc.titleZh}</div>
+        <div class="doc-title-en en">${doc.titleEn}</div>
+        <div class="doc-cat">${sectionLabel[doc.section]}${extBadge}</div>
+      </div>
+    `;
+  }).join('');
 }
 
 

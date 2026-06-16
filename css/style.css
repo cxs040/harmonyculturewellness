@@ -551,6 +551,20 @@ body {
   color: var(--gold-dark);
   margin-top: 0.4rem;
 }
+.doc-ext-badge {
+  display: inline-block;
+  margin-left: 0.4em;
+  font-size: 0.68rem;
+  color: var(--gold);
+  opacity: 0.85;
+}
+.doc-external:hover .doc-ext-badge { opacity: 1; }
+.pdf-ext-icon {
+  font-size: 0.7rem;
+  color: var(--gold);
+  margin-left: 0.2em;
+  opacity: 0.8;
+}
 .doc-empty {
   text-align: center;
   padding: 2rem;
