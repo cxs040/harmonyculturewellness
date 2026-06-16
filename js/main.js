@@ -653,6 +653,42 @@ function handleSearchResult(idx) {
   }
 }
 
+/* ════════════════════════════════════════
+   VOICE SEARCH
+   Uses Web Speech API (Chrome + Safari iOS)
+   ════════════════════════════════════════ */
+(function initVoiceSearch() {
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const btn = document.getElementById('voice-search-btn');
+  if (!SpeechRecognition || !btn) return;
+
+  btn.style.display = 'flex';
+
+  const recognition = new SpeechRecognition();
+  recognition.continuous    = false;
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  btn.addEventListener('click', () => {
+    recognition.lang = currentLang === 'zh' ? 'zh-TW' : 'en-US';
+    recognition.start();
+    btn.classList.add('listening');
+  });
+
+  recognition.onresult = e => {
+    const transcript = e.results[0][0].transcript.trim();
+    btn.classList.remove('listening');
+    openSearch();
+    const input = document.getElementById('search-input');
+    if (!input) return;
+    input.value = transcript;
+    input.dispatchEvent(new Event('input'));
+  };
+
+  recognition.onerror = () => btn.classList.remove('listening');
+  recognition.onend   = () => btn.classList.remove('listening');
+})();
+
 (function initSearch() {
   const input   = document.getElementById('search-input');
   const openBtn = document.getElementById('search-open');
