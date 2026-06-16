@@ -683,6 +683,19 @@ body {
   letter-spacing: 0.2em;
   opacity: 0.88;
 }
+.footer-institute {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem !important;
+  color: var(--gold-bright) !important;
+  letter-spacing: 0.3em !important;
+  opacity: 1 !important;
+  padding-top: 0 !important;
+  padding-bottom: 1.4rem !important;
+  border-top: 1px solid rgba(201,169,110,0.25);
+  margin: 0 auto;
+  width: fit-content;
+}
 
 /* ════════════════════════════════════════
    RESPONSIVE
