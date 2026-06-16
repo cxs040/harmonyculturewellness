@@ -639,6 +639,12 @@ body {
   max-width: 100%;
   box-shadow: 0 2px 10px rgba(0,0,0,0.18);
 }
+.shelf-empty {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  font-style: italic;
+  padding: 0.5rem 0;
+}
 .pdf-hint {
   font-size: 0.8rem;
   color: var(--ink-soft);

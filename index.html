@@ -184,19 +184,8 @@
           <div class="pdf-shelf">
             <h3 class="zh">相關典籍</h3>
             <h3 class="en">Related Texts</h3>
-            <div class="pdf-row">
-              <div class="pdf-btn" onclick="openPDF('pdfs/lunyu.pdf','論語 — Analects of Confucius')">
-                <span>📜</span>
-                <span class="zh">論語</span><span class="en">The Analects</span>
-              </div>
-              <div class="pdf-btn" onclick="openPDF('pdfs/daxue.pdf','大學 — The Great Learning')">
-                <span>📜</span>
-                <span class="zh">大學</span><span class="en">The Great Learning</span>
-              </div>
-              <div class="pdf-btn" onclick="openPDF('pdfs/zhongyong.pdf','中庸 — The Doctrine of the Mean')">
-                <span>📜</span>
-                <span class="zh">中庸</span><span class="en">The Doctrine of the Mean</span>
-              </div>
+            <div id="shelf-confucianism" class="pdf-row">
+              <!-- auto-populated from pdfs/confucianism/ via documents.js -->
             </div>
           </div>
         </div>
@@ -264,15 +253,8 @@
           <div class="pdf-shelf">
             <h3 class="zh">相關典籍</h3>
             <h3 class="en">Related Texts</h3>
-            <div class="pdf-row">
-              <div class="pdf-btn" onclick="openPDF('pdfs/daodejing.pdf','道德經 — Tao Te Ching')">
-                <span>📜</span>
-                <span class="zh">道德經</span><span class="en">Tao Te Ching</span>
-              </div>
-              <div class="pdf-btn" onclick="openPDF('pdfs/zhuangzi.pdf','莊子 — Zhuangzi')">
-                <span>📜</span>
-                <span class="zh">莊子</span><span class="en">Zhuangzi</span>
-              </div>
+            <div id="shelf-taoism" class="pdf-row">
+              <!-- auto-populated from pdfs/taoism/ via documents.js -->
             </div>
           </div>
         </div>
@@ -374,15 +356,8 @@
           <div class="pdf-shelf">
             <h3 class="zh">詩詞典籍</h3>
             <h3 class="en">Poetry Collections</h3>
-            <div class="pdf-row">
-              <div class="pdf-btn" onclick="openPDF('pdfs/tangshi.pdf','唐詩三百首 — Three Hundred Tang Poems')">
-                <span>📜</span>
-                <span class="zh">唐詩三百首</span><span class="en">Three Hundred Tang Poems</span>
-              </div>
-              <div class="pdf-btn" onclick="openPDF('pdfs/shijing.pdf','詩經 — Book of Songs')">
-                <span>📜</span>
-                <span class="zh">詩經</span><span class="en">Book of Songs</span>
-              </div>
+            <div id="shelf-poetry" class="pdf-row">
+              <!-- auto-populated from pdfs/poetry/ via documents.js -->
             </div>
           </div>
         </div>
@@ -440,8 +415,8 @@
         <button onclick="nextPage()" class="pdf-nav-btn"><span class="zh">下頁</span><span class="en">Next</span> ▶</button>
       </div>
       <canvas id="pdf-canvas"></canvas>
-      <p class="pdf-hint zh">📌 PDF文件需上傳至 <code>pdfs/</code> 資料夾後方可檢視</p>
-      <p class="pdf-hint en">📌 PDF files must be placed in the <code>pdfs/</code> folder to be viewable</p>
+      <p class="pdf-hint zh">📌 將PDF上傳至GitHub對應資料夾後即可檢視</p>
+      <p class="pdf-hint en">📌 Upload the PDF to the matching GitHub folder to view it here</p>
     </div>
   </div>
 
