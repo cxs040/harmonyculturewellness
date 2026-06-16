@@ -97,8 +97,11 @@ function nextPage() {
 }
 
 document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('pdf-modal').classList.contains('open')) closePDF();
+    if (document.getElementById('fig-modal').classList.contains('open')) closeFigure();
+  }
   if (!document.getElementById('pdf-modal').classList.contains('open')) return;
-  if (e.key === 'Escape')     closePDF();
   if (e.key === 'ArrowLeft')  prevPage();
   if (e.key === 'ArrowRight') nextPage();
 });
@@ -318,3 +321,227 @@ function printPoem(cardId) {
   card.classList.remove('print-target');
   navigateTo('poetry');
 }
+
+/* ════════════════════════════════════════
+   FIGURE DATA — timeline persons
+   ════════════════════════════════════════ */
+const FIGURES = {
+  kongzi: {
+    nameZh: '孔子', nameEn: 'Confucius',
+    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
+    section: 'confucianism', catLabelZh: '儒家', catLabelEn: 'Confucianism',
+    quoteZh: '學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？人不知而不慍，不亦君子乎？',
+    quoteEn: 'Is it not pleasant to learn and practise what you have learned? Is it not joyful to have friends come from afar? Is it not virtue for a man to remain unperturbed though men may take no note of him?',
+    sourceZh: '《論語·學而》', sourceEn: 'Analects, Book I',
+  },
+  laozi: {
+    nameZh: '老子', nameEn: 'Laozi',
+    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
+    section: 'taoism', catLabelZh: '道家', catLabelEn: 'Taoism',
+    quoteZh: '道可道，非常道；名可名，非常名。無名天地之始，有名萬物之母。',
+    quoteEn: 'The Tao that can be told is not the eternal Tao; the name that can be named is not the eternal name. The nameless is the origin of heaven and earth; the named is the mother of ten thousand things.',
+    sourceZh: '《道德經》第一章', sourceEn: 'Tao Te Ching, Chapter I',
+  },
+  sunzi: {
+    nameZh: '孫子', nameEn: 'Sun Tzu',
+    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
+    section: 'documents', catLabelZh: '典籍', catLabelEn: 'Documents',
+    quoteZh: '知己知彼，百戰不殆；不知彼而知己，一勝一負；不知彼，不知己，每戰必敗。',
+    quoteEn: 'If you know the enemy and know yourself, you need not fear the result of a hundred battles. If you know yourself but not the enemy, for every victory you will also suffer a defeat. If you know neither yourself nor the enemy, you will succumb in every battle.',
+    sourceZh: '《孫子兵法·謀攻篇》', sourceEn: 'The Art of War, Chapter III',
+  },
+  mengzi: {
+    nameZh: '孟子', nameEn: 'Mencius',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'confucianism', catLabelZh: '儒家', catLabelEn: 'Confucianism',
+    quoteZh: '老吾老，以及人之老；幼吾幼，以及人之幼。天下可運於掌。',
+    quoteEn: 'Treat the aged of your own family with the reverence due to age, then extend that reverence to the aged of other families; treat your own young with the tenderness due to youth, then extend that tenderness to the young of other families — and the empire may be turned in your palm.',
+    sourceZh: '《孟子·梁惠王上》', sourceEn: 'Mencius, Book I Part A',
+  },
+  zhuangzi: {
+    nameZh: '莊子', nameEn: 'Zhuangzi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'taoism', catLabelZh: '道家', catLabelEn: 'Taoism',
+    quoteZh: '吾生也有涯，而知也無涯。以有涯隨無涯，殆已！已而為知者，殆而已矣。',
+    quoteEn: 'Our life has a limit, but our knowledge is without limit. To use what has a limit in pursuit of what is without limit is a perilous thing; and when, knowing this, we still seek the increase of our knowledge, the peril cannot be averted.',
+    sourceZh: '《莊子·養生主》', sourceEn: 'Zhuangzi, The Secret of Caring for Life',
+  },
+  xunzi: {
+    nameZh: '荀子', nameEn: 'Xunzi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'confucianism', catLabelZh: '儒家', catLabelEn: 'Confucianism',
+    quoteZh: '青，取之於藍，而青於藍；冰，水為之，而寒於水。',
+    quoteEn: 'Indigo blue is extracted from the indigo plant and yet it surpasses the plant in blueness. Ice is made of water and yet it is colder than water — learning transforms the learner beyond the source.',
+    sourceZh: '《荀子·勸學》', sourceEn: 'Xunzi, An Exhortation to Learning',
+  },
+  dongzhongshu: {
+    nameZh: '董仲舒', nameEn: 'Dong Zhongshu',
+    dynastyZh: '漢朝', dynastyEn: 'Han Dynasty',
+    section: 'confucianism', catLabelZh: '儒家', catLabelEn: 'Confucianism',
+    quoteZh: '仁義禮智信，五者，王道之本也。此五者並行，人道出焉。聖人知其然，故多其愛而少其嚴。',
+    quoteEn: 'Benevolence, righteousness, ritual propriety, wisdom, and integrity — these five are the foundation of the kingly way. When they flourish together, the way of humanity emerges. The sage, knowing this, emphasises love over severity.',
+    sourceZh: '《春秋繁露》', sourceEn: 'Luxuriant Gems of the Spring and Autumn Annals',
+  },
+  simaqian: {
+    nameZh: '司馬遷', nameEn: 'Sima Qian',
+    dynastyZh: '漢朝', dynastyEn: 'Han Dynasty',
+    section: 'documents', catLabelZh: '典籍', catLabelEn: 'Documents',
+    quoteZh: '人固有一死，或重於泰山，或輕於鴻毛，用之所趨異也。',
+    quoteEn: 'It is certain that all men must die, but some deaths are weightier than Mount Tai and others lighter than a feather. To give one\'s life for the people is weightier than Mount Tai; to die in service to tyranny is lighter than a feather.',
+    sourceZh: '《報任少卿書》', sourceEn: 'Letter to Ren An',
+  },
+  bangu: {
+    nameZh: '班固', nameEn: 'Ban Gu',
+    dynastyZh: '漢朝', dynastyEn: 'Han Dynasty',
+    section: 'documents', catLabelZh: '典籍', catLabelEn: 'Documents',
+    quoteZh: '蓋文章，經國之大業，不朽之盛事。年壽有時而盡，榮樂止乎其身，二者必至之常期，未若文章之無窮。',
+    quoteEn: 'Literary writing is the greatest undertaking in governing a nation and an affair of undying glory. A person\'s lifespan eventually ends, and honour ceases with the body — both have their inevitable terms. Yet they cannot compare with literary writing, which endures without end.',
+    sourceZh: '《典論·論文》', sourceEn: 'Discourse on Literature',
+  },
+  libai: {
+    nameZh: '李白', nameEn: 'Li Bai',
+    dynastyZh: '唐朝', dynastyEn: 'Tang Dynasty',
+    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    quoteZh: '君不見黃河之水天上來，奔流到海不復回。君不見高堂明鏡悲白髮，朝如青絲暮成雪。人生得意須盡歡，莫使金樽空對月。',
+    quoteEn: 'Do you not see the waters of the Yellow River pour down from the sky, rushing to the sea never to return? Do you not see the bright mirror in the high hall lamenting white hair — morning threads of silk, by evening turned to snow? When life is joyful, make the most of it; do not let the golden goblet face the moon alone and empty.',
+    sourceZh: '《將進酒》', sourceEn: 'Bring in the Wine',
+  },
+  dufu: {
+    nameZh: '杜甫', nameEn: 'Du Fu',
+    dynastyZh: '唐朝', dynastyEn: 'Tang Dynasty',
+    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    quoteZh: '國破山河在，城春草木深。感時花濺淚，恨別鳥驚心。烽火連三月，家書抵萬金。',
+    quoteEn: 'The nation is broken, yet mountains and rivers remain. Spring comes to the city — grass and trees grow deep. Moved by the times, flowers draw forth tears; grieving separation, birds startle the heart. The beacon fires have blazed for three months; a letter from home is worth ten thousand in gold.',
+    sourceZh: '《春望》', sourceEn: 'Spring View',
+  },
+  wangzhihuan: {
+    nameZh: '王之渙', nameEn: 'Wang Zhihuan',
+    dynastyZh: '唐朝', dynastyEn: 'Tang Dynasty',
+    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    quoteZh: '白日依山盡，黃河入海流。欲窮千里目，更上一層樓。',
+    quoteEn: 'The white sun sets beyond the mountains; the Yellow River flows into the sea. To see a thousand miles further, you must climb one more storey of the tower.',
+    sourceZh: '《登鸛雀樓》', sourceEn: 'Ascending Stork Tower',
+  },
+  sushi: {
+    nameZh: '蘇軾', nameEn: 'Su Shi',
+    dynastyZh: '宋朝', dynastyEn: 'Song Dynasty',
+    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    quoteZh: '明月幾時有，把酒問青天。不知天上宮闕，今夕是何年。人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。',
+    quoteEn: 'How long has the bright moon been there? I raise my cup to ask the blue sky. I wonder what year it is tonight in the palace above. People have sorrows and joys, partings and reunions; the moon waxes and wanes — perfection has always been elusive. I only wish those I love may live long, to share this beautiful moonlight across a thousand miles.',
+    sourceZh: '《水調歌頭·明月幾時有》', sourceEn: 'Prelude to Water Melody',
+  },
+  zhuxi: {
+    nameZh: '朱熹', nameEn: 'Zhu Xi',
+    dynastyZh: '宋朝', dynastyEn: 'Song Dynasty',
+    section: 'confucianism', catLabelZh: '儒家', catLabelEn: 'Confucianism',
+    quoteZh: '問渠那得清如許？為有源頭活水來。',
+    quoteEn: 'How is it that this pond stays so crystal clear? Because living water flows ceaselessly from its source. (A metaphor for continuous study and the renewal of the mind through fresh learning.)',
+    sourceZh: '《觀書有感》', sourceEn: 'Reflections on Reading',
+  },
+  liqingzhao: {
+    nameZh: '李清照', nameEn: 'Li Qingzhao',
+    dynastyZh: '宋朝', dynastyEn: 'Song Dynasty',
+    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    quoteZh: '生當作人傑，死亦為鬼雄。至今思項羽，不肯過江東。',
+    quoteEn: 'In life, be a hero among the living; in death, be a hero among the dead. I still think of Xiang Yu, who refused to cross the river east and retreat from defeat.',
+    sourceZh: '《夏日絕句》', sourceEn: 'Quatrain Written in Summer',
+  },
+  luoguanzhong: {
+    nameZh: '羅貫中', nameEn: 'Luo Guanzhong',
+    dynastyZh: '元末明初', dynastyEn: 'Yuan–Ming Period',
+    section: 'documents', catLabelZh: '典籍', catLabelEn: 'Documents',
+    quoteZh: '話說天下大勢，分久必合，合久必分。',
+    quoteEn: 'It is a truth universally acknowledged that the realm under heaven, after a long period of division, tends to unite; and after a long period of union, tends to divide.',
+    sourceZh: '《三國演義》第一回', sourceEn: 'Romance of the Three Kingdoms, Chapter I',
+  },
+  caoxueqin: {
+    nameZh: '曹雪芹', nameEn: 'Cao Xueqin',
+    dynastyZh: '清朝', dynastyEn: 'Qing Dynasty',
+    section: 'documents', catLabelZh: '典籍', catLabelEn: 'Documents',
+    quoteZh: '滿紙荒唐言，一把辛酸淚。都云作者癡，誰解其中味？',
+    quoteEn: 'Pages full of fantastical words, a handful of bitter tears — all say the author was a fool; who can understand the taste within?',
+    sourceZh: '《紅樓夢》卷首題詩', sourceEn: 'Dream of the Red Chamber, Preface Poem',
+  },
+  wangyangming: {
+    nameZh: '王陽明', nameEn: 'Wang Yangming',
+    dynastyZh: '明朝', dynastyEn: 'Ming Dynasty',
+    section: 'confucianism', catLabelZh: '儒家', catLabelEn: 'Confucianism',
+    quoteZh: '知是行之始，行是知之成。',
+    quoteEn: 'Knowledge is the beginning of action; action is the completion of knowledge. True understanding and moral conduct are inseparable — to genuinely know something is already to act upon it.',
+    sourceZh: '《傳習錄》', sourceEn: 'Instructions for Practical Living',
+  },
+};
+
+/* ════════════════════════════════════════
+   FIGURE MODAL — show famous passage
+   ════════════════════════════════════════ */
+function showFigure(figId) {
+  const fig = FIGURES[figId];
+  if (!fig) return;
+
+  document.getElementById('fig-name-zh').textContent    = fig.nameZh;
+  document.getElementById('fig-name-en').textContent    = fig.nameEn;
+  document.getElementById('fig-dynasty-zh').textContent = fig.dynastyZh;
+  document.getElementById('fig-dynasty-en').textContent = fig.dynastyEn;
+  document.getElementById('fig-cat-badge').textContent  = fig.catLabelZh + ' · ' + fig.catLabelEn;
+  document.getElementById('fig-quote-zh').textContent   = '「' + fig.quoteZh + '」';
+  document.getElementById('fig-quote-en').textContent   = fig.quoteEn;
+  document.getElementById('fig-src-zh').textContent     = fig.sourceZh;
+  document.getElementById('fig-src-en').textContent     = fig.sourceEn;
+
+  const btn = document.getElementById('fig-explore-btn');
+  btn.querySelector('.fig-btn-zh').textContent = '探索' + fig.catLabelZh + ' →';
+  btn.querySelector('.fig-btn-en').textContent = 'Explore ' + fig.catLabelEn + ' →';
+  btn.onclick = () => { closeFigure(); navigateTo(fig.section); };
+
+  document.getElementById('fig-modal').classList.add('open');
+  document.getElementById('fig-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFigure() {
+  document.getElementById('fig-modal').classList.remove('open');
+  document.getElementById('fig-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ════════════════════════════════════════
+   HANZIWRITER — home page stroke animations
+   ════════════════════════════════════════ */
+(function initHanziWriter() {
+  if (typeof HanziWriter === 'undefined') return;
+
+  const chars = [
+    { id: 'hw-ren',  char: '仁' },
+    { id: 'hw-dao',  char: '道' },
+    { id: 'hw-shi',  char: '詩' },
+    { id: 'hw-juan', char: '卷' },
+  ];
+
+  chars.forEach(({ id, char }) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.textContent = '';
+
+    let writer;
+    try {
+      writer = HanziWriter.create(id, char, {
+        width: 80,
+        height: 80,
+        padding: 5,
+        strokeColor: '#8B1A1A',
+        outlineColor: 'rgba(201,169,110,0.3)',
+        drawingWidth: 3,
+        strokeAnimationSpeed: 1,
+        delayBetweenStrokes: 150,
+        delayBetweenLoops: 3000,
+        loop: true,
+        onLoadCharDataError: () => { el.textContent = char; },
+      });
+      writer.animateCharacter();
+      el.addEventListener('mouseenter', () => writer.animateCharacter());
+    } catch (e) {
+      el.textContent = char;
+    }
+  });
+})();

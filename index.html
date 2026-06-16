@@ -104,28 +104,28 @@
           <div class="gold-rule"><span>✦</span></div>
           <div class="feature-grid">
             <div class="feature-card" onclick="navigateTo('confucianism')">
-              <div class="char-icon">仁</div>
+              <div class="char-icon" id="hw-ren">仁</div>
               <h3 class="zh">儒家思想</h3>
               <h3 class="en">Confucianism</h3>
               <p class="zh">仁義禮智信，修身齊家治國平天下</p>
               <p class="en">Benevolence, righteousness, and ritual propriety</p>
             </div>
             <div class="feature-card" onclick="navigateTo('taoism')">
-              <div class="char-icon">道</div>
+              <div class="char-icon" id="hw-dao">道</div>
               <h3 class="zh">道家思想</h3>
               <h3 class="en">Taoism</h3>
               <p class="zh">道可道，非常道。無為而治，順應自然</p>
               <p class="en">The eternal Way — effortless action in harmony with nature</p>
             </div>
             <div class="feature-card" onclick="navigateTo('poetry')">
-              <div class="char-icon">詩</div>
+              <div class="char-icon" id="hw-shi">詩</div>
               <h3 class="zh">詩詞文學</h3>
               <h3 class="en">Poetry &amp; Literature</h3>
               <p class="zh">唐詩宋詞，千古傳誦，風雅之極致</p>
               <p class="en">Tang poetry and Song lyrics — timeless verses across the ages</p>
             </div>
             <div class="feature-card" onclick="navigateTo('documents')">
-              <div class="char-icon">卷</div>
+              <div class="char-icon" id="hw-juan">卷</div>
               <h3 class="zh">典籍文件庫</h3>
               <h3 class="en">Document Archive</h3>
               <p class="zh">瀏覽上傳的典籍文件，探求文化精髓</p>
@@ -456,9 +456,9 @@
               <div class="era-name-zh">春秋時代</div>
               <div class="era-name-en">Spring &amp; Autumn</div>
               <ul class="era-figures">
-                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">孔子 Confucius</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('taoism')">老子 Laozi</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">孫子 Sun Tzu</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('kongzi')">孔子 Confucius</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('laozi')">老子 Laozi</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('sunzi')">孫子 Sun Tzu</button></li>
               </ul>
             </div>
             <!-- Warring States -->
@@ -467,9 +467,9 @@
               <div class="era-name-zh">戰國時代</div>
               <div class="era-name-en">Warring States</div>
               <ul class="era-figures">
-                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">孟子 Mencius</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('taoism')">莊子 Zhuangzi</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">荀子 Xunzi</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('mengzi')">孟子 Mencius</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('zhuangzi')">莊子 Zhuangzi</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('xunzi')">荀子 Xunzi</button></li>
               </ul>
             </div>
             <!-- Han -->
@@ -478,9 +478,9 @@
               <div class="era-name-zh">漢朝</div>
               <div class="era-name-en">Han Dynasty</div>
               <ul class="era-figures">
-                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">董仲舒 Dong Zhongshu</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('documents')">司馬遷 Sima Qian</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('documents')">班固 Ban Gu</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('dongzhongshu')">董仲舒 Dong Zhongshu</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('simaqian')">司馬遷 Sima Qian</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('bangu')">班固 Ban Gu</button></li>
               </ul>
             </div>
             <!-- Tang -->
@@ -489,9 +489,9 @@
               <div class="era-name-zh">唐朝</div>
               <div class="era-name-en">Tang Dynasty</div>
               <ul class="era-figures">
-                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">李白 Li Bai</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">杜甫 Du Fu</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">王之渙 Wang Zhihuan</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('libai')">李白 Li Bai</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('dufu')">杜甫 Du Fu</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('wangzhihuan')">王之渙 Wang Zhihuan</button></li>
               </ul>
             </div>
             <!-- Song -->
@@ -500,9 +500,9 @@
               <div class="era-name-zh">宋朝</div>
               <div class="era-name-en">Song Dynasty</div>
               <ul class="era-figures">
-                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">蘇軾 Su Shi</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">朱熹 Zhu Xi</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('poetry')">李清照 Li Qingzhao</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('sushi')">蘇軾 Su Shi</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('zhuxi')">朱熹 Zhu Xi</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('liqingzhao')">李清照 Li Qingzhao</button></li>
               </ul>
             </div>
             <!-- Yuan-Ming-Qing -->
@@ -511,9 +511,9 @@
               <div class="era-name-zh">元明清</div>
               <div class="era-name-en">Yuan · Ming · Qing</div>
               <ul class="era-figures">
-                <li><button class="era-fig-btn" onclick="navigateTo('documents')">羅貫中 Luo Guanzhong</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('documents')">曹雪芹 Cao Xueqin</button></li>
-                <li><button class="era-fig-btn" onclick="navigateTo('confucianism')">王陽明 Wang Yangming</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('luoguanzhong')">羅貫中 Luo Guanzhong</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('caoxueqin')">曹雪芹 Cao Xueqin</button></li>
+                <li><button class="era-fig-btn" onclick="showFigure('wangyangming')">王陽明 Wang Yangming</button></li>
               </ul>
             </div>
           </div>
@@ -530,6 +530,38 @@
   <div id="share-toast" class="share-toast">
     <span class="zh">已複製到剪貼板！</span>
     <span class="en">Copied to clipboard!</span>
+  </div>
+
+  <!-- ═══ FIGURE MODAL ═══ -->
+  <div id="fig-overlay" onclick="closeFigure()"></div>
+  <div id="fig-modal" role="dialog" aria-modal="true">
+    <div class="modal-header">
+      <div>
+        <span id="fig-name-zh" class="fig-hd-zh"></span>
+        <span id="fig-name-en" class="fig-hd-en"></span>
+      </div>
+      <button class="modal-close-btn" onclick="closeFigure()" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body fig-modal-body">
+      <div class="fig-badges">
+        <span id="fig-dynasty-zh" class="fig-badge"></span>
+        <span id="fig-dynasty-en" class="fig-badge fig-badge-era"></span>
+        <span id="fig-cat-badge" class="fig-badge fig-badge-cat"></span>
+      </div>
+      <div class="fig-quote-block">
+        <p class="fig-quote-zh" id="fig-quote-zh"></p>
+        <p class="fig-quote-en" id="fig-quote-en"></p>
+        <footer class="fig-source">
+          <span id="fig-src-zh"></span>
+          <span class="fig-src-sep"> · </span>
+          <span id="fig-src-en"></span>
+        </footer>
+      </div>
+      <button class="fig-explore-btn" id="fig-explore-btn">
+        <span class="fig-btn-zh"></span>
+        <span class="fig-btn-en"></span>
+      </button>
+    </div>
   </div>
 
   <!-- ═══ PDF MODAL ═══ -->
@@ -558,6 +590,7 @@
     <p class="en">Chinese Philosophy &amp; Literary Archives · Preserving Millennia of Cultural Wisdom</p>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <script src="js/documents.js"></script>
   <script src="js/main.js"></script>
