@@ -185,8 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const saved = localStorage.getItem('darkMode');
   if (saved === 'on') {
     body.classList.add('dark');
-    btn.textContent = '☀';
+    if (btn) btn.textContent = '☀';
   }
+  if (!btn) return;
   btn.addEventListener('click', () => {
     const isDark = body.classList.toggle('dark');
     btn.textContent = isDark ? '☀' : '☽';
@@ -210,12 +211,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   applySize();
 
-  document.getElementById('font-decrease').addEventListener('click', () => {
-    if (idx > 0) { idx--; applySize(); }
-  });
-  document.getElementById('font-increase').addEventListener('click', () => {
-    if (idx < SIZES.length - 1) { idx++; applySize(); }
-  });
+  const decBtn = document.getElementById('font-decrease');
+  const incBtn = document.getElementById('font-increase');
+  if (decBtn) decBtn.addEventListener('click', () => { if (idx > 0) { idx--; applySize(); } });
+  if (incBtn) incBtn.addEventListener('click', () => { if (idx < SIZES.length - 1) { idx++; applySize(); } });
 })();
 
 /* ════════════════════════════════════════
