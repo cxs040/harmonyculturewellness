@@ -103,13 +103,13 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') nextPage();
 });
 
-/* ── Build a PDF button element ── */
-function makePdfBtn(section, doc) {
+/* ── Build a clickable PDF card ── */
+function makePdfCard(section, doc) {
   const path  = `pdfs/${section}/${doc.file}`;
-  const label = `${doc.titleZh} — ${doc.titleEn}`;
+  const title = `${doc.titleZh} — ${doc.titleEn}`;
   const btn   = document.createElement('div');
   btn.className = 'pdf-btn';
-  btn.onclick   = () => openPDF(path, label);
+  btn.onclick   = () => openPDF(path, title);
   btn.innerHTML = `
     <span>📜</span>
     <span class="zh">${doc.titleZh}</span>
@@ -131,7 +131,7 @@ function loadSectionShelves() {
                          <p class="shelf-empty en">No files yet — upload PDFs to pdfs/${section}/</p>`;
       return;
     }
-    docs.forEach(doc => shelf.appendChild(makePdfBtn(section, doc)));
+    docs.forEach(doc => shelf.appendChild(makePdfCard(section, doc)));
   });
 }
 
