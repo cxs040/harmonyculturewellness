@@ -4,6 +4,11 @@
    This file handles rendering + behaviour.
    ════════════════════════════════════════ */
 
+/* ── Azure Speech TTS ── */
+const SPEECH_KEY    = (typeof speechConfig !== 'undefined') ? speechConfig.key    : '';
+const SPEECH_REGION = (typeof speechConfig !== 'undefined') ? speechConfig.region : '';
+let   _ttsAudio     = null;
+
 /* ── Language toggle ── */
 let currentLang = 'zh';
 
@@ -248,6 +253,10 @@ function renderPoems() {
       <div class="poem-lines zh">${p.linesZh.join('<br>')}</div>
       <div class="poem-lines en">${p.linesEn.join('<br>')}</div>
       <div class="poem-actions">
+        <button class="poem-action-btn poem-listen-btn" onclick="togglePoem('${p.id}')" data-poem-id="${p.id}">
+          <i class="ti ti-volume"></i>
+          <span class="zh">聆聽</span><span class="en">Listen</span>
+        </button>
         <button class="poem-action-btn" onclick="sharePoem('${p.id}')" title="Share">
           <i class="ti ti-share"></i>
           <span class="zh">分享</span><span class="en">Share</span>
@@ -418,6 +427,86 @@ function printPoem(cardId) {
 
   card.classList.remove('print-target');
   navigateTo('poetry');
+}
+
+/* ════════════════════════════════════════
+   FEATURE 7 — POEM TEXT-TO-SPEECH
+   Azure AI Speech REST API (no SDK needed)
+   ════════════════════════════════════════ */
+async function togglePoem(poemId) {
+  if (_ttsAudio && !_ttsAudio.paused) {
+    _ttsAudio.pause();
+    _ttsAudio = null;
+    document.querySelectorAll('.poem-listen-btn').forEach(b =>
+      _setListenBtnState(b.dataset.poemId, 'idle')
+    );
+    return;
+  }
+
+  if (_ttsAudio) { _ttsAudio.pause(); _ttsAudio = null; }
+  document.querySelectorAll('.poem-listen-btn').forEach(b =>
+    _setListenBtnState(b.dataset.poemId, 'idle')
+  );
+
+  const poem = POEMS.find(p => p.id === poemId);
+  if (!poem) return;
+
+  _setListenBtnState(poemId, 'loading');
+
+  const text = poem.titleZh + '。' + poem.linesZh.join('');
+  const ssml = `<speak version='1.0' xml:lang='zh-TW'><voice name='zh-TW-HsiaoChenNeural'>${text}</voice></speak>`;
+
+  try {
+    const res = await fetch(
+      `https://${SPEECH_REGION}.tts.speech.microsoft.com/cognitiveservices/v1`,
+      {
+        method: 'POST',
+        headers: {
+          'Ocp-Apim-Subscription-Key': SPEECH_KEY,
+          'Content-Type': 'application/ssml+xml',
+          'X-Microsoft-OutputFormat': 'audio-24khz-160kbitrate-mono-mp3',
+        },
+        body: ssml,
+      }
+    );
+    if (!res.ok) throw new Error('TTS error');
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    _ttsAudio  = new Audio(url);
+    _setListenBtnState(poemId, 'playing');
+    _ttsAudio.onended = () => {
+      _setListenBtnState(poemId, 'idle');
+      URL.revokeObjectURL(url);
+      _ttsAudio = null;
+    };
+    _ttsAudio.play();
+  } catch {
+    _setListenBtnState(poemId, 'idle');
+  }
+}
+
+function _setListenBtnState(poemId, state) {
+  const btn = document.querySelector(`#${poemId} .poem-listen-btn`);
+  if (!btn) return;
+  btn.classList.remove('tts-loading', 'tts-playing');
+  const icon = btn.querySelector('i');
+  const zh   = btn.querySelector('.zh');
+  const en   = btn.querySelector('.en');
+  if (state === 'loading') {
+    btn.classList.add('tts-loading');
+    if (icon) icon.className = 'ti ti-loader-2';
+    if (zh) zh.textContent = '載入…';
+    if (en) en.textContent = 'Loading…';
+  } else if (state === 'playing') {
+    btn.classList.add('tts-playing');
+    if (icon) icon.className = 'ti ti-player-stop';
+    if (zh) zh.textContent = '停止';
+    if (en) en.textContent = 'Stop';
+  } else {
+    if (icon) icon.className = 'ti ti-volume';
+    if (zh) zh.textContent = '聆聽';
+    if (en) en.textContent = 'Listen';
+  }
 }
 
 /* ════════════════════════════════════════

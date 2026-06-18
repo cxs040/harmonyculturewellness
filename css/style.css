@@ -993,6 +993,28 @@ body.font-large  { font-size: 19px; }
 .poem-action-btn .ti { font-size: 0.9rem; }
 
 /* ════════════════════════════════════════
+   FEATURE 7 — POEM TTS LISTEN BUTTON
+   ════════════════════════════════════════ */
+.poem-listen-btn.tts-loading .ti {
+  display: inline-block;
+  animation: tts-spin 0.9s linear infinite;
+}
+.poem-listen-btn.tts-playing {
+  background: var(--red);
+  color: #fff;
+  border-color: var(--red);
+}
+.poem-listen-btn.tts-playing:hover {
+  background: #6b1212;
+  border-color: #6b1212;
+  color: #fff;
+}
+@keyframes tts-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ════════════════════════════════════════
    FEATURE 5 — SHARE TOAST
    ════════════════════════════════════════ */
 .share-toast {
