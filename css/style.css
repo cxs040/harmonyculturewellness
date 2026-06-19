@@ -993,31 +993,6 @@ body.font-large  { font-size: 19px; }
 .poem-action-btn .ti { font-size: 0.9rem; }
 
 /* ════════════════════════════════════════
-   FEATURE 9 — AZURE BLOB STORAGE PORTRAITS
-   ════════════════════════════════════════ */
-.fig-portrait-wrap {
-  text-align: center;
-  margin-bottom: 1.2rem;
-}
-.fig-portrait {
-  width: 140px;
-  height: 140px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 3px solid var(--gold);
-  box-shadow: 0 4px 16px rgba(139,26,26,0.18);
-}
-.era-fig-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  object-fit: cover;
-  vertical-align: middle;
-  margin-right: 0.4rem;
-  border: 1px solid rgba(201,169,110,0.5);
-}
-
-/* ════════════════════════════════════════
    FEATURE 8 — AZURE MAPS
    ════════════════════════════════════════ */
 .map-section {

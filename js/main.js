@@ -4,9 +4,6 @@
    This file handles rendering + behaviour.
    ════════════════════════════════════════ */
 
-/* ── Azure Blob Storage — portrait images ── */
-const PORTRAITS_URL = 'https://harmonycwstorage.blob.core.windows.net/portraits';
-
 /* ── Azure Speech TTS ── */
 const SPEECH_KEY    = (typeof speechConfig !== 'undefined') ? speechConfig.key    : '';
 const SPEECH_REGION = (typeof speechConfig !== 'undefined') ? speechConfig.region : '';
@@ -285,10 +282,7 @@ function renderTimeline() {
         ${era.figures.map(key => {
           const fig = FIGURES[key];
           if (!fig) return '';
-          return `<li><button class="era-fig-btn" onclick="showFigure('${key}')">
-            <img class="era-fig-avatar" src="${PORTRAITS_URL}/${key}.jpg" alt="" onerror="this.style.display='none'">
-            ${fig.nameZh} ${fig.nameEn}
-          </button></li>`;
+          return `<li><button class="era-fig-btn" onclick="showFigure('${key}')">${fig.nameZh} ${fig.nameEn}</button></li>`;
         }).join('')}
       </ul>
     </div>`).join('');
@@ -649,13 +643,6 @@ function showFigure(figId) {
     if (zh) zh.textContent = '探索' + fig.catLabelZh + ' →';
     if (en) en.textContent = 'Explore ' + fig.catLabelEn + ' →';
     btn.onclick = () => { closeFigure(); navigateTo(fig.section); };
-  }
-
-  const portrait = document.getElementById('fig-portrait');
-  if (portrait) {
-    portrait.src = `${PORTRAITS_URL}/${figId}.jpg`;
-    portrait.alt = fig.nameZh;
-    portrait.closest('.fig-portrait-wrap').style.display = '';
   }
 
   modal.classList.add('open');
