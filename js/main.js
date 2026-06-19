@@ -294,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderTimeline();
   loadSectionShelves();
   loadDocumentArchive();
+  initFigureMap();
 });
 
 
@@ -510,6 +511,111 @@ function _setListenBtnState(poemId, state) {
 }
 
 /* ════════════════════════════════════════
+   FEATURE 8 — AZURE MAPS
+   Shows all historical figures as pins on a
+   map of China. Clicking a figure name pans
+   the map to their birthplace.
+   ════════════════════════════════════════ */
+let _map        = null;
+let _mapReady   = false;
+let _mapPopup   = null;
+let _pendingKey = null;
+
+function initFigureMap() {
+  const MAPS_KEY = (typeof mapsConfig !== 'undefined') ? mapsConfig.key : '';
+  if (!MAPS_KEY || MAPS_KEY === 'PLACEHOLDER' || typeof atlas === 'undefined') return;
+
+  _map = new atlas.Map('figure-map', {
+    center: [108, 34],
+    zoom: 3.8,
+    language: 'zh-Hant',
+    style: 'road',
+    authOptions: { authType: 'subscriptionKey', subscriptionKey: MAPS_KEY },
+  });
+
+  _mapPopup = new atlas.Popup({ pixelOffset: [0, -20], closeButton: true });
+
+  _map.events.add('ready', () => {
+    _mapReady = true;
+
+    const datasource = new atlas.source.DataSource();
+    _map.sources.add(datasource);
+
+    const catColors = {
+      confucianism: '#8B1A1A',
+      taoism:       '#2E6B4F',
+      poetry:       '#C9A96E',
+      documents:    '#4A5568',
+    };
+
+    const symbolLayer = new atlas.layer.SymbolLayer(datasource, null, {
+      iconOptions: { image: 'pin-round-red', anchor: 'bottom', allowOverlap: true },
+      textOptions: {
+        textField: ['get', 'nameZh'],
+        offset: [0, -2.8],
+        color: '#5a0d0d',
+        haloColor: '#fff',
+        haloWidth: 2,
+        size: 13,
+        allowOverlap: false,
+      },
+      filter: ['has', 'nameZh'],
+    });
+    _map.layers.add(symbolLayer);
+
+    Object.entries(FIGURES).forEach(([key, fig]) => {
+      if (!fig.lat || !fig.lng) return;
+      datasource.add(new atlas.data.Feature(
+        new atlas.data.Point([fig.lng, fig.lat]),
+        { key, nameZh: fig.nameZh, nameEn: fig.nameEn,
+          dynastyZh: fig.dynastyZh, dynastyEn: fig.dynastyEn,
+          locationZh: fig.locationZh || '', locationEn: fig.locationEn || '' }
+      ));
+    });
+
+    _map.events.add('click', symbolLayer, e => {
+      if (!e.shapes || !e.shapes.length) return;
+      const props = e.shapes[0].getProperties();
+      const coords = e.shapes[0].getCoordinates();
+      _showMapPopup(coords, props);
+      showFigure(props.key);
+    });
+
+    _map.events.add('mouseover', symbolLayer, () => {
+      _map.getCanvasContainer().style.cursor = 'pointer';
+    });
+    _map.events.add('mouseout', symbolLayer, () => {
+      _map.getCanvasContainer().style.cursor = '';
+    });
+
+    if (_pendingKey) { panMapToFigure(_pendingKey); _pendingKey = null; }
+  });
+}
+
+function panMapToFigure(key) {
+  const fig = FIGURES[key];
+  if (!fig || !fig.lat || !fig.lng) return;
+  if (!_mapReady) { _pendingKey = key; return; }
+  _map.setCamera({ center: [fig.lng, fig.lat], zoom: 6, type: 'fly', duration: 900 });
+
+  document.getElementById('figure-map')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function _showMapPopup(coords, props) {
+  if (!_mapPopup) return;
+  const isZh = currentLang === 'zh';
+  _mapPopup.setOptions({
+    position: coords,
+    content: `<div class="map-popup">
+      <div class="map-popup-name">${props.nameZh} ${props.nameEn}</div>
+      <div class="map-popup-dynasty">${isZh ? props.dynastyZh : props.dynastyEn}</div>
+      <div class="map-popup-loc">${isZh ? props.locationZh : props.locationEn}</div>
+    </div>`,
+  });
+  _mapPopup.open(_map);
+}
+
+/* ════════════════════════════════════════
    FIGURE MODAL — show famous passage
    Uses FIGURES from data.js
    ════════════════════════════════════════ */
@@ -542,6 +648,8 @@ function showFigure(figId) {
   modal.classList.add('open');
   overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  panMapToFigure(figId);
 }
 
 function closeFigure() {

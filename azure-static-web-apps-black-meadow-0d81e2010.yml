@@ -22,7 +22,8 @@ jobs:
     submodules: true
   - bash: |
       echo "const speechConfig = { key: '$(SPEECH_KEY)', region: 'centralus' };" > js/speech-config.js
-    displayName: 'Inject Azure Speech config'
+      echo "const mapsConfig = { key: '$(MAPS_KEY)' };" > js/maps-config.js
+    displayName: 'Inject Azure API configs'
   - task: AzureStaticWebApp@0
     inputs:
       azure_static_web_apps_api_token: $(AZURE_STATIC_WEB_APPS_API_TOKEN_BLACK_MEADOW_0D81E2010)

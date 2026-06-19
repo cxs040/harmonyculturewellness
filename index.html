@@ -8,8 +8,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/style.css?v=7">
+  <link rel="stylesheet" href="css/style.css?v=8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/iconfont/tabler-icons.min.css">
+  <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css">
 </head>
 <body class="lang-zh">
 
@@ -244,6 +245,13 @@
           <p class="intro-text zh" style="text-indent:0">中華文明歷經數千年，諸子百家各展風華，以下為主要時代及其代表人物。</p>
           <p class="intro-text en" style="text-indent:0">Chinese civilisation spans millennia. Explore the great eras and their defining voices.</p>
           <div class="timeline-scroll" id="timeline-eras"></div>
+          <div class="map-section">
+            <div class="map-label">
+              <span class="zh">歷史人物地圖 · 點擊人物名稱即可定位</span>
+              <span class="en">Historical Figures Map · Click a name to locate</span>
+            </div>
+            <div id="figure-map"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -359,8 +367,10 @@
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <script src="js/documents.js?v=10"></script>
-  <script src="js/data.js?v=8"></script>
+  <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
+  <script src="js/data.js?v=9"></script>
   <script src="js/speech-config.js"></script>
-  <script src="js/main.js?v=11"></script>
+  <script src="js/maps-config.js"></script>
+  <script src="js/main.js?v=12"></script>
 </body>
 </html>

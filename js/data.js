@@ -289,6 +289,7 @@ const FIGURES = {
     quoteZh: '學而時習之，不亦說乎？有朋自遠方來，不亦樂乎？人不知而不慍，不亦君子乎？',
     quoteEn: 'Is it not pleasant to learn and practise what you have learned? Is it not joyful to have friends come from afar? Is it not virtue for a man to remain unperturbed though men may take no note of him?',
     sourceZh: '《論語·學而》', sourceEn: 'Analects, Book I',
+    lat: 35.60, lng: 116.99, locationZh: '魯國曲阜', locationEn: 'Qufu, Lu State',
   },
 
   laozi: {
@@ -298,6 +299,7 @@ const FIGURES = {
     quoteZh: '道可道，非常道；名可名，非常名。無名天地之始，有名萬物之母。',
     quoteEn: 'The Tao that can be told is not the eternal Tao; the name that can be named is not the eternal name. The nameless is the origin of heaven and earth; the named is the mother of ten thousand things.',
     sourceZh: '《道德經》第一章', sourceEn: 'Tao Te Ching, Chapter I',
+    lat: 33.85, lng: 115.48, locationZh: '陳國苦縣（今河南鹿邑）', locationEn: 'Luyi, Henan',
   },
 
   sunzi: {
@@ -307,6 +309,7 @@ const FIGURES = {
     quoteZh: '知己知彼，百戰不殆；不知彼而知己，一勝一負；不知彼，不知己，每戰必敗。',
     quoteEn: 'If you know the enemy and know yourself, you need not fear the result of a hundred battles. If you know yourself but not the enemy, for every victory you will also suffer a defeat. If you know neither yourself nor the enemy, you will succumb in every battle.',
     sourceZh: '《孫子兵法·謀攻篇》', sourceEn: 'The Art of War, Chapter III',
+    lat: 37.49, lng: 117.52, locationZh: '齊國樂安（今山東惠民）', locationEn: 'Huimin, Shandong',
   },
 
   mengzi: {
@@ -316,6 +319,7 @@ const FIGURES = {
     quoteZh: '老吾老，以及人之老；幼吾幼，以及人之幼。天下可運於掌。',
     quoteEn: 'Treat the aged of your own family with the reverence due to age, then extend that reverence to the aged of other families; treat your own young with the tenderness due to youth, then extend that tenderness to the young of other families — and the empire may be turned in your palm.',
     sourceZh: '《孟子·梁惠王上》', sourceEn: 'Mencius, Book I Part A',
+    lat: 35.40, lng: 117.00, locationZh: '鄒國（今山東鄒城）', locationEn: 'Zoucheng, Shandong',
   },
 
   zhuangzi: {
@@ -325,6 +329,7 @@ const FIGURES = {
     quoteZh: '吾生也有涯，而知也無涯。以有涯隨無涯，殆已！已而為知者，殆而已矣。',
     quoteEn: 'Our life has a limit, but our knowledge is without limit. To use what has a limit in pursuit of what is without limit is a perilous thing; and when, knowing this, we still seek the increase of our knowledge, the peril cannot be averted.',
     sourceZh: '《莊子·養生主》', sourceEn: 'Zhuangzi, The Secret of Caring for Life',
+    lat: 34.42, lng: 115.65, locationZh: '宋國蒙邑（今河南商丘）', locationEn: 'Shangqiu, Henan',
   },
 
   xunzi: {
@@ -334,6 +339,7 @@ const FIGURES = {
     quoteZh: '青，取之於藍，而青於藍；冰，水為之，而寒於水。',
     quoteEn: 'Indigo blue is extracted from the indigo plant and yet it surpasses the plant in blueness. Ice is made of water and yet it is colder than water — learning transforms the learner beyond the source.',
     sourceZh: '《荀子·勸學》', sourceEn: 'Xunzi, An Exhortation to Learning',
+    lat: 38.42, lng: 112.73, locationZh: '趙國（今山西新絳）', locationEn: 'Xinjiang, Shanxi',
   },
 
   dongzhongshu: {
@@ -343,6 +349,7 @@ const FIGURES = {
     quoteZh: '仁義禮智信，五者，王道之本也。此五者並行，人道出焉。聖人知其然，故多其愛而少其嚴。',
     quoteEn: 'Benevolence, righteousness, ritual propriety, wisdom, and integrity — these five are the foundation of the kingly way. When they flourish together, the way of humanity emerges. The sage, knowing this, emphasises love over severity.',
     sourceZh: '《春秋繁露》', sourceEn: 'Luxuriant Gems of the Spring and Autumn Annals',
+    lat: 38.57, lng: 115.56, locationZh: '廣川（今河北景縣）', locationEn: 'Jingxian, Hebei',
   },
 
   simaqian: {
@@ -352,6 +359,7 @@ const FIGURES = {
     quoteZh: '人固有一死，或重於泰山，或輕於鴻毛，用之所趨異也。',
     quoteEn: "It is certain that all men must die, but some deaths are weightier than Mount Tai and others lighter than a feather. To give one's life for the people is weightier than Mount Tai; to die in service to tyranny is lighter than a feather.",
     sourceZh: '《報任少卿書》', sourceEn: 'Letter to Ren An',
+    lat: 35.48, lng: 110.44, locationZh: '夏陽（今陝西韓城）', locationEn: 'Hancheng, Shaanxi',
   },
 
   bangu: {
@@ -361,6 +369,7 @@ const FIGURES = {
     quoteZh: '蓋文章，經國之大業，不朽之盛事。年壽有時而盡，榮樂止乎其身，二者必至之常期，未若文章之無窮。',
     quoteEn: "Literary writing is the greatest undertaking in governing a nation and an affair of undying glory. A person's lifespan eventually ends, and honour ceases with the body — both have their inevitable terms. Yet they cannot compare with literary writing, which endures without end.",
     sourceZh: '《典論·論文》', sourceEn: 'Discourse on Literature',
+    lat: 34.34, lng: 108.71, locationZh: '安陵（今陝西咸陽）', locationEn: 'Xianyang, Shaanxi',
   },
 
   libai: {
@@ -370,6 +379,7 @@ const FIGURES = {
     quoteZh: '君不見黃河之水天上來，奔流到海不復回。君不見高堂明鏡悲白髮，朝如青絲暮成雪。人生得意須盡歡，莫使金樽空對月。',
     quoteEn: 'Do you not see the waters of the Yellow River pour down from the sky, rushing to the sea never to return? Do you not see the bright mirror in the high hall lamenting white hair — morning threads of silk, by evening turned to snow? When life is joyful, make the most of it; do not let the golden goblet face the moon alone and empty.',
     sourceZh: '《將進酒》', sourceEn: 'Bring in the Wine',
+    lat: 31.78, lng: 104.73, locationZh: '綿州昌隆（今四川江油）', locationEn: 'Jiangyou, Sichuan',
   },
 
   dufu: {
@@ -379,6 +389,7 @@ const FIGURES = {
     quoteZh: '國破山河在，城春草木深。感時花濺淚，恨別鳥驚心。烽火連三月，家書抵萬金。',
     quoteEn: 'The nation is broken, yet mountains and rivers remain. Spring comes to the city — grass and trees grow deep. Moved by the times, flowers draw forth tears; grieving separation, birds startle the heart. The beacon fires have blazed for three months; a letter from home is worth ten thousand in gold.',
     sourceZh: '《春望》', sourceEn: 'Spring View',
+    lat: 34.76, lng: 113.02, locationZh: '鞏縣（今河南鞏義）', locationEn: 'Gongyi, Henan',
   },
 
   wangzhihuan: {
@@ -388,6 +399,7 @@ const FIGURES = {
     quoteZh: '白日依山盡，黃河入海流。欲窮千里目，更上一層樓。',
     quoteEn: 'The white sun sets beyond the mountains; the Yellow River flows into the sea. To see a thousand miles further, you must climb one more storey of the tower.',
     sourceZh: '《登鸛雀樓》', sourceEn: 'Ascending Stork Tower',
+    lat: 37.87, lng: 112.55, locationZh: '絳州（今山西新絳）', locationEn: 'Xinjiang, Shanxi',
   },
 
   sushi: {
@@ -397,6 +409,7 @@ const FIGURES = {
     quoteZh: '明月幾時有，把酒問青天。不知天上宮闕，今夕是何年。人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。',
     quoteEn: 'How long has the bright moon been there? I raise my cup to ask the blue sky. I wonder what year it is tonight in the palace above. People have sorrows and joys, partings and reunions; the moon waxes and wanes — perfection has always been elusive. I only wish those I love may live long, to share this beautiful moonlight across a thousand miles.',
     sourceZh: '《水調歌頭·明月幾時有》', sourceEn: 'Prelude to Water Melody',
+    lat: 30.07, lng: 103.85, locationZh: '眉州眉山（今四川眉山）', locationEn: 'Meishan, Sichuan',
   },
 
   zhuxi: {
@@ -406,6 +419,7 @@ const FIGURES = {
     quoteZh: '問渠那得清如許？為有源頭活水來。',
     quoteEn: 'How is it that this pond stays so crystal clear? Because living water flows ceaselessly from its source. (A metaphor for continuous study and the renewal of the mind through fresh learning.)',
     sourceZh: '《觀書有感》', sourceEn: 'Reflections on Reading',
+    lat: 26.17, lng: 118.18, locationZh: '南劍州尤溪（今福建尤溪）', locationEn: 'Youxi, Fujian',
   },
 
   liqingzhao: {
@@ -415,6 +429,7 @@ const FIGURES = {
     quoteZh: '生當作人傑，死亦為鬼雄。至今思項羽，不肯過江東。',
     quoteEn: 'In life, be a hero among the living; in death, be a hero among the dead. I still think of Xiang Yu, who refused to cross the river east and retreat from defeat.',
     sourceZh: '《夏日絕句》', sourceEn: 'Quatrain Written in Summer',
+    lat: 36.67, lng: 117.00, locationZh: '齊州濟南（今山東濟南）', locationEn: 'Jinan, Shandong',
   },
 
   luoguanzhong: {
@@ -424,6 +439,7 @@ const FIGURES = {
     quoteZh: '話說天下大勢，分久必合，合久必分。',
     quoteEn: 'It is a truth universally acknowledged that the realm under heaven, after a long period of division, tends to unite; and after a long period of union, tends to divide.',
     sourceZh: '《三國演義》第一回', sourceEn: 'Romance of the Three Kingdoms, Chapter I',
+    lat: 37.87, lng: 112.55, locationZh: '太原（今山西太原）', locationEn: 'Taiyuan, Shanxi',
   },
 
   caoxueqin: {
@@ -433,6 +449,7 @@ const FIGURES = {
     quoteZh: '滿紙荒唐言，一把辛酸淚。都云作者癡，誰解其中味？',
     quoteEn: 'Pages full of fantastical words, a handful of bitter tears — all say the author was a fool; who can understand the taste within?',
     sourceZh: '《紅樓夢》卷首題詩', sourceEn: 'Dream of the Red Chamber, Preface Poem',
+    lat: 32.06, lng: 118.79, locationZh: '江寧（今江蘇南京）', locationEn: 'Nanjing, Jiangsu',
   },
 
   wangyangming: {
@@ -442,6 +459,7 @@ const FIGURES = {
     quoteZh: '知是行之始，行是知之成。',
     quoteEn: 'Knowledge is the beginning of action; action is the completion of knowledge. True understanding and moral conduct are inseparable — to genuinely know something is already to act upon it.',
     sourceZh: '《傳習錄》', sourceEn: 'Instructions for Practical Living',
+    lat: 29.97, lng: 121.15, locationZh: '餘姚（今浙江餘姚）', locationEn: 'Yuyao, Zhejiang',
   },
 
 };
