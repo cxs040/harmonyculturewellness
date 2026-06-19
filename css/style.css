@@ -1534,6 +1534,114 @@ body.dark .search-result-item:hover,
 body.dark .search-result-item:focus { background: rgba(201,169,110,0.07); }
 
 /* ════════════════════════════════════════
+   学以致用 BANNER (home page)
+   ════════════════════════════════════════ */
+.zhiyong-banner {
+  text-align: center;
+  padding: 1.8rem 1rem 0.5rem;
+}
+
+.zhiyong-char {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.35em;
+  margin-bottom: 0.5rem;
+}
+
+.zhiyong-sub {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  line-height: 1.7;
+  max-width: 520px;
+  margin: 0 auto 0.25rem;
+}
+
+/* ════════════════════════════════════════
+   DOCUMENTS + POETRY SUBSECTION HEADERS
+   ════════════════════════════════════════ */
+.docs-subsection-head {
+  margin: 0.25rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--gold);
+}
+
+.docs-subsection-head h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--red);
+  letter-spacing: 0.08em;
+}
+
+/* ════════════════════════════════════════
+   ZHANG-HUANG SUBCATEGORY TABS
+   ════════════════════════════════════════ */
+.zh-subcats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(201,169,110,0.4);
+}
+
+.zh-subcat-btn {
+  background: transparent;
+  border: 1px solid rgba(139,26,26,0.25);
+  color: var(--ink-soft);
+  padding: 0.3rem 0.75rem;
+  font-size: 0.82rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 0.04em;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.zh-subcat-btn .zh,
+.zh-subcat-btn .en { display: inline; }
+
+.zh-subcat-btn:hover {
+  background: rgba(139,26,26,0.06);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.zh-subcat-btn.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--parch-lt);
+}
+
+/* ════════════════════════════════════════
+   乐读会 SECTION
+   ════════════════════════════════════════ */
+.leduhui-intro {
+  margin: 1rem 0 1.5rem;
+}
+
+.leduhui-intro p {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  margin-bottom: 0.5rem;
+}
+
+.leduhui-placeholder {
+  text-align: center;
+  padding: 2rem 1rem;
+  border: 1px dashed var(--gold);
+  border-radius: 6px;
+  color: #aaa;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+  background: rgba(201,169,110,0.04);
+}
+
+/* ════════════════════════════════════════
    ZHANG-HUANG CHART CARD
    ════════════════════════════════════════ */
 .zh-chart-card {

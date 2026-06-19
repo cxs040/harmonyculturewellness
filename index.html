@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/iconfont/tabler-icons.min.css">
   <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css">
 </head>
@@ -59,9 +59,9 @@
         <span class="nav-chn">道家</span>
         <span class="nav-rom">Taoism</span>
       </a></li>
-      <li><a href="#" class="nav-link" data-section="poetry">
-        <span class="nav-chn">詩詞</span>
-        <span class="nav-rom">Poetry</span>
+      <li><a href="#" class="nav-link" data-section="buddhism">
+        <span class="nav-chn">释家</span>
+        <span class="nav-rom">Buddhism</span>
       </a></li>
       <li><a href="#" class="nav-link" data-section="documents">
         <span class="nav-chn">典籍文件</span>
@@ -74,6 +74,10 @@
       <li><a href="#" class="nav-link" data-section="zhanghuang">
         <span class="nav-chn">實用章黃學</span>
         <span class="nav-rom">Zhang-Huang Studies</span>
+      </a></li>
+      <li><a href="#" class="nav-link" data-section="leduhui">
+        <span class="nav-chn">乐读会</span>
+        <span class="nav-rom">Reading Club</span>
       </a></li>
     </ul>
   </nav>
@@ -126,20 +130,27 @@
               <p class="zh">道可道，非常道。無為而治，順應自然</p>
               <p class="en">The eternal Way — effortless action in harmony with nature</p>
             </div>
-            <div class="feature-card" onclick="navigateTo('poetry')">
-              <div class="char-icon" id="hw-shi">詩</div>
-              <h3 class="zh">詩詞文學</h3>
-              <h3 class="en">Poetry &amp; Literature</h3>
-              <p class="zh">唐詩宋詞，千古傳誦，風雅之極致</p>
-              <p class="en">Tang poetry and Song lyrics — timeless verses across the ages</p>
+            <div class="feature-card" onclick="navigateTo('buddhism')">
+              <div class="char-icon" id="hw-shi">空</div>
+              <h3 class="zh">释家思想</h3>
+              <h3 class="en">Buddhism</h3>
+              <p class="zh">諸行無常，色即是空，以慈悲心照見萬物</p>
+              <p class="en">Impermanence, emptiness, and compassion — the path to liberation</p>
             </div>
             <div class="feature-card" onclick="navigateTo('documents')">
               <div class="char-icon" id="hw-juan">卷</div>
-              <h3 class="zh">典籍文件庫</h3>
-              <h3 class="en">Document Archive</h3>
-              <p class="zh">瀏覽上傳的典籍文件，探求文化精髓</p>
-              <p class="en">Browse uploaded PDF texts to explore cultural essence</p>
+              <h3 class="zh">典籍詩文庫</h3>
+              <h3 class="en">Classics &amp; Poetry</h3>
+              <p class="zh">典籍文件與詩詞文學，探求文化精髓</p>
+              <p class="en">Classical texts, documents and poetry — explore the cultural heritage</p>
             </div>
+          </div>
+
+          <div class="gold-rule"><span>✦</span></div>
+          <div class="zhiyong-banner">
+            <div class="zhiyong-char zh">學以致用</div>
+            <p class="zhiyong-sub zh">知識的意義在於實踐，以學養行，以行驗學，知行合一</p>
+            <p class="zhiyong-sub en">Knowledge finds its meaning in practice — unite learning with action, and action with wisdom</p>
           </div>
         </div>
       </div>
@@ -189,16 +200,42 @@
       </div>
     </section>
 
-    <!-- ── POETRY ── -->
-    <section id="poetry" class="page">
+    <!-- ── BUDDHISM ── -->
+    <section id="buddhism" class="page">
       <div class="scroll-wrap">
         <div class="scroll-top-bar">
           <span class="orn">❧</span>
-          <h2 class="zh">詩詞文學</h2>
-          <h2 class="en">Poetry &amp; Literature</h2>
+          <h2 class="zh">释家思想</h2>
+          <h2 class="en">Buddhism</h2>
           <span class="orn">❧</span>
         </div>
         <div class="scroll-body">
+          <div id="buddhism-content"></div>
+          <div class="pdf-shelf">
+            <h3 class="zh">相關典籍</h3>
+            <h3 class="en">Related Texts</h3>
+            <div id="shelf-buddhism" class="pdf-row">
+              <!-- auto-populated from pdfs/buddhism/ via documents.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DOCUMENTS & POETRY ── -->
+    <section id="documents" class="page">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">典籍詩文庫</h2>
+          <h2 class="en">Classics &amp; Poetry</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <div class="docs-subsection-head">
+            <h3 class="zh">詩詞文學</h3>
+            <h3 class="en">Poetry &amp; Literature</h3>
+          </div>
           <div id="poem-grid" class="poem-grid"></div>
           <div class="pdf-shelf">
             <h3 class="zh">詩詞典籍</h3>
@@ -207,21 +244,12 @@
               <!-- auto-populated from pdfs/poetry/ via documents.js -->
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── DOCUMENTS ── -->
-    <section id="documents" class="page">
-      <div class="scroll-wrap">
-        <div class="scroll-top-bar">
-          <span class="orn">❧</span>
-          <h2 class="zh">典籍文件庫</h2>
-          <h2 class="en">Document Archive</h2>
-          <span class="orn">❧</span>
-        </div>
-        <div class="scroll-body">
-<div id="doc-gallery" class="doc-gallery">
+          <div class="gold-rule"><span>✦</span></div>
+          <div class="docs-subsection-head">
+            <h3 class="zh">典籍文件</h3>
+            <h3 class="en">Document Archive</h3>
+          </div>
+          <div id="doc-gallery" class="doc-gallery">
             <!-- populated by js/documents.js -->
           </div>
           <div id="doc-empty" class="doc-empty" style="display:none">
@@ -266,12 +294,51 @@
           <span class="orn">❧</span>
         </div>
         <div class="scroll-body">
+          <div class="zh-subcats">
+            <button class="zh-subcat-btn active" data-cat="all">
+              <span class="zh">全覽</span><span class="en">All</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="yuyanxue">
+              <span class="zh">語言學</span><span class="en">Linguistics</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="wenzixue">
+              <span class="zh">文字學</span><span class="en">Philology</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="zhexue">
+              <span class="zh">哲學</span><span class="en">Philosophy</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="jingxue">
+              <span class="zh">經學</span><span class="en">Classics</span>
+            </button>
+          </div>
           <div id="zhanghuang-content"></div>
           <div class="pdf-shelf">
             <h3 class="zh">相關典籍</h3>
             <h3 class="en">Related Texts</h3>
             <div id="shelf-zhanghuang" class="pdf-row">
               <!-- auto-populated from pdfs/zhanghuang/ via documents.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── READING CLUB ── -->
+    <section id="leduhui" class="page">
+      <div class="scroll-wrap">
+        <div class="scroll-top-bar">
+          <span class="orn">❧</span>
+          <h2 class="zh">乐读会</h2>
+          <h2 class="en">Reading Club</h2>
+          <span class="orn">❧</span>
+        </div>
+        <div class="scroll-body">
+          <div id="leduhui-content"></div>
+          <div class="pdf-shelf">
+            <h3 class="zh">推薦書目</h3>
+            <h3 class="en">Recommended Readings</h3>
+            <div id="shelf-leduhui" class="pdf-row">
+              <!-- auto-populated from pdfs/leduhui/ via documents.js -->
             </div>
           </div>
         </div>
@@ -368,9 +435,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <script src="js/documents.js?v=10"></script>
   <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
-  <script src="js/data.js?v=11"></script>
+  <script src="js/data.js?v=12"></script>
   <script src="js/speech-config.js"></script>
   <script src="js/maps-config.js"></script>
-  <script src="js/main.js?v=14"></script>
+  <script src="js/main.js?v=15"></script>
 </body>
 </html>

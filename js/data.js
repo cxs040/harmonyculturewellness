@@ -34,12 +34,20 @@ const SECTION_QUOTES = {
     sourceEn: 'Tao Te Ching, Chapter I · Laozi',
   },
 
+  buddhism: {
+    zh:       '觀自在菩薩，行深般若波羅蜜多時，照見五蘊皆空，度一切苦厄。',
+    en:       'The Bodhisattva Avalokiteśvara, while practising the deep perfection of wisdom, perceived that all five aggregates are empty, and freed all beings from suffering.',
+    sourceZh: '《般若波羅蜜多心經》',
+    sourceEn: 'The Heart Sutra (Prajñāpāramitā Hṛdaya)',
+  },
+
 };
 
 /* Sub-heading shown above each concept list */
 const SECTION_HEADINGS = {
   confucianism: { zh: '五常：核心德目', en: 'The Five Constants' },
   taoism:       { zh: '核心概念',       en: 'Core Concepts'      },
+  buddhism:     { zh: '核心義理',       en: 'Core Teachings'     },
 };
 
 
@@ -76,6 +84,34 @@ const CONCEPTS = {
       charZh: '信', titleZh: '信 · 誠信', titleEn: 'Xìn · Integrity',
       descZh: '言而有信，誠實守諾，立身之本',
       descEn: "Faithfulness, trustworthiness, and keeping one's word",
+    },
+  ],
+
+  buddhism: [
+    {
+      charZh: '空', titleZh: '空 · 性空緣起', titleEn: 'Kōng · Emptiness (Śūnyatā)',
+      descZh: '萬物無固定自性，因緣和合而生。空非虛無，乃指萬物無常自存之性，破除對自我與外物的執著',
+      descEn: 'All phenomena lack inherent self-existence; they arise through dependent origination. Emptiness is not nothingness — it points to the absence of fixed, independent essence',
+    },
+    {
+      charZh: '緣', titleZh: '緣起 · 相依相存', titleEn: 'Yuánqǐ · Dependent Origination',
+      descZh: '此有故彼有，此生故彼生。萬物相互依存，因緣際會方生萬象，無一物可獨立存在',
+      descEn: 'Because this exists, that exists; because this arises, that arises. All phenomena arise through mutual conditions — nothing exists independently',
+    },
+    {
+      charZh: '諦', titleZh: '四諦 · 苦集滅道', titleEn: 'Sì Dì · Four Noble Truths',
+      descZh: '苦諦（生命之苦）、集諦（苦之根源在貪愛）、滅諦（苦可止息）、道諦（八正道為解脫之徑）',
+      descEn: 'Suffering exists; it has a cause (craving); it can cease; the Noble Eightfold Path leads to its cessation',
+    },
+    {
+      charZh: '道', titleZh: '八正道 · 解脫之路', titleEn: 'Bā Zhèngdào · Noble Eightfold Path',
+      descZh: '正見、正思、正語、正業、正命、正精進、正念、正定，通向涅槃解脫之路',
+      descEn: 'Right view, intention, speech, action, livelihood, effort, mindfulness, and concentration — the path to nirvāṇa',
+    },
+    {
+      charZh: '禪', titleZh: '禪定 · 明心見性', titleEn: 'Chán · Meditation & Insight',
+      descZh: '透過靜坐冥想，觀照自心，息滅妄念，以達明心見性、超越生死之境界',
+      descEn: 'Through meditative practice one stills the mind, observes the nature of awareness, and attains liberation beyond birth and death',
     },
   ],
 

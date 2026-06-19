@@ -147,7 +147,7 @@ function makePdfCard(section, doc) {
 function loadSectionShelves() {
   if (typeof DOCUMENTS === 'undefined') return;
 
-  ['confucianism', 'taoism', 'poetry'].forEach(section => {
+  ['confucianism', 'taoism', 'buddhism', 'poetry'].forEach(section => {
     const shelf = document.getElementById(`shelf-${section}`);
     if (!shelf) return;
     const docs = DOCUMENTS[section] || [];
@@ -166,7 +166,7 @@ function loadDocumentArchive() {
   const empty   = document.getElementById('doc-empty');
   if (!gallery || typeof DOCUMENTS === 'undefined') return;
 
-  const all = ['confucianism', 'taoism', 'poetry', 'documents']
+  const all = ['confucianism', 'taoism', 'buddhism', 'poetry', 'documents']
     .flatMap(section => (DOCUMENTS[section] || []).map(doc => ({ ...doc, section })));
 
   if (!all.length) { empty.style.display = 'block'; return; }
@@ -174,6 +174,7 @@ function loadDocumentArchive() {
   const sectionLabel = {
     confucianism: '儒家 · Confucianism',
     taoism:       '道家 · Taoism',
+    buddhism:     '释家 · Buddhism',
     poetry:       '詩詞 · Poetry',
     documents:    '典籍 · Classics',
   };
@@ -203,7 +204,7 @@ function loadDocumentArchive() {
 
 /* ── Philosophy sections: quote + heading + concept list ── */
 function renderSectionContent() {
-  ['confucianism', 'taoism'].forEach(sec => {
+  ['confucianism', 'taoism', 'buddhism'].forEach(sec => {
     const el = document.getElementById(sec + '-content');
     if (!el) return;
     const q     = SECTION_QUOTES[sec];
@@ -479,14 +480,62 @@ function renderZhanghuang() {
   container.innerHTML = html;
 }
 
+/* ════════════════════════════════════════
+   乐读会 SECTION
+   ════════════════════════════════════════ */
+function renderLeduhui() {
+  const el = document.getElementById('leduhui-content');
+  if (!el) return;
+  el.innerHTML = `
+    <blockquote class="quote-block">
+      <p class="zh">"讀書之法，在循序而漸進，熟讀而精思。"</p>
+      <p class="en">"The method of reading is to proceed step by step, to read thoroughly and think deeply."</p>
+      <footer class="zh">— 朱熹《讀書之要》</footer>
+      <footer class="en">— Zhu Xi, On the Essentials of Reading</footer>
+    </blockquote>
+    <div class="section-heading">
+      <h3 class="zh">乐读会 · 共讀共長</h3>
+      <h3 class="en">Reading Club · Learn Together, Grow Together</h3>
+    </div>
+    <div class="leduhui-intro">
+      <p class="zh">
+        乐读会是一個以閱讀為紐帶的學習社群。在這裡，我們分享書籍心得，探討思想，
+        以書會友，以文化人，讓知識在交流中昇華，讓智慧在共讀中傳承。
+      </p>
+      <p class="en">
+        乐读会 is a learning community united by the joy of reading. Here we share reflections,
+        explore ideas, meet through books, and cultivate character through culture — letting knowledge
+        deepen through dialogue and wisdom endure through shared reading.
+      </p>
+    </div>
+    <div class="leduhui-placeholder">
+      <div class="zh">書目討論區域 · 即將開放</div>
+      <div class="en">Book discussions · Coming soon</div>
+    </div>`;
+}
+
+/* ════════════════════════════════════════
+   ZHANG-HUANG SUBCATEGORY TABS
+   ════════════════════════════════════════ */
+function initZhanghuangTabs() {
+  document.querySelectorAll('.zh-subcat-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.zh-subcat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSectionContent();
   renderPoems();
   renderZhanghuang();
+  renderLeduhui();
   renderTimeline();
   loadSectionShelves();
   loadDocumentArchive();
   initFigureMap();
+  initZhanghuangTabs();
 });
 
 
@@ -613,13 +662,13 @@ function printPoem(cardId) {
   if (!card) return;
 
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('poetry').classList.add('active');
+  document.getElementById('documents').classList.add('active');
 
   card.classList.add('print-target');
   window.print();
 
   card.classList.remove('print-target');
-  navigateTo('poetry');
+  navigateTo('documents');
 }
 
 /* ════════════════════════════════════════
@@ -880,7 +929,7 @@ function initHanziWriter() {
   const chars = [
     { id: 'hw-ren',  char: '仁' },
     { id: 'hw-dao',  char: '道' },
-    { id: 'hw-shi',  char: '詩' },
+    { id: 'hw-shi',  char: '空' },
     { id: 'hw-juan', char: '卷' },
   ];
 
@@ -934,7 +983,7 @@ const SEARCH_INDEX = [
     titleZh: p.titleZh,  titleEn: p.titleEn,
     metaZh:  p.authorZh, metaEn:  p.authorEn,
     excerpt: p.linesZh.join(''),
-    section: 'poetry', elementId: p.id,
+    section: 'documents', elementId: p.id,
   })),
 
   // Concepts — built from CONCEPTS in data.js
