@@ -291,8 +291,167 @@ function renderTimeline() {
 /* ── Zhang-Huang Studies: render 王天舒 poems ── */
 function renderZhanghuang() {
   const container = document.getElementById('zhanghuang-content');
-  if (!container || typeof ZHANGHUANG_POEMS === 'undefined') return;
-  container.innerHTML = `
+  if (!container) return;
+
+  let html = '';
+
+  /* ── Chart ── */
+  if (typeof ZHANGHUANG_CHART !== 'undefined') {
+    const c = ZHANGHUANG_CHART;
+    html += `
+    <div class="zh-chart-card" id="${c.id}">
+      <div class="zh-chart-head">
+        <div class="zh-chart-title zh">${c.titleZh}</div>
+        <div class="zh-chart-attr zh">${c.attributionZh}</div>
+      </div>
+
+      <div class="zh-chart-section">
+        <div class="zh-chart-section-label zh">生物圈</div>
+        <div class="zh-chart-block">
+          <div class="zh-chart-row">
+            <div class="zh-chart-row-head zh">植物圈</div>
+            <div class="zh-chart-row-body">
+              <div class="zh-chart-line zh"><span class="zh-chart-key">结构要素</span>器官</div>
+              <div class="zh-chart-line zh"><span class="zh-chart-key">特性·关系</span>植物性 · 形体构造</div>
+              <div class="zh-chart-line zh"><span class="zh-chart-key">功能</span>生理机能（无系统）</div>
+            </div>
+          </div>
+          <div class="zh-chart-row">
+            <div class="zh-chart-row-head zh">动物圈</div>
+            <div class="zh-chart-row-body">
+              <div class="zh-chart-line zh"><span class="zh-chart-key">结构要素</span>系统（体系）</div>
+              <div class="zh-chart-line zh"><span class="zh-chart-key">特性·关系</span>动物性 · 系统构造</div>
+              <div class="zh-chart-line zh"><span class="zh-chart-key">感受器系统</span>察觉之网</div>
+              <div class="zh-chart-line zh"><span class="zh-chart-key">效应器系统</span>效用之网</div>
+              <div class="zh-chart-note zh">德国生物学家乌克威尔认为，没有这两套系统的互相协作和平衡，生命体不可能存在。两套系统紧密交织，联结成"动物功能圈"。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="zh-chart-section">
+        <div class="zh-chart-section-label zh">人类系统</div>
+        <div class="zh-chart-block">
+          <div class="zh-chart-row">
+            <div class="zh-chart-row-head zh">生命性</div>
+            <div class="zh-chart-row-body">
+              <div class="zh-chart-line zh"><span class="zh-chart-key">结构关系</span>生命体系</div>
+              <div class="zh-chart-line zh"><span class="zh-chart-key">感受系统</span>认知、察觉、感知网络</div>
+              <div class="zh-chart-line zh"><span class="zh-chart-key">效应系统</span>反应、行动、效用网络</div>
+              <div class="zh-chart-note zh">研究其数量、状态、性质、分布状态、神经系统状态等，就能够给予我们生命体内外世界精确"图像"。</div>
+            </div>
+          </div>
+          <div class="zh-chart-row">
+            <div class="zh-chart-row-head zh">社会性</div>
+            <div class="zh-chart-row-body">
+              <div class="zh-chart-line zh"><span class="zh-chart-key">社会体系</span>符号系统是基石</div>
+              <div class="zh-chart-path zh">人与人类社会发展路径：人 ── 使用符号 ── 创造符号（卡西尔）</div>
+              <div class="zh-chart-symbols">
+                <div class="zh-chart-sym-row">
+                  <div class="zh-chart-sym-top">
+                    <span class="zh-chart-sym-tag zh">象征符号</span>
+                    <span class="zh">比喻 · 象征 · 表征 · 艺术 · 创意 · 创新</span>
+                  </div>
+                  <div class="zh-chart-note zh">指那些用以表征人的思想、行为倾向的种种事物。如：图腾物、国旗、国徽、雕塑、纪念碑、庙宇等。</div>
+                </div>
+                <div class="zh-chart-sym-row">
+                  <div class="zh-chart-sym-top">
+                    <span class="zh-chart-sym-tag zh">中介符号</span>
+                    <span class="zh">载体桥梁 · 传递传承 · 转换平台</span>
+                  </div>
+                  <div class="zh-chart-note zh">指被用以作为接受和反馈信息的载体的一类符号。例如：文字、石器、机器等。</div>
+                </div>
+                <div class="zh-chart-sym-row">
+                  <div class="zh-chart-sym-top">
+                    <span class="zh-chart-sym-tag zh">工具符号</span>
+                    <span class="zh">预知应对 · 改造创造 · 制造创新</span>
+                  </div>
+                  <div class="zh-chart-note zh">指那些被用以扩展自我思想、行为的工具。语言是使用最多、意义最大的工具符号，也是制造与创造符号的符号。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="zh-chart-section">
+        <div class="zh-chart-section-label zh">社会形态</div>
+        <div class="zh-chart-social-wrap">
+          <table class="zh-chart-social">
+            <thead>
+              <tr>
+                <th class="zh">社会形态</th>
+                <th class="zh">特性</th>
+                <th class="zh">主客体关系</th>
+                <th class="zh">人的类型</th>
+                <th class="zh">心理状态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="zh">蒙昧社会</td>
+                <td class="zh">表象性</td>
+                <td class="zh">自然一人</td>
+                <td class="zh">自然人</td>
+                <td class="zh zh-chart-state">自在</td>
+              </tr>
+              <tr>
+                <td rowspan="3" class="zh">文化社会<br>（含科学社会）</td>
+                <td class="zh">物质性</td>
+                <td class="zh">人一自然物</td>
+                <td class="zh">社会人</td>
+                <td class="zh zh-chart-state">自明</td>
+              </tr>
+              <tr>
+                <td class="zh">物化性</td>
+                <td class="zh">人一人工物</td>
+                <td class="zh">异化人</td>
+                <td class="zh zh-chart-state-loss">自失</td>
+              </tr>
+              <tr>
+                <td class="zh">理性化</td>
+                <td class="zh">人一发明物</td>
+                <td class="zh">文化人</td>
+                <td class="zh zh-chart-state">自觉</td>
+              </tr>
+              <tr>
+                <td class="zh">文明社会</td>
+                <td class="zh">智能通融</td>
+                <td class="zh">人一自己</td>
+                <td class="zh">文明人</td>
+                <td class="zh zh-chart-state">自由</td>
+              </tr>
+              <tr>
+                <td class="zh">宇宙蒙昧</td>
+                <td class="zh">智慧性</td>
+                <td class="zh">人一宇宙</td>
+                <td class="zh">宇宙人</td>
+                <td class="zh zh-chart-state-peak">自由自在</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="zh-chart-note zh" style="margin-top:0.6rem">
+          1、人类系统，主要由感受系统、效应系统、符号系统组成。<br>
+          2、构成社会体系与社会形态的核心要素，则是符号系统。<br>
+          3、符号的意义是随时代变化、地区空间变化而变化的。
+        </div>
+      </div>
+
+      <div class="zh-chart-ref zh">注：${c.referenceZh}</div>
+
+      <div class="poem-actions">
+        <button class="poem-action-btn poem-listen-btn" onclick="togglePoem('${c.id}')" data-poem-id="${c.id}">
+          <i class="ti ti-volume"></i>
+          <span class="zh">聆聽</span><span class="en">Listen</span>
+        </button>
+      </div>
+    </div>`;
+  }
+
+  /* ── Poems ── */
+  if (typeof ZHANGHUANG_POEMS !== 'undefined') {
+    html += `
     <div class="zhanghuang-intro">
       <p class="zh">王天舒律詩修定稿小彙</p>
     </div>
@@ -315,6 +474,9 @@ function renderZhanghuang() {
           </div>
         </div>`).join('')}
     </div>`;
+  }
+
+  container.innerHTML = html;
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -482,6 +644,7 @@ async function togglePoem(poemId) {
   const allPoems = [
     ...(typeof POEMS !== 'undefined' ? POEMS : []),
     ...(typeof ZHANGHUANG_POEMS !== 'undefined' ? ZHANGHUANG_POEMS : []),
+    ...(typeof ZHANGHUANG_CHART !== 'undefined' ? [ZHANGHUANG_CHART] : []),
   ];
   const poem = allPoems.find(p => p.id === poemId);
   if (!poem) return;

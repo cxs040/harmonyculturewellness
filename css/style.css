@@ -1532,3 +1532,195 @@ mark.sh {
 body.dark #search-modal { background: var(--cream); }
 body.dark .search-result-item:hover,
 body.dark .search-result-item:focus { background: rgba(201,169,110,0.07); }
+
+/* ════════════════════════════════════════
+   ZHANG-HUANG CHART CARD
+   ════════════════════════════════════════ */
+.zh-chart-card {
+  background: var(--parch-lt);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  font-family: 'Noto Serif SC', serif;
+}
+
+.zh-chart-head {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--gold);
+}
+
+.zh-chart-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.1em;
+  display: block;
+}
+
+.zh-chart-attr {
+  font-size: 0.82rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.12em;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.zh-chart-section {
+  margin-bottom: 1.4rem;
+}
+
+.zh-chart-section-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.7rem;
+  border-left: 3px solid var(--gold);
+  background: rgba(201,169,110,0.1);
+  margin-bottom: 0.8rem;
+}
+
+.zh-chart-block { padding-left: 0.75rem; }
+
+.zh-chart-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.7rem;
+  align-items: flex-start;
+}
+
+.zh-chart-row-head {
+  min-width: 4.5rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--ink);
+  background: rgba(139,26,26,0.07);
+  border: 1px solid rgba(139,26,26,0.18);
+  border-radius: 3px;
+  padding: 0.25rem 0.4rem;
+  text-align: center;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.zh-chart-row-body { flex: 1; }
+
+.zh-chart-line {
+  font-size: 0.86rem;
+  color: var(--ink-soft);
+  line-height: 1.75;
+  margin-bottom: 0.1rem;
+}
+
+.zh-chart-key {
+  display: inline-block;
+  font-size: 0.76rem;
+  color: var(--red);
+  background: rgba(139,26,26,0.06);
+  border: 1px solid rgba(139,26,26,0.22);
+  padding: 0.05rem 0.38rem;
+  border-radius: 3px;
+  margin-right: 0.35rem;
+  white-space: nowrap;
+}
+
+.zh-chart-note {
+  font-size: 0.77rem;
+  color: #888;
+  line-height: 1.65;
+  margin-top: 0.3rem;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--gold);
+  font-style: italic;
+}
+
+.zh-chart-path {
+  font-size: 0.8rem;
+  color: var(--gold-dark);
+  letter-spacing: 0.04em;
+  margin: 0.3rem 0 0.5rem;
+}
+
+.zh-chart-symbols { margin-top: 0.5rem; }
+
+.zh-chart-sym-row {
+  background: rgba(201,169,110,0.07);
+  border: 1px solid rgba(201,169,110,0.3);
+  border-radius: 4px;
+  padding: 0.5rem 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+.zh-chart-sym-top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.2rem;
+}
+
+.zh-chart-sym-tag {
+  display: inline-block;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--parch-lt);
+  background: var(--red);
+  padding: 0.1rem 0.45rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.zh-chart-sym-top > span:last-child {
+  font-size: 0.84rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.02em;
+}
+
+/* Social forms table */
+.zh-chart-social-wrap { overflow-x: auto; }
+
+.zh-chart-social {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+}
+
+.zh-chart-social th,
+.zh-chart-social td {
+  border: 1px solid var(--gold);
+  padding: 0.38rem 0.6rem;
+  text-align: center;
+  vertical-align: middle;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+
+.zh-chart-social th {
+  background: rgba(139,26,26,0.07);
+  color: var(--red);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+.zh-chart-state       { font-weight: 600; color: var(--red); }
+.zh-chart-state-loss  { color: #888; font-weight: 600; }
+.zh-chart-state-peak  { font-weight: 700; color: var(--gold-dark); }
+
+.zh-chart-ref {
+  font-size: 0.76rem;
+  color: #999;
+  text-align: right;
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .zh-chart-card { padding: 1rem; }
+  .zh-chart-row { flex-direction: column; gap: 0.3rem; }
+  .zh-chart-row-head { min-width: unset; width: fit-content; }
+  .zh-chart-social th,
+  .zh-chart-social td { padding: 0.28rem 0.35rem; font-size: 0.78rem; }
+}
