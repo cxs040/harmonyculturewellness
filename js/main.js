@@ -288,9 +288,39 @@ function renderTimeline() {
     </div>`).join('');
 }
 
+/* ── Zhang-Huang Studies: render 王天舒 poems ── */
+function renderZhanghuang() {
+  const container = document.getElementById('zhanghuang-content');
+  if (!container || typeof ZHANGHUANG_POEMS === 'undefined') return;
+  container.innerHTML = `
+    <div class="zhanghuang-intro">
+      <p class="zh">王天舒律詩修定稿小彙</p>
+    </div>
+    <div class="poem-grid">
+      ${ZHANGHUANG_POEMS.map(p => `
+        <div class="poem-card" id="${p.id}">
+          <div class="poem-title"><span class="zh">${p.titleZh}</span></div>
+          <div class="poem-author"><span class="zh">${p.subtitleZh}</span></div>
+          <div class="poem-lines zh">${p.linesZh.join('<br>')}</div>
+          ${p.noteZh ? `<div class="poem-note zh">${p.noteZh}</div>` : ''}
+          <div class="poem-actions">
+            <button class="poem-action-btn poem-listen-btn" onclick="togglePoem('${p.id}')" data-poem-id="${p.id}">
+              <i class="ti ti-volume"></i>
+              <span class="zh">聆聽</span><span class="en">Listen</span>
+            </button>
+            <button class="poem-action-btn" onclick="sharePoem('${p.id}')">
+              <i class="ti ti-share"></i>
+              <span class="zh">分享</span><span class="en">Share</span>
+            </button>
+          </div>
+        </div>`).join('')}
+    </div>`;
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   renderSectionContent();
   renderPoems();
+  renderZhanghuang();
   renderTimeline();
   loadSectionShelves();
   loadDocumentArchive();
@@ -449,7 +479,11 @@ async function togglePoem(poemId) {
     _setListenBtnState(b.dataset.poemId, 'idle')
   );
 
-  const poem = POEMS.find(p => p.id === poemId);
+  const allPoems = [
+    ...(typeof POEMS !== 'undefined' ? POEMS : []),
+    ...(typeof ZHANGHUANG_POEMS !== 'undefined' ? ZHANGHUANG_POEMS : []),
+  ];
+  const poem = allPoems.find(p => p.id === poemId);
   if (!poem) return;
 
   _setListenBtnState(poemId, 'loading');
