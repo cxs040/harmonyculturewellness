@@ -710,14 +710,14 @@ const ZHANGHUANG_POEMS = [
    HOW TO ADD: append an object to the array.
    ══════════════════════════════════════════ */
 const DONORS = [
-  { nameZh: '王大明', titleZh: '先生', amountZh: '伍佰元',       msgZh: '鼎力相助，感激不盡'   },
-  { nameZh: '李秀英', titleZh: '女士', amountZh: '貳佰元',       msgZh: '仁義解囊，功德無量'   },
-  { nameZh: '張志遠', titleZh: '先生', amountZh: '壹仟元',       msgZh: '高誼厚情，銘感五內'   },
-  { nameZh: '陳美玲', titleZh: '女士', amountZh: '參佰元',       msgZh: '慷慨仗義，令人感銘'   },
-  { nameZh: '劉建國', titleZh: '先生', amountZh: '捌佰元',       msgZh: '厚德載物，深表謝忱'   },
-  { nameZh: '趙天佑', titleZh: '先生', amountZh: '壹佰伍拾元',   msgZh: '善舉可嘉，萬分感激'   },
-  { nameZh: '林曉燕', titleZh: '女士', amountZh: '陸佰元',       msgZh: '芳心仁義，芳名永載'   },
-  { nameZh: '黃文峰', titleZh: '先生', amountZh: '貳佰伍拾元',   msgZh: '熱心助學，深表謝意'   },
+  { nameZh: '王大明', titleZh: '先生', amountZh: '壹仟伍佰元',   msgZh: '鼎力相助，感激不盡'   },
+  { nameZh: '李秀英', titleZh: '女士', amountZh: '貳仟元',       msgZh: '仁義解囊，功德無量'   },
+  { nameZh: '張志遠', titleZh: '先生', amountZh: '伍仟元',       msgZh: '高誼厚情，銘感五內'   },
+  { nameZh: '陳美玲', titleZh: '女士', amountZh: '壹仟貳佰元',   msgZh: '慷慨仗義，令人感銘'   },
+  { nameZh: '劉建國', titleZh: '先生', amountZh: '參仟伍佰元',   msgZh: '厚德載物，深表謝忱'   },
+  { nameZh: '趙天佑', titleZh: '先生', amountZh: '壹仟元',       msgZh: '善舉可嘉，萬分感激'   },
+  { nameZh: '林曉燕', titleZh: '女士', amountZh: '貳仟捌佰元',   msgZh: '芳心仁義，芳名永載'   },
+  { nameZh: '黃文峰', titleZh: '先生', amountZh: '肆仟元',       msgZh: '熱心助學，深表謝意'   },
 ];
 
 
