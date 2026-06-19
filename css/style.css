@@ -1534,6 +1534,81 @@ body.dark .search-result-item:hover,
 body.dark .search-result-item:focus { background: rgba(201,169,110,0.07); }
 
 /* ════════════════════════════════════════
+   DONATION SECTION
+   ════════════════════════════════════════ */
+.donation-section {
+  text-align: center;
+  padding: 1.2rem 1rem 0.8rem;
+}
+
+.donation-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--red);
+  color: var(--parch-lt);
+  border: none;
+  border-radius: 4px;
+  padding: 0.55rem 1.4rem;
+  font-size: 0.92rem;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(139,26,26,0.3);
+}
+
+.donation-btn:hover {
+  background: var(--red-mid);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(139,26,26,0.35);
+}
+
+.donation-btn i { font-size: 1.1rem; }
+
+.donation-desc {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.04em;
+  margin: 0.5rem auto 0.1rem;
+  line-height: 1.65;
+}
+
+/* Scrolling donor marquee */
+.donor-marquee {
+  overflow: hidden;
+  background: rgba(139,26,26,0.04);
+  border-top: 1px solid rgba(201,169,110,0.5);
+  border-bottom: 1px solid rgba(201,169,110,0.5);
+  padding: 0.5rem 0;
+  margin-top: 0.9rem;
+}
+
+.donor-marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: donor-scroll 40s linear infinite;
+}
+
+.donor-marquee:hover .donor-marquee-track {
+  animation-play-state: paused;
+}
+
+.donor-text {
+  font-size: 0.82rem;
+  color: var(--red);
+  letter-spacing: 0.04em;
+  line-height: 2;
+  padding-right: 0;
+}
+
+@keyframes donor-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ════════════════════════════════════════
    学以致用 BANNER (home page)
    ════════════════════════════════════════ */
 .zhiyong-banner {

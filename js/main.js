@@ -484,6 +484,30 @@ function renderZhanghuang() {
 }
 
 /* ════════════════════════════════════════
+   DONOR SCROLLING BANNER
+   ════════════════════════════════════════ */
+function renderDonorBanner() {
+  const c1 = document.getElementById('donor-copy-1');
+  const c2 = document.getElementById('donor-copy-2');
+  if (!c1 || typeof DONORS === 'undefined' || !DONORS.length) return;
+
+  const sep = '　　✦　　';
+  const text = DONORS.map(d =>
+    `✦ 承蒙 ${d.nameZh} ${d.titleZh} 慷慨捐贈 ${d.amountZh}，${d.msgZh}！`
+  ).join(sep) + sep;
+
+  c1.textContent = text;
+  c2.textContent = text;
+
+  /* Speed: one full scroll = ~40 s regardless of text length */
+  const track = document.getElementById('donor-marquee-track');
+  if (track) {
+    const duration = Math.max(30, DONORS.length * 5);
+    track.style.animationDuration = duration + 's';
+  }
+}
+
+/* ════════════════════════════════════════
    乐读会 SECTION
    ════════════════════════════════════════ */
 function renderLeduhui() {
@@ -544,6 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPoems();
   renderZhanghuang();
   renderLeduhui();
+  renderDonorBanner();
   renderTimeline();
   loadSectionShelves();
   loadDocumentArchive();
