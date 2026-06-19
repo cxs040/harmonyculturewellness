@@ -300,7 +300,7 @@ function renderZhanghuang() {
   if (typeof ZHANGHUANG_CHART !== 'undefined') {
     const c = ZHANGHUANG_CHART;
     html += `
-    <div class="zh-chart-card" id="${c.id}">
+    <div class="zh-chart-card" id="${c.id}" data-cat="yuyanxue">
       <div class="zh-chart-head">
         <div class="zh-chart-title zh">${c.titleZh}</div>
         <div class="zh-chart-attr zh">${c.attributionZh}</div>
@@ -453,31 +453,34 @@ function renderZhanghuang() {
   /* ── Poems ── */
   if (typeof ZHANGHUANG_POEMS !== 'undefined') {
     html += `
-    <div class="zhanghuang-intro">
-      <p class="zh">王天舒律詩修定稿小彙</p>
-    </div>
-    <div class="poem-grid">
-      ${ZHANGHUANG_POEMS.map(p => `
-        <div class="poem-card" id="${p.id}">
-          <div class="poem-title"><span class="zh">${p.titleZh}</span></div>
-          <div class="poem-author"><span class="zh">${p.subtitleZh}</span></div>
-          <div class="poem-lines zh">${p.linesZh.join('<br>')}</div>
-          ${p.noteZh ? `<div class="poem-note zh">${p.noteZh}</div>` : ''}
-          <div class="poem-actions">
-            <button class="poem-action-btn poem-listen-btn" onclick="togglePoem('${p.id}')" data-poem-id="${p.id}">
-              <i class="ti ti-volume"></i>
-              <span class="zh">聆聽</span><span class="en">Listen</span>
-            </button>
-            <button class="poem-action-btn" onclick="sharePoem('${p.id}')">
-              <i class="ti ti-share"></i>
-              <span class="zh">分享</span><span class="en">Share</span>
-            </button>
-          </div>
-        </div>`).join('')}
+    <div data-cat="jingxue">
+      <div class="zhanghuang-intro">
+        <p class="zh">王天舒律詩修定稿小彙</p>
+      </div>
+      <div class="poem-grid">
+        ${ZHANGHUANG_POEMS.map(p => `
+          <div class="poem-card" id="${p.id}">
+            <div class="poem-title"><span class="zh">${p.titleZh}</span></div>
+            <div class="poem-author"><span class="zh">${p.subtitleZh}</span></div>
+            <div class="poem-lines zh">${p.linesZh.join('<br>')}</div>
+            ${p.noteZh ? `<div class="poem-note zh">${p.noteZh}</div>` : ''}
+            <div class="poem-actions">
+              <button class="poem-action-btn poem-listen-btn" onclick="togglePoem('${p.id}')" data-poem-id="${p.id}">
+                <i class="ti ti-volume"></i>
+                <span class="zh">聆聽</span><span class="en">Listen</span>
+              </button>
+              <button class="poem-action-btn" onclick="sharePoem('${p.id}')">
+                <i class="ti ti-share"></i>
+                <span class="zh">分享</span><span class="en">Share</span>
+              </button>
+            </div>
+          </div>`).join('')}
+      </div>
     </div>`;
   }
 
   container.innerHTML = html;
+  initZhanghuangTabs();
 }
 
 /* ════════════════════════════════════════
@@ -518,10 +521,20 @@ function renderLeduhui() {
    ZHANG-HUANG SUBCATEGORY TABS
    ════════════════════════════════════════ */
 function initZhanghuangTabs() {
-  document.querySelectorAll('.zh-subcat-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.zh-subcat-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  const subcats = document.querySelector('.zh-subcats');
+  if (!subcats || subcats._tabsInited) return;
+  subcats._tabsInited = true;
+
+  subcats.addEventListener('click', e => {
+    const btn = e.target.closest('.zh-subcat-btn');
+    if (!btn) return;
+    const cat = btn.dataset.cat;
+    subcats.querySelectorAll('.zh-subcat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const content = document.getElementById('zhanghuang-content');
+    if (!content) return;
+    content.querySelectorAll('[data-cat]').forEach(el => {
+      el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
     });
   });
 }
