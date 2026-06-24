@@ -1,58 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" opacity="0.09">
-  <g fill="none" stroke="#c9a84c">
-    <!-- Outer decorative rings -->
-    <circle cx="200" cy="200" r="192" stroke-width="2.5"/>
-    <circle cx="200" cy="200" r="176" stroke-width="0.6"/>
-    <circle cx="200" cy="200" r="152" stroke-width="1.2"/>
-    <circle cx="200" cy="200" r="108" stroke-width="0.8"/>
-
-    <!-- 8 spokes dividing the ring zones -->
-    <line x1="200" y1="8"   x2="200" y2="392" stroke-width="0.4"/>
-    <line x1="8"   y1="200" x2="392" y2="200" stroke-width="0.4"/>
-    <line x1="57"  y1="57"  x2="343" y2="343" stroke-width="0.4"/>
-    <line x1="343" y1="57"  x2="57"  y2="343" stroke-width="0.4"/>
-
-    <!-- Yin-Yang outer border -->
-    <circle cx="200" cy="200" r="54" stroke-width="1.5"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" opacity="0.14">
+  <!-- Rings -->
+  <g stroke="#c9a84c" fill="none">
+    <circle cx="250" cy="250" r="237" stroke-width="2.5"/>
+    <circle cx="250" cy="250" r="200" stroke-width="1"/>
+    <circle cx="250" cy="250" r="128" stroke-width="1"/>
+    <!-- 8 spokes -->
+    <line x1="250" y1="13"  x2="250" y2="487" stroke-width="0.8"/>
+    <line x1="13"  y1="250" x2="487" y2="250" stroke-width="0.8"/>
+    <line x1="83"  y1="83"  x2="417" y2="417" stroke-width="0.8"/>
+    <line x1="417" y1="83"  x2="83"  y2="417" stroke-width="0.8"/>
+    <!-- Yin-yang outer ring -->
+    <circle cx="250" cy="250" r="62" stroke-width="2"/>
+    <!-- Yin-yang S-curve -->
+    <path d="M250,188 A31,31 0 0,1 250,250 A31,31 0 0,0 250,312" stroke-width="1.8"/>
+    <!-- Small fish-eye circles -->
+    <circle cx="250" cy="219" r="10" stroke-width="1.5"/>
+    <circle cx="250" cy="281" r="10" stroke-width="1.5"/>
   </g>
 
-  <!-- Yin-Yang shape -->
-  <g>
-    <!-- Light half (gold) -->
-    <path d="M200,146 A54,54 0 0,1 200,254 A27,27 0 0,1 200,200 A27,27 0 0,0 200,146 Z" fill="#c9a84c" opacity="0.09"/>
-    <!-- Small dot: light in dark -->
-    <circle cx="200" cy="173" r="9" fill="#c9a84c" opacity="0.09"/>
-    <!-- Small dot: dark in light -->
-    <circle cx="200" cy="227" r="9" fill="#18140e" opacity="0.09"/>
-    <!-- Outline -->
-    <path d="M200,146 A54,54 0 0,1 200,254 A27,27 0 0,1 200,200 A27,27 0 0,0 200,146 Z" fill="none" stroke="#c9a84c" stroke-width="0.8" opacity="0.09"/>
+  <!-- 後天八卦 trigrams (Later Heaven arrangement, South at top) -->
+  <!-- Trigram radius ≈ 168 from center -->
+  <g fill="#c9a84c" stroke="none"
+     font-family="'Segoe UI Symbol','Apple Symbols','Symbola',serif"
+     font-size="36" text-anchor="middle" dominant-baseline="central">
+    <text x="250" y="68">☲</text>   <!-- 南 South  Li   Fire    -->
+    <text x="369" y="131">☷</text>  <!-- 坤 SW     Kun  Earth   -->
+    <text x="418" y="250">☱</text>  <!-- 西 West   Dui  Lake    -->
+    <text x="369" y="369">☰</text>  <!-- 乾 NW     Qian Heaven  -->
+    <text x="250" y="432">☵</text>  <!-- 北 North  Kan  Water   -->
+    <text x="131" y="369">☶</text>  <!-- 艮 NE     Gen  Mountain-->
+    <text x="82"  y="250">☳</text>  <!-- 東 East   Zhen Thunder -->
+    <text x="131" y="131">☴</text>  <!-- 巽 SE     Xun  Wind    -->
   </g>
 
-  <!-- 後天八卦 trigram symbols -->
-  <g fill="#c9a84c" opacity="0.09" font-family="serif" text-anchor="middle" font-size="32">
-    <!-- S/top: ☲ Li Fire -->
-    <text x="200" y="44">☲</text>
-    <!-- SE: ☴ Xun Wind -->
-    <text x="300" y="76">☴</text>
-    <!-- E/right: ☱ Dui Lake (later heaven: W=Dui, E=Zhen) -->
-    <text x="344" y="212">☱</text>
-    <!-- NE: ☰ Qian Heaven -->
-    <text x="300" y="344">☰</text>
-    <!-- N/bottom: ☵ Kan Water -->
-    <text x="200" y="374">☵</text>
-    <!-- NW: ☶ Gen Mountain -->
-    <text x="102" y="344">☶</text>
-    <!-- W/left: ☳ Zhen Thunder -->
-    <text x="58" y="212">☳</text>
-    <!-- SW: ☷ Kun Earth -->
-    <text x="102" y="76">☷</text>
-  </g>
-
-  <!-- Chinese cardinal labels (tiny) -->
-  <g fill="#c9a84c" opacity="0.09" font-family="serif" text-anchor="middle" font-size="11">
-    <text x="200" y="132">南</text>
-    <text x="200" y="280">北</text>
-    <text x="132" y="205">西</text>
-    <text x="270" y="205">東</text>
+  <!-- Direction labels -->
+  <g fill="#c9a84c" stroke="none"
+     font-family="'Noto Serif SC','Segoe UI','Microsoft YaHei',sans-serif"
+     font-size="13" text-anchor="middle" dominant-baseline="central">
+    <text x="250" y="150">南</text>
+    <text x="250" y="350">北</text>
+    <text x="150" y="250">東</text>
+    <text x="352" y="250">西</text>
   </g>
 </svg>
