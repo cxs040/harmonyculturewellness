@@ -42,26 +42,15 @@ let allFigures = [];
    INIT / AUTH
    ══════════════════════════════════════════ */
 async function init() {
-  // Check SWA auth status via /.auth/me
-  try {
-    const meRes = await fetch('/.auth/me');
-    const me = await meRes.json();
-    if (!me.clientPrincipal) {
-      // Not logged in — show auth screen (already visible by default)
-      return;
-    }
-  } catch {
-    // Could not reach /.auth/me — might be local dev, continue anyway
-  }
-
-  // Check CMS allowlist via API
   try {
     const res = await apiGet('/api/userinfo');
     if (res.status === 401) {
+      // Not authenticated — show login screen
       document.getElementById('auth-screen').style.display = 'flex';
       return;
     }
     if (res.status === 403) {
+      // Authenticated but not in allowlist
       document.getElementById('auth-screen').style.display = 'none';
       document.getElementById('access-denied').style.display = 'flex';
       return;
@@ -72,11 +61,10 @@ async function init() {
     document.getElementById('dash-layout').style.display = 'flex';
     document.getElementById('sidebar-email').textContent = user.email;
     document.getElementById('topbar-badge').textContent = user.isAdmin ? '管理員' : '編輯';
-
     setupNav();
     showSection('timeline');
-  } catch (err) {
-    // API not configured yet — allow preview in local dev
+  } catch {
+    // API unreachable — local dev fallback
     currentUser = { email: 'local-dev', isAdmin: true };
     document.getElementById('auth-screen').style.display = 'none';
     document.getElementById('dash-layout').style.display = 'flex';
