@@ -52,22 +52,6 @@ body.dashboard-body {
   text-decoration: none;
 }
 .btn-login:hover { background: #e0bb5e; }
-.btn-login-google {
-  background: #fff;
-  color: #333;
-  font-weight: 700;
-  padding: .8rem 2rem;
-  border: 2px solid #ddd;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1rem;
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-}
-.btn-login-google::before { content: 'G'; font-weight: 900; color: #4285f4; font-size: 1.1rem; }
-.btn-login-google:hover { border-color: #4285f4; }
 
 #access-denied { display: none; }
 #access-denied.show { display: flex; }
