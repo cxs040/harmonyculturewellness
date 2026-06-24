@@ -498,7 +498,43 @@ const FIGURES = {
     lat: 29.97, lng: 121.15, locationZh: '餘姚（今浙江餘姚）', locationEn: 'Yuyao, Zhejiang',
   },
 
-  /* ── 諸子百家 ── */
+  /* ══════════════════════════════════════════
+     諸子百家 — HUNDRED SCHOOLS OF THOUGHT
+     春秋 · 戰國 全覽
+     ══════════════════════════════════════════ */
+
+  /* ── 儒家 (Confucianism) — Spring & Autumn ── */
+  guanzi: {
+    nameZh: '管仲', nameEn: 'Guan Zhong',
+    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
+    section: 'documents', catLabelZh: '法家先驅', catLabelEn: 'Proto-Legalism',
+    quoteZh: '倉廩實而知禮節，衣食足而知榮辱。上服度則六親固，四維張則君令行。',
+    quoteEn: 'When the granaries are full, the people learn ritual propriety; when clothing and food are sufficient, they understand honour and shame. When the ruler observes proper measure, the six relationships are secure; when the four moral principles are upheld, the ruler\'s commands are heeded.',
+    sourceZh: '《管子·牧民》', sourceEn: 'Guanzi, Shepherding the People',
+    lat: 36.57, lng: 119.57, locationZh: '齊國（今山東安丘）', locationEn: 'Anqiu, Shandong',
+  },
+
+  zichan: {
+    nameZh: '子產', nameEn: 'Zi Chan',
+    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
+    section: 'documents', catLabelZh: '法家先驅', catLabelEn: 'Proto-Legalism',
+    quoteZh: '寬猛相濟，政是以和。火烈，民望而畏之，故鮮死焉；水懦弱，民狎而翫之，則多死焉。故從政者寬以濟猛，猛以濟寬，政是以和。',
+    quoteEn: 'Leniency and severity must complement each other — this is how governance achieves harmony. Fire is fierce: the people fear it and few perish in it. Water is gentle: the people take it lightly and many drown in it. Therefore the statesman tempers severity with leniency and leniency with severity — and governance achieves harmony.',
+    sourceZh: '《左傳·昭公二十年》', sourceEn: 'Zuo Zhuan, 20th Year of Duke Zhao',
+    lat: 34.39, lng: 113.85, locationZh: '鄭國新鄭（今河南新鄭）', locationEn: 'Xinzheng, Henan',
+  },
+
+  yanying: {
+    nameZh: '晏嬰', nameEn: 'Yan Ying',
+    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
+    section: 'documents', catLabelZh: '政治家', catLabelEn: 'Statesman',
+    quoteZh: '聖人千慮，必有一失；愚人千慮，必有一得。',
+    quoteEn: 'Even a sage, after a thousand deliberations, must make one mistake; even a fool, after a thousand deliberations, must arrive at one correct answer.',
+    sourceZh: '《晏子春秋·內篇雜下》', sourceEn: 'Yanzi Chunqiu, Inner Chapters',
+    lat: 36.38, lng: 119.75, locationZh: '齊國夷維（今山東高密）', locationEn: 'Gaomi, Shandong',
+  },
+
+  /* ── 墨家 (Mohism) ── */
   mozi: {
     nameZh: '墨子', nameEn: 'Mozi',
     dynastyZh: '春秋末至戰國初', dynastyEn: 'Late Spring & Autumn',
@@ -509,14 +545,46 @@ const FIGURES = {
     lat: 34.77, lng: 117.67, locationZh: '魯國（今山東滕州）', locationEn: 'Tengzhou, Shandong',
   },
 
-  hanfeizi: {
-    nameZh: '韓非子', nameEn: 'Han Feizi',
+  /* ── 道家 (Taoism) — additional ── */
+  liezi: {
+    nameZh: '列子', nameEn: 'Liezi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'taoism', catLabelZh: '道家', catLabelEn: 'Taoism',
+    quoteZh: '天地無全功，聖人無全能，萬物無全用。故天職生覆，地職形載，聖職教化，物職所宜。',
+    quoteEn: 'Heaven and earth do not encompass all functions; the sage does not possess all capacities; the ten thousand things do not have all uses. Heaven\'s duty is to produce and shelter; earth\'s is to shape and support; the sage\'s is to teach and transform; each thing\'s is to serve its fitting purpose.',
+    sourceZh: '《列子·天瑞》', sourceEn: 'Liezi, Heavenly Gifts',
+    lat: 34.76, lng: 113.63, locationZh: '鄭國（今河南鄭州）', locationEn: 'Zhengzhou, Henan',
+  },
+
+  yangzhu: {
+    nameZh: '楊朱', nameEn: 'Yang Zhu',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'taoism', catLabelZh: '道家·楊朱學派', catLabelEn: 'Taoism · Yang Zhu School',
+    quoteZh: '古之人損一毫利天下，不與也；悉天下奉一身，不取也。人人不損一毫，人人不利天下，天下治矣。',
+    quoteEn: 'The men of old would not give up a single hair to benefit the world, nor would they take all the world\'s wealth for their own person. If every person refused to sacrifice a single hair, and every person refrained from exploiting the world, the world would govern itself.',
+    sourceZh: '《列子·楊朱》', sourceEn: 'Liezi, Yang Zhu',
+    lat: 34.79, lng: 114.28, locationZh: '魏國（今河南開封附近）', locationEn: 'Near Kaifeng, Henan',
+  },
+
+  /* ── 法家 (Legalism) ── */
+  shenbuhui: {
+    nameZh: '申不害', nameEn: 'Shen Buhai',
     dynastyZh: '戰國時代', dynastyEn: 'Warring States',
     section: 'documents', catLabelZh: '法家', catLabelEn: 'Legalism',
-    quoteZh: '法不阿貴，繩不撓曲。法之所加，智者弗能辭，勇者弗敢爭。刑過不避大臣，賞善不遺匹夫。',
-    quoteEn: 'The law does not yield to the noble; the plumb-line does not bend for the crooked. Where the law applies, neither the wise can excuse themselves nor the brave dare resist. Punishment for transgressions spares not the high minister; reward for virtue overlooks not the common man.',
-    sourceZh: '《韓非子·有度》', sourceEn: 'Han Feizi, Having Standards',
-    lat: 34.39, lng: 113.86, locationZh: '韓國新鄭（今河南新鄭）', locationEn: 'Xinzheng, Henan',
+    quoteZh: '術者，因任而授官，循名而責實，操殺生之柄，課群臣之能者也。此人主之所執也。',
+    quoteEn: 'The method of statecraft means: assign office according to ability, hold men accountable to the name of their post, hold the power of life and death, and assess the competence of all ministers. This is what the ruler must hold fast to.',
+    sourceZh: '《韓非子·定法》引申子', sourceEn: 'Cited in Han Feizi, Fixing Standards',
+    lat: 34.41, lng: 113.80, locationZh: '鄭國→韓國（今河南鄭州）', locationEn: 'Zhengzhou, Henan',
+  },
+
+  shendao: {
+    nameZh: '慎到', nameEn: 'Shen Dao',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '法家·道家', catLabelEn: 'Legalism · Taoism',
+    quoteZh: '賢而屈於不肖者，權輕也；不肖而服於賢者，位尊也。堯為匹夫，不能治三人；而桀為天子，能亂天下。',
+    quoteEn: 'When the worthy submits to the unworthy, it is because the former\'s authority is light; when the unworthy obeys the worthy, it is because the latter\'s position is high. Yao as a commoner could not govern three people; but Jie as the Son of Heaven could throw the empire into chaos.',
+    sourceZh: '《慎子》', sourceEn: 'Shenzi',
+    lat: 36.62, lng: 114.47, locationZh: '趙國（今河北邯鄲）', locationEn: 'Handan, Hebei',
   },
 
   shanyang: {
@@ -529,24 +597,152 @@ const FIGURES = {
     lat: 35.30, lng: 114.87, locationZh: '衛國（今河南濮陽）', locationEn: 'Puyang, Henan',
   },
 
+  hanfeizi: {
+    nameZh: '韓非子', nameEn: 'Han Feizi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '法家', catLabelEn: 'Legalism',
+    quoteZh: '法不阿貴，繩不撓曲。法之所加，智者弗能辭，勇者弗敢爭。刑過不避大臣，賞善不遺匹夫。',
+    quoteEn: 'The law does not yield to the noble; the plumb-line does not bend for the crooked. Where the law applies, neither the wise can excuse themselves nor the brave dare resist. Punishment for transgressions spares not the high minister; reward for virtue overlooks not the common man.',
+    sourceZh: '《韓非子·有度》', sourceEn: 'Han Feizi, Having Standards',
+    lat: 34.39, lng: 113.86, locationZh: '韓國新鄭（今河南新鄭）', locationEn: 'Xinzheng, Henan',
+  },
+
+  lisi: {
+    nameZh: '李斯', nameEn: 'Li Si',
+    dynastyZh: '戰國末至秦朝', dynastyEn: 'Late Warring States — Qin',
+    section: 'documents', catLabelZh: '法家', catLabelEn: 'Legalism',
+    quoteZh: '泰山不讓土壤，故能成其大；河海不擇細流，故能就其深；王者不卻衆庶，故能明其德。',
+    quoteEn: 'Mount Tai does not reject a single clod of earth — that is how it achieves its greatness. The rivers and seas do not turn away the smallest streams — that is how they achieve their depth. A true king does not reject the common people — that is how he makes his virtue shine.',
+    sourceZh: '《諫逐客書》', sourceEn: 'Memorial Against the Expulsion of Guest Officials',
+    lat: 33.26, lng: 114.52, locationZh: '楚國上蔡（今河南上蔡）', locationEn: 'Shangcai, Henan',
+  },
+
+  /* ── 名家 (School of Names) ── */
+  huishi: {
+    nameZh: '惠施', nameEn: 'Hui Shi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '名家', catLabelEn: 'School of Names',
+    quoteZh: '至大無外，謂之大一；至小無內，謂之小一。無厚，不可積也，其大千里。天與地卑，山與澤平。',
+    quoteEn: 'That which has nothing beyond it is called the Great One; that which has nothing within it is called the Small One. That which has no thickness cannot be stacked up, yet it can extend for a thousand li. Heaven is as low as the earth; mountains are level with marshes.',
+    sourceZh: '《莊子·天下》引惠施十事', sourceEn: 'Zhuangzi, The World — Ten Theses of Hui Shi',
+    lat: 34.42, lng: 115.63, locationZh: '宋國（今河南商丘）', locationEn: 'Shangqiu, Henan',
+  },
+
+  gongsunlong: {
+    nameZh: '公孫龍', nameEn: 'Gongsun Long',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '名家', catLabelEn: 'School of Names',
+    quoteZh: '白馬非馬。馬者，所以命形也；白者，所以命色也。命色者非命形也，故曰白馬非馬。',
+    quoteEn: 'A white horse is not a horse. "Horse" is what names the form; "white" is what names the colour. What names the colour is not what names the form — therefore a white horse is not a horse.',
+    sourceZh: '《公孫龍子·白馬論》', sourceEn: 'Gongsun Longzi, White Horse Discourse',
+    lat: 36.60, lng: 114.50, locationZh: '趙國（今河北邯鄲）', locationEn: 'Handan, Hebei',
+  },
+
+  /* ── 陰陽家 (Yin-Yang School) ── */
   zouyan: {
     nameZh: '鄒衍', nameEn: 'Zou Yan',
     dynastyZh: '戰國時代', dynastyEn: 'Warring States',
     section: 'documents', catLabelZh: '陰陽家', catLabelEn: 'Yin-Yang School',
-    quoteZh: '稱引天地剖判以來，五德轉移，治各有宜，而符應若茲。',
-    quoteEn: 'From the separation of heaven and earth down to the present, the Five Virtues have rotated, each era governed by its fitting virtue, and the signs have corresponded accordingly.',
-    sourceZh: '《史記·孟子荀卿列傳》', sourceEn: 'Records of the Grand Historian, Biography of Mencius and Xunzi',
+    quoteZh: '稱引天地剖判以來，五德轉移，治各有宜，而符應若茲。以為儒者所謂中國者，於天下乃八十一分居其一分耳。',
+    quoteEn: 'From the separation of heaven and earth down to the present, the Five Virtues have rotated, each era governed by its fitting virtue, and the signs have corresponded accordingly. What the Confucians call the Middle Kingdom is but one eighty-first part of all under heaven.',
+    sourceZh: '《史記·孟子荀卿列傳》', sourceEn: 'Records of the Grand Historian',
     lat: 36.81, lng: 118.05, locationZh: '齊國臨淄（今山東淄博）', locationEn: 'Zibo, Shandong',
   },
 
-  guanzi: {
-    nameZh: '管仲', nameEn: 'Guan Zhong',
-    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
-    section: 'documents', catLabelZh: '法家先驅', catLabelEn: 'Proto-Legalism',
-    quoteZh: '倉廩實而知禮節，衣食足而知榮辱。',
-    quoteEn: 'When the granaries are full, the people learn ritual propriety; when clothing and food are sufficient, they understand honour and shame.',
-    sourceZh: '《管子·牧民》', sourceEn: 'Guanzi, Shepherding the People',
-    lat: 36.57, lng: 119.57, locationZh: '齊國（今山東安丘）', locationEn: 'Anqiu, Shandong',
+  /* ── 縱橫家 (School of Diplomacy) ── */
+  guiguzi: {
+    nameZh: '鬼谷子', nameEn: 'Guiguzi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '縱橫家', catLabelEn: 'School of Diplomacy',
+    quoteZh: '口者，心之門戶也，心者，神之主也。志意、喜欲、思慮、智謀，此皆由門戶出入。',
+    quoteEn: 'The mouth is the gateway of the heart; the heart is the master of the spirit. Will and intention, joy and desire, thought and deliberation, wisdom and strategy — all pass in and out through this gateway.',
+    sourceZh: '《鬼谷子·捭闔》', sourceEn: 'Guiguzi, Opening and Closing',
+    lat: 35.69, lng: 114.30, locationZh: '雲夢山（今河南鶴壁）', locationEn: 'Hebi, Henan',
+  },
+
+  suqin: {
+    nameZh: '蘇秦', nameEn: 'Su Qin',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '縱橫家', catLabelEn: 'School of Diplomacy',
+    quoteZh: '夫家貧則思良妻，國亂則思良相。今趙秦相攻，天下震動，合六國之衆以抗強秦，此縱之所以立也。',
+    quoteEn: 'When the household is poor, one longs for a good wife; when the state is in disorder, one longs for a good minister. Now that Zhao and Qin attack each other and all under heaven trembles, uniting the six states to resist mighty Qin — this is the purpose for which the Vertical Alliance exists.',
+    sourceZh: '《戰國策·趙策》', sourceEn: 'Strategies of the Warring States, Zhao Strategies',
+    lat: 34.62, lng: 112.46, locationZh: '東周雒邑（今河南洛陽）', locationEn: 'Luoyang, Henan',
+  },
+
+  zhangyi: {
+    nameZh: '張儀', nameEn: 'Zhang Yi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '縱橫家', catLabelEn: 'School of Diplomacy',
+    quoteZh: '以天下之地，倍諸侯之衆，奉西面而事秦，秦必喜，天下亦安矣。此所謂以橫破縱者也。',
+    quoteEn: 'With the land of all under heaven and the combined armies of the lords — if they face west and serve Qin, Qin will be pleased and the world will find peace. This is what is meant by using the Horizontal Alliance to break the Vertical Alliance.',
+    sourceZh: '《戰國策·秦策》', sourceEn: 'Strategies of the Warring States, Qin Strategies',
+    lat: 35.13, lng: 111.22, locationZh: '魏國安邑（今山西夏縣）', locationEn: 'Xiaxian, Shanxi',
+  },
+
+  /* ── 兵家 (Military School) ── */
+  wuqi: {
+    nameZh: '吳起', nameEn: 'Wu Qi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '兵家', catLabelEn: 'Military School',
+    quoteZh: '凡制國治軍，必教之以禮，勵之以義，使有恥也。夫人有恥，在大足以戰，在小足以守矣。',
+    quoteEn: 'In governing a state and commanding an army, one must instruct the people in ritual propriety and inspire them with righteousness, so that they have a sense of shame. When people have a sense of shame, a large force is sufficient to fight and a small force is sufficient to hold firm.',
+    sourceZh: '《吳子·圖國》', sourceEn: 'Wuzi, Planning for the State',
+    lat: 35.71, lng: 115.01, locationZh: '衛國（今河南濮陽）', locationEn: 'Puyang, Henan',
+  },
+
+  sunbin: {
+    nameZh: '孫臏', nameEn: 'Sun Bin',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '兵家', catLabelEn: 'Military School',
+    quoteZh: '勝者，勝已敗之敵也；敗者，戰未負之兵也。善戰者，立於不敗之地，而不失敵之敗也。',
+    quoteEn: 'The victor is one who defeats an already-beaten enemy; the defeated is one who fights an army not yet broken. The skilled commander stands on ground where defeat is impossible, and does not miss the moment of the enemy\'s downfall.',
+    sourceZh: '《孫臏兵法·篇題》', sourceEn: 'Sun Bin\'s Art of War',
+    lat: 35.55, lng: 115.48, locationZh: '齊國阿鄄（今山東鄄城）', locationEn: 'Juancheng, Shandong',
+  },
+
+  /* ── 農家 (Agriculturalism) ── */
+  xuxing: {
+    nameZh: '許行', nameEn: 'Xu Xing',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '農家', catLabelEn: 'Agriculturalism',
+    quoteZh: '賢者與民並耕而食，饔飧而治。今也滕有倉廩府庫，則是厲民而自養也，惡得賢？',
+    quoteEn: 'A worthy ruler tills the fields alongside the people and eats what he grows, cooks his own morning and evening meals while governing. But Teng has granaries and treasuries — this means he burdens the people to feed himself. How can that be worthy?',
+    sourceZh: '《孟子·滕文公上》所引', sourceEn: 'Cited in Mencius, Duke Wen of Teng I',
+    lat: 30.70, lng: 112.00, locationZh: '楚國（今湖北荊州附近）', locationEn: 'Near Jingzhou, Hubei',
+  },
+
+  /* ── 雜家 (Eclecticism) ── */
+  lvbuwei: {
+    nameZh: '呂不韋', nameEn: 'Lü Buwei',
+    dynastyZh: '戰國末至秦朝', dynastyEn: 'Late Warring States — Qin',
+    section: 'documents', catLabelZh: '雜家', catLabelEn: 'Eclecticism',
+    quoteZh: '天下無粹白之狐，而有粹白之裘，取之衆白也。夫取於衆，此三王之所以大立功名也。',
+    quoteEn: 'There is no fox of pure white in the world, yet there are garments of pure white fur — for they are made by combining many white pieces. Taking from the many — this is how the Three Kings achieved their great merit and fame.',
+    sourceZh: '《呂氏春秋·用衆》', sourceEn: 'Master Lü\'s Spring and Autumn Annals, Employing the Multitude',
+    lat: 35.71, lng: 114.99, locationZh: '衛國（今河南安陽）', locationEn: 'Anyang, Henan',
+  },
+
+  /* ── 醫家 (Medical School) ── */
+  bianque: {
+    nameZh: '扁鵲', nameEn: 'Bian Que',
+    dynastyZh: '春秋末至戰國初', dynastyEn: 'Late Spring & Autumn',
+    section: 'documents', catLabelZh: '醫家', catLabelEn: 'Medical School',
+    quoteZh: '人之所病，病疾多；而醫之所病，病道少。疾雖久，猶可畢也；言不可治者，未得其術也。',
+    quoteEn: 'What people lament is that there are too many diseases; what physicians lament is that there are too few methods. Even long-standing illness can ultimately be cured — to say it is incurable is simply to say one has not yet mastered the technique.',
+    sourceZh: '《史記·扁鵲倉公列傳》', sourceEn: 'Records of the Grand Historian, Biography of Bian Que',
+    lat: 38.71, lng: 116.10, locationZh: '渤海鄚州（今河北任丘）', locationEn: 'Renqiu, Hebei',
+  },
+
+  /* ── 文學 (Literary School) ── */
+  quyuan: {
+    nameZh: '屈原', nameEn: 'Qu Yuan',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '楚辭·文學', catLabelEn: 'Chu Ci · Literature',
+    quoteZh: '路漫漫其修遠兮，吾將上下而求索。長太息以掩涕兮，哀民生之多艱。',
+    quoteEn: 'The road ahead is long and far, yet I shall search above and below. I heave a long sigh and wipe away my tears — I grieve that the people\'s lives are so full of hardship.',
+    sourceZh: '《離騷》', sourceEn: 'Li Sao (Encountering Sorrow)',
+    lat: 30.83, lng: 110.97, locationZh: '楚國丹陽（今湖北秭歸）', locationEn: 'Zigui, Hubei',
   },
 
 };
@@ -568,13 +764,25 @@ const ERAS = [
     period:  '770 – 476 BCE',
     nameZh:  '春秋時代 · 諸子百家之源',
     nameEn:  'Spring & Autumn · Origins of the Hundred Schools',
-    figures: ['kongzi', 'laozi', 'sunzi', 'guanzi'],
+    figures: ['kongzi', 'laozi', 'sunzi', 'guanzi', 'zichan', 'yanying', 'bianque'],
   },
   {
     period:  '475 – 221 BCE',
     nameZh:  '戰國時代 · 百家爭鳴',
     nameEn:  'Warring States · Contention of the Hundred Schools',
-    figures: ['mengzi', 'zhuangzi', 'xunzi', 'mozi', 'hanfeizi', 'shanyang', 'zouyan'],
+    figures: [
+      'mengzi', 'xunzi',                          /* 儒家 */
+      'zhuangzi', 'liezi', 'yangzhu',              /* 道家 */
+      'mozi',                                      /* 墨家 */
+      'shenbuhui', 'shendao', 'shanyang', 'hanfeizi', 'lisi', /* 法家 */
+      'huishi', 'gongsunlong',                     /* 名家 */
+      'zouyan',                                    /* 陰陽家 */
+      'guiguzi', 'suqin', 'zhangyi',               /* 縱橫家 */
+      'wuqi', 'sunbin',                            /* 兵家 */
+      'xuxing',                                    /* 農家 */
+      'lvbuwei',                                   /* 雜家 */
+      'quyuan',                                    /* 楚辭·文學 */
+    ],
   },
   {
     period:  '206 BCE – 220 CE',
