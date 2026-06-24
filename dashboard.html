@@ -5,16 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>內容管理 · 和諧文化養生</title>
   <link rel="stylesheet" href="css/style.css?v=12" />
-  <link rel="stylesheet" href="css/dashboard.css?v=1" />
+  <link rel="stylesheet" href="css/dashboard.css?v=2" />
 </head>
 <body class="dashboard-body">
 
 <!-- Auth screen (unauthenticated) -->
 <div id="auth-screen">
   <h1>和諧文化養生 · 內容管理</h1>
-  <p>請使用您的 Microsoft 帳號登入以繼續。</p>
+  <p>請選擇登入方式</p>
   <a class="btn-login" href="/.auth/login/aad?post_login_redirect_uri=/dashboard">
     使用 Microsoft 帳號登入
+  </a>
+  <a class="btn-login-google" href="/.auth/login/google?post_login_redirect_uri=/dashboard">
+    使用 Google 帳號登入
   </a>
 </div>
 
