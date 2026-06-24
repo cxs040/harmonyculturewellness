@@ -1,6 +1,6 @@
 /* CRUD for per-section content blocks stored in Azure Table Storage */
 const { TableClient } = require('@azure/data-tables');
-const { v4: uuidv4 } = require('uuid');
+const { randomUUID } = require('crypto');
 
 const TABLE_NAME = 'SiteContent';
 const ALLOWED_EMAILS = () =>
@@ -79,7 +79,7 @@ module.exports = async function (context, req) {
         json(context, 400, { error: 'Body must include section' });
         return;
       }
-      const id = uuidv4();
+      const id = randomUUID();
       const entity = {
         partitionKey: item.section,
         rowKey: id,
