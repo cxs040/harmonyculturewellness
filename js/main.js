@@ -289,23 +289,29 @@ function renderTimeline() {
     </div>`).join('');
 }
 
-/* ── Zhang-Huang Studies: render 王天舒 poems ── */
+/* ── Zhang-Huang Studies: render content by sub-category ── */
 function renderZhanghuang() {
   const container = document.getElementById('zhanghuang-content');
   if (!container) return;
 
+  const placeholder = (label) => `
+    <div class="zh-placeholder">
+      <span class="zh">${label} · 內容即將上線</span>
+      <span class="en">${label} · Coming soon</span>
+    </div>`;
+
   let html = '';
 
-  /* ── Chart ── */
+  /* ── 語言學 (yuyanxue) ── */
+  html += `<div data-cat="yuyanxue">`;
   if (typeof ZHANGHUANG_CHART !== 'undefined') {
     const c = ZHANGHUANG_CHART;
     html += `
-    <div class="zh-chart-card" id="${c.id}" data-cat="yuyanxue">
+    <div class="zh-chart-card" id="${c.id}">
       <div class="zh-chart-head">
         <div class="zh-chart-title zh">${c.titleZh}</div>
         <div class="zh-chart-attr zh">${c.attributionZh}</div>
       </div>
-
       <div class="zh-chart-section">
         <div class="zh-chart-section-label zh">生物圈</div>
         <div class="zh-chart-block">
@@ -329,7 +335,6 @@ function renderZhanghuang() {
           </div>
         </div>
       </div>
-
       <div class="zh-chart-section">
         <div class="zh-chart-section-label zh">人类系统</div>
         <div class="zh-chart-block">
@@ -349,24 +354,15 @@ function renderZhanghuang() {
               <div class="zh-chart-path zh">人与人类社会发展路径：人 ── 使用符号 ── 创造符号（卡西尔）</div>
               <div class="zh-chart-symbols">
                 <div class="zh-chart-sym-row">
-                  <div class="zh-chart-sym-top">
-                    <span class="zh-chart-sym-tag zh">象征符号</span>
-                    <span class="zh">比喻 · 象征 · 表征 · 艺术 · 创意 · 创新</span>
-                  </div>
+                  <div class="zh-chart-sym-top"><span class="zh-chart-sym-tag zh">象征符号</span><span class="zh">比喻 · 象征 · 表征 · 艺术 · 创意 · 创新</span></div>
                   <div class="zh-chart-note zh">指那些用以表征人的思想、行为倾向的种种事物。如：图腾物、国旗、国徽、雕塑、纪念碑、庙宇等。</div>
                 </div>
                 <div class="zh-chart-sym-row">
-                  <div class="zh-chart-sym-top">
-                    <span class="zh-chart-sym-tag zh">中介符号</span>
-                    <span class="zh">载体桥梁 · 传递传承 · 转换平台</span>
-                  </div>
+                  <div class="zh-chart-sym-top"><span class="zh-chart-sym-tag zh">中介符号</span><span class="zh">载体桥梁 · 传递传承 · 转换平台</span></div>
                   <div class="zh-chart-note zh">指被用以作为接受和反馈信息的载体的一类符号。例如：文字、石器、机器等。</div>
                 </div>
                 <div class="zh-chart-sym-row">
-                  <div class="zh-chart-sym-top">
-                    <span class="zh-chart-sym-tag zh">工具符号</span>
-                    <span class="zh">预知应对 · 改造创造 · 制造创新</span>
-                  </div>
+                  <div class="zh-chart-sym-top"><span class="zh-chart-sym-tag zh">工具符号</span><span class="zh">预知应对 · 改造创造 · 制造创新</span></div>
                   <div class="zh-chart-note zh">指那些被用以扩展自我思想、行为的工具。语言是使用最多、意义最大的工具符号，也是制造与创造符号的符号。</div>
                 </div>
               </div>
@@ -374,61 +370,23 @@ function renderZhanghuang() {
           </div>
         </div>
       </div>
-
       <div class="zh-chart-section">
         <div class="zh-chart-section-label zh">社会形态</div>
         <div class="zh-chart-social-wrap">
           <table class="zh-chart-social">
             <thead>
               <tr>
-                <th class="zh">社会形态</th>
-                <th class="zh">特性</th>
-                <th class="zh">主客体关系</th>
-                <th class="zh">人的类型</th>
-                <th class="zh">心理状态</th>
+                <th class="zh">社会形态</th><th class="zh">特性</th>
+                <th class="zh">主客体关系</th><th class="zh">人的类型</th><th class="zh">心理状态</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td class="zh">蒙昧社会</td>
-                <td class="zh">表象性</td>
-                <td class="zh">自然一人</td>
-                <td class="zh">自然人</td>
-                <td class="zh zh-chart-state">自在</td>
-              </tr>
-              <tr>
-                <td rowspan="3" class="zh">文化社会<br>（含科学社会）</td>
-                <td class="zh">物质性</td>
-                <td class="zh">人一自然物</td>
-                <td class="zh">社会人</td>
-                <td class="zh zh-chart-state">自明</td>
-              </tr>
-              <tr>
-                <td class="zh">物化性</td>
-                <td class="zh">人一人工物</td>
-                <td class="zh">异化人</td>
-                <td class="zh zh-chart-state-loss">自失</td>
-              </tr>
-              <tr>
-                <td class="zh">理性化</td>
-                <td class="zh">人一发明物</td>
-                <td class="zh">文化人</td>
-                <td class="zh zh-chart-state">自觉</td>
-              </tr>
-              <tr>
-                <td class="zh">文明社会</td>
-                <td class="zh">智能通融</td>
-                <td class="zh">人一自己</td>
-                <td class="zh">文明人</td>
-                <td class="zh zh-chart-state">自由</td>
-              </tr>
-              <tr>
-                <td class="zh">宇宙蒙昧</td>
-                <td class="zh">智慧性</td>
-                <td class="zh">人一宇宙</td>
-                <td class="zh">宇宙人</td>
-                <td class="zh zh-chart-state-peak">自由自在</td>
-              </tr>
+              <tr><td class="zh">蒙昧社会</td><td class="zh">表象性</td><td class="zh">自然一人</td><td class="zh">自然人</td><td class="zh zh-chart-state">自在</td></tr>
+              <tr><td rowspan="3" class="zh">文化社会<br>（含科学社会）</td><td class="zh">物质性</td><td class="zh">人一自然物</td><td class="zh">社会人</td><td class="zh zh-chart-state">自明</td></tr>
+              <tr><td class="zh">物化性</td><td class="zh">人一人工物</td><td class="zh">异化人</td><td class="zh zh-chart-state-loss">自失</td></tr>
+              <tr><td class="zh">理性化</td><td class="zh">人一发明物</td><td class="zh">文化人</td><td class="zh zh-chart-state">自觉</td></tr>
+              <tr><td class="zh">文明社会</td><td class="zh">智能通融</td><td class="zh">人一自己</td><td class="zh">文明人</td><td class="zh zh-chart-state">自由</td></tr>
+              <tr><td class="zh">宇宙蒙昧</td><td class="zh">智慧性</td><td class="zh">人一宇宙</td><td class="zh">宇宙人</td><td class="zh zh-chart-state-peak">自由自在</td></tr>
             </tbody>
           </table>
         </div>
@@ -438,9 +396,7 @@ function renderZhanghuang() {
           3、符号的意义是随时代变化、地区空间变化而变化的。
         </div>
       </div>
-
       <div class="zh-chart-ref zh">注：${c.referenceZh}</div>
-
       <div class="poem-actions">
         <button class="poem-action-btn poem-listen-btn" onclick="togglePoem('${c.id}')" data-poem-id="${c.id}">
           <i class="ti ti-volume"></i>
@@ -449,13 +405,43 @@ function renderZhanghuang() {
       </div>
     </div>`;
   }
+  html += `
+  <div class="zh-subsub-section">
+    <div class="zh-subsub-head zh">音韻格律學 · Phonology &amp; Prosody</div>
+    <div class="zh-subsub-item">
+      <div class="zh-subsub-label zh">講義</div>
+      ${placeholder('講義')}
+    </div>
+  </div>
+  </div>`; /* end yuyanxue */
 
-  /* ── Poems ── */
+  /* ── 文字學 (wenzixue) ── */
+  html += `<div data-cat="wenzixue">
+    <div class="zh-subsub-section">
+      <div class="zh-subsub-head zh">說文學 · Etymology</div>
+      ${placeholder('說文學')}
+    </div>
+    <div class="zh-subsub-section">
+      <div class="zh-subsub-head zh">形構學 · Structural Analysis</div>
+      ${placeholder('形構學')}
+    </div>
+  </div>`;
+
+  /* ── 哲學 ── */
+  html += `<div data-cat="zhexue">${placeholder('哲學')}</div>`;
+
+  /* ── 史學 ── */
+  html += `<div data-cat="shixue">${placeholder('史學')}</div>`;
+
+  /* ── 經濟學 ── */
+  html += `<div data-cat="jingjixue">${placeholder('經濟學')}</div>`;
+
+  /* ── 文學 (wenxue) — 律詩定稿 ── */
   if (typeof ZHANGHUANG_POEMS !== 'undefined') {
     html += `
-    <div data-cat="jingxue">
+    <div data-cat="wenxue">
       <div class="zhanghuang-intro">
-        <p class="zh">王天舒律詩修定稿小彙</p>
+        <p class="zh">律詩定稿 · 王天舒律詩修定稿小彙</p>
       </div>
       <div class="poem-grid">
         ${ZHANGHUANG_POEMS.map(p => `
@@ -478,6 +464,12 @@ function renderZhanghuang() {
       </div>
     </div>`;
   }
+
+  /* ── 中醫學 ── */
+  html += `<div data-cat="zhongyixue">${placeholder('中醫學')}</div>`;
+
+  /* ── 玄學 ── */
+  html += `<div data-cat="xuanxue">${placeholder('玄學')}</div>`;
 
   container.innerHTML = html;
   initZhanghuangTabs();
@@ -549,17 +541,51 @@ function initZhanghuangTabs() {
   if (!subcats || subcats._tabsInited) return;
   subcats._tabsInited = true;
 
-  subcats.addEventListener('click', e => {
-    const btn = e.target.closest('.zh-subcat-btn');
-    if (!btn) return;
-    const cat = btn.dataset.cat;
-    subcats.querySelectorAll('.zh-subcat-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  function applyTab(cat) {
+    subcats.querySelectorAll('.zh-subcat-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.cat === cat)
+    );
     const content = document.getElementById('zhanghuang-content');
     if (!content) return;
     content.querySelectorAll('[data-cat]').forEach(el => {
-      el.style.display = (cat === 'all' || el.dataset.cat === cat) ? '' : 'none';
+      el.style.display = (el.dataset.cat === cat) ? '' : 'none';
     });
+  }
+
+  const firstActive = subcats.querySelector('.zh-subcat-btn.active');
+  if (firstActive) applyTab(firstActive.dataset.cat);
+
+  subcats.addEventListener('click', e => {
+    const btn = e.target.closest('.zh-subcat-btn');
+    if (!btn) return;
+    applyTab(btn.dataset.cat);
+  });
+}
+
+/* ════════════════════════════════════════
+   DOCUMENTS SUB-TABS (經 史 子 集 章黃學庫)
+   ════════════════════════════════════════ */
+function initDocumentsTabs() {
+  const tabBar = document.querySelector('.docs-subtabs');
+  if (!tabBar || tabBar._tabsInited) return;
+  tabBar._tabsInited = true;
+
+  function applyTab(subcat) {
+    tabBar.querySelectorAll('.docs-subtab-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.subcat === subcat)
+    );
+    document.querySelectorAll('.docs-subcat-content').forEach(el => {
+      el.style.display = (el.dataset.subcat === subcat) ? '' : 'none';
+    });
+  }
+
+  const firstActive = tabBar.querySelector('.docs-subtab-btn.active');
+  if (firstActive) applyTab(firstActive.dataset.subcat);
+
+  tabBar.addEventListener('click', e => {
+    const btn = e.target.closest('.docs-subtab-btn');
+    if (!btn) return;
+    applyTab(btn.dataset.subcat);
   });
 }
 
@@ -574,6 +600,7 @@ document.addEventListener('DOMContentLoaded', () => {
   loadDocumentArchive();
   initFigureMap();
   initZhanghuangTabs();
+  initDocumentsTabs();
 });
 
 

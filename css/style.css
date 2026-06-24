@@ -1691,6 +1691,92 @@ body.dark .search-result-item:focus { background: rgba(201,169,110,0.07); }
 }
 
 /* ════════════════════════════════════════
+   DOCUMENTS SUB-TABS (經 史 子 集 章黃學庫)
+   ════════════════════════════════════════ */
+.docs-subtabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.4rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid rgba(201,169,110,0.4);
+}
+
+.docs-subtab-btn {
+  background: transparent;
+  border: 1px solid rgba(139,26,26,0.25);
+  color: var(--ink-soft);
+  padding: 0.3rem 0.9rem;
+  font-size: 0.85rem;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: 'Noto Serif SC', serif;
+  letter-spacing: 0.05em;
+  transition: background 0.18s, color 0.18s, border-color 0.18s;
+}
+
+.docs-subtab-btn .zh,
+.docs-subtab-btn .en { display: inline; }
+
+.docs-subtab-btn:hover {
+  background: rgba(139,26,26,0.06);
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.docs-subtab-btn.active {
+  background: var(--red);
+  border-color: var(--red);
+  color: var(--parch-lt);
+}
+
+.docs-placeholder {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border: 1px dashed rgba(201,169,110,0.5);
+  border-radius: 4px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  background: rgba(201,169,110,0.03);
+  margin: 0.5rem 0 1.5rem;
+}
+
+/* ════════════════════════════════════════
+   ZHANG-HUANG SUB-SUB SECTIONS
+   (音韻格律學, 說文學, 形構學, etc.)
+   ════════════════════════════════════════ */
+.zh-subsub-section {
+  margin: 1.5rem 0;
+  padding: 1rem 1.5rem;
+  border-left: 3px solid var(--gold);
+  background: rgba(201,169,110,0.04);
+  border-radius: 0 4px 4px 0;
+}
+
+.zh-subsub-head {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--red);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.06em;
+}
+
+.zh-subsub-item {
+  margin-left: 0.5rem;
+}
+
+.zh-subsub-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.04em;
+}
+
+/* ════════════════════════════════════════
    乐读会 SECTION
    ════════════════════════════════════════ */
 .leduhui-intro {

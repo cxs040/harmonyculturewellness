@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=12">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/iconfont/tabler-icons.min.css">
   <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css">
 </head>
@@ -64,11 +64,11 @@
         <span class="nav-rom">Buddhism</span>
       </a></li>
       <li><a href="#" class="nav-link" data-section="documents">
-        <span class="nav-chn">典籍文件</span>
-        <span class="nav-rom">Documents</span>
+        <span class="nav-chn">典籍文獻</span>
+        <span class="nav-rom">Archives</span>
       </a></li>
       <li><a href="#" class="nav-link" data-section="timeline">
-        <span class="nav-chn">年表</span>
+        <span class="nav-chn">歷史年表</span>
         <span class="nav-rom">Timeline</span>
       </a></li>
       <li><a href="#" class="nav-link" data-section="zhanghuang">
@@ -243,39 +243,90 @@
       </div>
     </section>
 
-    <!-- ── DOCUMENTS & POETRY ── -->
+    <!-- ── DOCUMENTS (典籍文獻) ── -->
     <section id="documents" class="page">
       <div class="scroll-wrap">
         <div class="scroll-top-bar">
           <span class="orn">❧</span>
-          <h2 class="zh">典籍詩文庫</h2>
-          <h2 class="en">Classics &amp; Poetry</h2>
+          <h2 class="zh">典籍文獻</h2>
+          <h2 class="en">Classical Archives</h2>
           <span class="orn">❧</span>
         </div>
         <div class="scroll-body">
-          <div class="docs-subsection-head">
-            <h3 class="zh">詩詞文學</h3>
-            <h3 class="en">Poetry &amp; Literature</h3>
+          <!-- Sub-tab bar: 經 史 子 集 章黃學庫 -->
+          <div class="docs-subtabs">
+            <button class="docs-subtab-btn" data-subcat="jing">
+              <span class="zh">經</span><span class="en">Classics</span>
+            </button>
+            <button class="docs-subtab-btn" data-subcat="shi">
+              <span class="zh">史</span><span class="en">History</span>
+            </button>
+            <button class="docs-subtab-btn" data-subcat="zi">
+              <span class="zh">子</span><span class="en">Masters</span>
+            </button>
+            <button class="docs-subtab-btn active" data-subcat="ji">
+              <span class="zh">集</span><span class="en">Collections</span>
+            </button>
+            <button class="docs-subtab-btn" data-subcat="zhanghuangku">
+              <span class="zh">章黃學庫</span><span class="en">Zhang-Huang Library</span>
+            </button>
           </div>
-          <div id="poem-grid" class="poem-grid"></div>
-          <div class="pdf-shelf">
-            <h3 class="zh">詩詞典籍</h3>
-            <h3 class="en">Poetry Collections</h3>
-            <div id="shelf-poetry" class="pdf-row">
-              <!-- auto-populated from pdfs/poetry/ via documents.js -->
+
+          <!-- 經 placeholder -->
+          <div class="docs-subcat-content" data-subcat="jing" style="display:none">
+            <div class="docs-subsection-head">
+              <h3 class="zh">經部典籍</h3><h3 class="en">Classical Canon</h3>
+            </div>
+            <div class="docs-placeholder">
+              <span class="zh">《十三經》等經部典籍 · 內容即將上線</span>
+              <span class="en">The Thirteen Classics and more · Coming soon</span>
             </div>
           </div>
-          <div class="gold-rule"><span>✦</span></div>
-          <div class="docs-subsection-head">
-            <h3 class="zh">典籍文件</h3>
-            <h3 class="en">Document Archive</h3>
+
+          <!-- 史 placeholder -->
+          <div class="docs-subcat-content" data-subcat="shi" style="display:none">
+            <div class="docs-subsection-head">
+              <h3 class="zh">史部典籍</h3><h3 class="en">Historical Records</h3>
+            </div>
+            <div class="docs-placeholder">
+              <span class="zh">二十四史、紀事本末體等 · 內容即將上線</span>
+              <span class="en">The Twenty-Four Histories and more · Coming soon</span>
+            </div>
           </div>
-          <div id="doc-gallery" class="doc-gallery">
-            <!-- populated by js/documents.js -->
+
+          <!-- 子 placeholder -->
+          <div class="docs-subcat-content" data-subcat="zi" style="display:none">
+            <div class="docs-subsection-head">
+              <h3 class="zh">子部典籍</h3><h3 class="en">Philosophical Texts</h3>
+            </div>
+            <div class="docs-placeholder">
+              <span class="zh">諸子百家著作 · 內容即將上線</span>
+              <span class="en">Works of the Hundred Schools · Coming soon</span>
+            </div>
           </div>
-          <div id="doc-empty" class="doc-empty" style="display:none">
-            <p class="zh">尚未新增任何文件。請依照上方說明新增PDF文件。</p>
-            <p class="en">No documents added yet. Follow the instructions above to add PDF files.</p>
+
+          <!-- 集 — poems (default active) -->
+          <div class="docs-subcat-content" data-subcat="ji">
+            <div class="docs-subsection-head">
+              <h3 class="zh">集部 · 典籍詩文庫</h3><h3 class="en">Collections · Poetry &amp; Literature</h3>
+            </div>
+            <div id="poem-grid" class="poem-grid"></div>
+            <div class="pdf-shelf">
+              <h3 class="zh">詩詞典籍</h3><h3 class="en">Poetry Collections</h3>
+              <div id="shelf-poetry" class="pdf-row"></div>
+            </div>
+          </div>
+
+          <!-- 章黃學庫 — document archive -->
+          <div class="docs-subcat-content" data-subcat="zhanghuangku" style="display:none">
+            <div class="docs-subsection-head">
+              <h3 class="zh">章黃學庫 · 典籍文件</h3><h3 class="en">Zhang-Huang Document Archive</h3>
+            </div>
+            <div id="doc-gallery" class="doc-gallery"></div>
+            <div id="doc-empty" class="doc-empty" style="display:none">
+              <p class="zh">尚未新增任何文件。</p>
+              <p class="en">No documents added yet.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -316,10 +367,7 @@
         </div>
         <div class="scroll-body">
           <div class="zh-subcats">
-            <button class="zh-subcat-btn active" data-cat="all">
-              <span class="zh">全覽</span><span class="en">All</span>
-            </button>
-            <button class="zh-subcat-btn" data-cat="yuyanxue">
+            <button class="zh-subcat-btn active" data-cat="yuyanxue">
               <span class="zh">語言學</span><span class="en">Linguistics</span>
             </button>
             <button class="zh-subcat-btn" data-cat="wenzixue">
@@ -328,8 +376,20 @@
             <button class="zh-subcat-btn" data-cat="zhexue">
               <span class="zh">哲學</span><span class="en">Philosophy</span>
             </button>
-            <button class="zh-subcat-btn" data-cat="jingxue">
-              <span class="zh">經學</span><span class="en">Classics</span>
+            <button class="zh-subcat-btn" data-cat="shixue">
+              <span class="zh">史學</span><span class="en">History</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="jingjixue">
+              <span class="zh">經濟學</span><span class="en">Economics</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="wenxue">
+              <span class="zh">文學</span><span class="en">Literature</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="zhongyixue">
+              <span class="zh">中醫學</span><span class="en">TCM</span>
+            </button>
+            <button class="zh-subcat-btn" data-cat="xuanxue">
+              <span class="zh">玄學</span><span class="en">Metaphysics</span>
             </button>
           </div>
           <div id="zhanghuang-content"></div>
@@ -456,9 +516,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <script src="js/documents.js?v=10"></script>
   <script src="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.js"></script>
-  <script src="js/data.js?v=14"></script>
+  <script src="js/data.js?v=15"></script>
   <script src="js/speech-config.js"></script>
   <script src="js/maps-config.js"></script>
-  <script src="js/main.js?v=18"></script>
+  <script src="js/main.js?v=19"></script>
 </body>
 </html>

@@ -411,7 +411,7 @@ const FIGURES = {
   libai: {
     nameZh: '李白', nameEn: 'Li Bai',
     dynastyZh: '唐朝', dynastyEn: 'Tang Dynasty',
-    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    section: 'documents', catLabelZh: '詩詞', catLabelEn: 'Poetry',
     quoteZh: '君不見黃河之水天上來，奔流到海不復回。君不見高堂明鏡悲白髮，朝如青絲暮成雪。人生得意須盡歡，莫使金樽空對月。',
     quoteEn: 'Do you not see the waters of the Yellow River pour down from the sky, rushing to the sea never to return? Do you not see the bright mirror in the high hall lamenting white hair — morning threads of silk, by evening turned to snow? When life is joyful, make the most of it; do not let the golden goblet face the moon alone and empty.',
     sourceZh: '《將進酒》', sourceEn: 'Bring in the Wine',
@@ -421,7 +421,7 @@ const FIGURES = {
   dufu: {
     nameZh: '杜甫', nameEn: 'Du Fu',
     dynastyZh: '唐朝', dynastyEn: 'Tang Dynasty',
-    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    section: 'documents', catLabelZh: '詩詞', catLabelEn: 'Poetry',
     quoteZh: '國破山河在，城春草木深。感時花濺淚，恨別鳥驚心。烽火連三月，家書抵萬金。',
     quoteEn: 'The nation is broken, yet mountains and rivers remain. Spring comes to the city — grass and trees grow deep. Moved by the times, flowers draw forth tears; grieving separation, birds startle the heart. The beacon fires have blazed for three months; a letter from home is worth ten thousand in gold.',
     sourceZh: '《春望》', sourceEn: 'Spring View',
@@ -431,7 +431,7 @@ const FIGURES = {
   wangzhihuan: {
     nameZh: '王之渙', nameEn: 'Wang Zhihuan',
     dynastyZh: '唐朝', dynastyEn: 'Tang Dynasty',
-    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    section: 'documents', catLabelZh: '詩詞', catLabelEn: 'Poetry',
     quoteZh: '白日依山盡，黃河入海流。欲窮千里目，更上一層樓。',
     quoteEn: 'The white sun sets beyond the mountains; the Yellow River flows into the sea. To see a thousand miles further, you must climb one more storey of the tower.',
     sourceZh: '《登鸛雀樓》', sourceEn: 'Ascending Stork Tower',
@@ -441,7 +441,7 @@ const FIGURES = {
   sushi: {
     nameZh: '蘇軾', nameEn: 'Su Shi',
     dynastyZh: '宋朝', dynastyEn: 'Song Dynasty',
-    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    section: 'documents', catLabelZh: '詩詞', catLabelEn: 'Poetry',
     quoteZh: '明月幾時有，把酒問青天。不知天上宮闕，今夕是何年。人有悲歡離合，月有陰晴圓缺，此事古難全。但願人長久，千里共嬋娟。',
     quoteEn: 'How long has the bright moon been there? I raise my cup to ask the blue sky. I wonder what year it is tonight in the palace above. People have sorrows and joys, partings and reunions; the moon waxes and wanes — perfection has always been elusive. I only wish those I love may live long, to share this beautiful moonlight across a thousand miles.',
     sourceZh: '《水調歌頭·明月幾時有》', sourceEn: 'Prelude to Water Melody',
@@ -461,7 +461,7 @@ const FIGURES = {
   liqingzhao: {
     nameZh: '李清照', nameEn: 'Li Qingzhao',
     dynastyZh: '宋朝', dynastyEn: 'Song Dynasty',
-    section: 'poetry', catLabelZh: '詩詞', catLabelEn: 'Poetry',
+    section: 'documents', catLabelZh: '詩詞', catLabelEn: 'Poetry',
     quoteZh: '生當作人傑，死亦為鬼雄。至今思項羽，不肯過江東。',
     quoteEn: 'In life, be a hero among the living; in death, be a hero among the dead. I still think of Xiang Yu, who refused to cross the river east and retreat from defeat.',
     sourceZh: '《夏日絕句》', sourceEn: 'Quatrain Written in Summer',
@@ -498,6 +498,57 @@ const FIGURES = {
     lat: 29.97, lng: 121.15, locationZh: '餘姚（今浙江餘姚）', locationEn: 'Yuyao, Zhejiang',
   },
 
+  /* ── 諸子百家 ── */
+  mozi: {
+    nameZh: '墨子', nameEn: 'Mozi',
+    dynastyZh: '春秋末至戰國初', dynastyEn: 'Late Spring & Autumn',
+    section: 'documents', catLabelZh: '墨家', catLabelEn: 'Mohism',
+    quoteZh: '兼相愛，交相利。視人之國，若視其國；視人之家，若視其家；視人之身，若視其身。',
+    quoteEn: 'Love all people impartially and benefit them mutually. Regard other states as your own state; regard other families as your own family; regard other persons as yourself.',
+    sourceZh: '《墨子·兼愛中》', sourceEn: 'Mozi, Universal Love II',
+    lat: 34.77, lng: 117.67, locationZh: '魯國（今山東滕州）', locationEn: 'Tengzhou, Shandong',
+  },
+
+  hanfeizi: {
+    nameZh: '韓非子', nameEn: 'Han Feizi',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '法家', catLabelEn: 'Legalism',
+    quoteZh: '法不阿貴，繩不撓曲。法之所加，智者弗能辭，勇者弗敢爭。刑過不避大臣，賞善不遺匹夫。',
+    quoteEn: 'The law does not yield to the noble; the plumb-line does not bend for the crooked. Where the law applies, neither the wise can excuse themselves nor the brave dare resist. Punishment for transgressions spares not the high minister; reward for virtue overlooks not the common man.',
+    sourceZh: '《韓非子·有度》', sourceEn: 'Han Feizi, Having Standards',
+    lat: 34.39, lng: 113.86, locationZh: '韓國新鄭（今河南新鄭）', locationEn: 'Xinzheng, Henan',
+  },
+
+  shanyang: {
+    nameZh: '商鞅', nameEn: 'Shang Yang',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '法家', catLabelEn: 'Legalism',
+    quoteZh: '法者，所以愛民也；禮者，所以便事也。是以聖人苟可以強國，不法其故；苟可以利民，不循其禮。',
+    quoteEn: 'Law is the means by which the people are protected; ritual the means by which affairs proceed. If a sage can strengthen the state, he need not follow old models; if he can benefit the people, he need not observe established rites.',
+    sourceZh: '《商君書·更法》', sourceEn: 'The Book of Lord Shang, Changing the Law',
+    lat: 35.30, lng: 114.87, locationZh: '衛國（今河南濮陽）', locationEn: 'Puyang, Henan',
+  },
+
+  zouyan: {
+    nameZh: '鄒衍', nameEn: 'Zou Yan',
+    dynastyZh: '戰國時代', dynastyEn: 'Warring States',
+    section: 'documents', catLabelZh: '陰陽家', catLabelEn: 'Yin-Yang School',
+    quoteZh: '稱引天地剖判以來，五德轉移，治各有宜，而符應若茲。',
+    quoteEn: 'From the separation of heaven and earth down to the present, the Five Virtues have rotated, each era governed by its fitting virtue, and the signs have corresponded accordingly.',
+    sourceZh: '《史記·孟子荀卿列傳》', sourceEn: 'Records of the Grand Historian, Biography of Mencius and Xunzi',
+    lat: 36.81, lng: 118.05, locationZh: '齊國臨淄（今山東淄博）', locationEn: 'Zibo, Shandong',
+  },
+
+  guanzi: {
+    nameZh: '管仲', nameEn: 'Guan Zhong',
+    dynastyZh: '春秋時代', dynastyEn: 'Spring & Autumn',
+    section: 'documents', catLabelZh: '法家先驅', catLabelEn: 'Proto-Legalism',
+    quoteZh: '倉廩實而知禮節，衣食足而知榮辱。',
+    quoteEn: 'When the granaries are full, the people learn ritual propriety; when clothing and food are sufficient, they understand honour and shame.',
+    sourceZh: '《管子·牧民》', sourceEn: 'Guanzi, Shepherding the People',
+    lat: 36.57, lng: 119.57, locationZh: '齊國（今山東安丘）', locationEn: 'Anqiu, Shandong',
+  },
+
 };
 
 
@@ -515,15 +566,15 @@ const FIGURES = {
 const ERAS = [
   {
     period:  '770 – 476 BCE',
-    nameZh:  '春秋時代',
-    nameEn:  'Spring & Autumn',
-    figures: ['kongzi', 'laozi', 'sunzi'],
+    nameZh:  '春秋時代 · 諸子百家之源',
+    nameEn:  'Spring & Autumn · Origins of the Hundred Schools',
+    figures: ['kongzi', 'laozi', 'sunzi', 'guanzi'],
   },
   {
     period:  '475 – 221 BCE',
-    nameZh:  '戰國時代',
-    nameEn:  'Warring States',
-    figures: ['mengzi', 'zhuangzi', 'xunzi'],
+    nameZh:  '戰國時代 · 百家爭鳴',
+    nameEn:  'Warring States · Contention of the Hundred Schools',
+    figures: ['mengzi', 'zhuangzi', 'xunzi', 'mozi', 'hanfeizi', 'shanyang', 'zouyan'],
   },
   {
     period:  '206 BCE – 220 CE',
