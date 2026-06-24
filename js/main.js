@@ -9,6 +9,9 @@ const SPEECH_KEY    = (typeof speechConfig !== 'undefined') ? speechConfig.key  
 const SPEECH_REGION = (typeof speechConfig !== 'undefined') ? speechConfig.region : '';
 let   _ttsAudio     = null;
 
+/* ── Live figures from CMS API (null = not fetched yet, {} = empty) ── */
+let _liveFigures = null;
+
 /* ── Language toggle ── */
 let currentLang = 'zh';
 
@@ -270,23 +273,84 @@ function renderPoems() {
     </div>`).join('');
 }
 
+/* ── Try to load figures from CMS API, fall back to data.js ── */
+async function tryLoadApiFigures() {
+  try {
+    const res = await fetch('/api/figures');
+    if (!res.ok) return;
+    const list = await res.json();
+    if (!list.length) return;
+    _liveFigures = {};
+    list.forEach(fig => {
+      const id = fig.rowKey || fig.id;
+      if (id) _liveFigures[id] = { ...fig, id };
+    });
+  } catch {
+    /* API not available — data.js stays as source of truth */
+  }
+}
+
+/* Returns figure by ID: API data first, then data.js fallback */
+function getFig(id) {
+  return (_liveFigures && _liveFigures[id]) ? _liveFigures[id] : FIGURES[id];
+}
+
 /* ── Timeline page: era cards with figure buttons ── */
 function renderTimeline() {
   const container = document.getElementById('timeline-eras');
   if (!container) return;
-  container.innerHTML = ERAS.map(era => `
-    <div class="era-card">
-      <div class="era-period">${era.period}</div>
-      <div class="era-name-zh">${era.nameZh}</div>
-      <div class="era-name-en">${era.nameEn}</div>
-      <ul class="era-figures">
-        ${era.figures.map(key => {
-          const fig = FIGURES[key];
-          if (!fig) return '';
-          return `<li><button class="era-fig-btn" onclick="showFigure('${key}')">${fig.nameZh} ${fig.nameEn}</button></li>`;
-        }).join('')}
-      </ul>
-    </div>`).join('');
+
+  if (_liveFigures && Object.keys(_liveFigures).length > 0) {
+    // Build dynasty→era lookup from data.js FIGURES
+    const dynastyEraMap = {};
+    ERAS.forEach(era => {
+      const sampleKey = era.figures.find(k => FIGURES[k]);
+      if (sampleKey) {
+        const dyn = FIGURES[sampleKey].dynastyEn;
+        if (dyn) dynastyEraMap[dyn] = era;
+      }
+    });
+
+    // Group API figures by dynastyEn
+    const byDynasty = {};
+    Object.entries(_liveFigures).forEach(([id, fig]) => {
+      const dyn = fig.dynastyEn || fig.partitionKey || 'Unknown';
+      if (!byDynasty[dyn]) byDynasty[dyn] = [];
+      byDynasty[dyn].push({ ...fig, id });
+    });
+
+    container.innerHTML = ERAS.map(era => {
+      const sampleKey = era.figures.find(k => FIGURES[k]);
+      const dynastyEn = sampleKey ? FIGURES[sampleKey].dynastyEn : null;
+      const eraFigs   = dynastyEn ? (byDynasty[dynastyEn] || []) : [];
+      return `
+        <div class="era-card">
+          <div class="era-period">${era.period}</div>
+          <div class="era-name-zh">${era.nameZh}</div>
+          <div class="era-name-en">${era.nameEn}</div>
+          <ul class="era-figures">
+            ${eraFigs.map(fig => `
+              <li><button class="era-fig-btn" onclick="showFigure('${fig.id}')">${fig.nameZh} ${fig.nameEn}</button></li>
+            `).join('')}
+          </ul>
+        </div>`;
+    }).join('');
+  } else {
+    // Fallback: hardcoded data.js
+    container.innerHTML = ERAS.map(era => `
+      <div class="era-card">
+        <div class="era-period">${era.period}</div>
+        <div class="era-name-zh">${era.nameZh}</div>
+        <div class="era-name-en">${era.nameEn}</div>
+        <ul class="era-figures">
+          ${era.figures.map(key => {
+            const fig = FIGURES[key];
+            if (!fig) return '';
+            return `<li><button class="era-fig-btn" onclick="showFigure('${key}')">${fig.nameZh} ${fig.nameEn}</button></li>`;
+          }).join('')}
+        </ul>
+      </div>`).join('');
+  }
 }
 
 /* ── Zhang-Huang Studies: render content by sub-category ── */
@@ -589,12 +653,14 @@ function initDocumentsTabs() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   renderSectionContent();
   renderPoems();
   renderZhanghuang();
   renderLeduhui();
   renderDonorBanner();
+  // Load figures from CMS API first (updates timeline if storage is configured)
+  await tryLoadApiFigures();
   renderTimeline();
   loadSectionShelves();
   loadDocumentArchive();
@@ -904,7 +970,7 @@ function initFigureMap() {
 }
 
 function panMapToFigure(key) {
-  const fig = FIGURES[key];
+  const fig = getFig(key);
   if (!fig || !fig.lat || !fig.lng) return;
   if (!_mapReady) { _pendingKey = key; return; }
   _map.setCamera({ center: [fig.lng, fig.lat], zoom: 6, type: 'fly', duration: 900 });
@@ -931,7 +997,7 @@ function _showMapPopup(coords, props) {
    Uses FIGURES from data.js
    ════════════════════════════════════════ */
 function showFigure(figId) {
-  const fig     = FIGURES[figId];
+  const fig     = getFig(figId);
   const modal   = document.getElementById('fig-modal');
   const overlay = document.getElementById('fig-overlay');
   if (!fig || !modal || !overlay) return;

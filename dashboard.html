@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>內容管理 · 和諧文化養生</title>
+  <link rel="stylesheet" href="css/style.css?v=12" />
+  <link rel="stylesheet" href="css/dashboard.css?v=1" />
+</head>
+<body class="dashboard-body">
+
+<!-- Auth screen (unauthenticated) -->
+<div id="auth-screen">
+  <h1>和諧文化養生 · 內容管理</h1>
+  <p>請使用您的 Microsoft 帳號登入以繼續。</p>
+  <a class="btn-login" href="/.auth/login/aad?post_login_redirect_uri=/dashboard">
+    使用 Microsoft 帳號登入
+  </a>
+</div>
+
+<!-- Access denied (authenticated but not in allowlist) -->
+<div id="access-denied" class="auth-screen" style="display:none">
+  <h1>無訪問權限</h1>
+  <p>您的帳號未獲授權。請聯繫管理員。</p>
+  <a class="btn-login" href="/.auth/logout">登出</a>
+</div>
+
+<!-- Main dashboard (hidden until auth confirmed) -->
+<div id="dash-layout" style="display:none">
+
+  <!-- Sidebar -->
+  <aside id="dash-sidebar">
+    <div class="sidebar-logo">
+      管理後台
+      <span>和諧文化養生</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <div class="nav-group-label">年表</div>
+        <div class="nav-item active" data-section="timeline">歷史年表</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">哲學</div>
+        <div class="nav-item" data-section="confucianism">儒家</div>
+        <div class="nav-item" data-section="taoism">道家</div>
+        <div class="nav-item" data-section="buddhism">釋家</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">典籍文獻</div>
+        <div class="nav-item" data-section="documents-jing">經</div>
+        <div class="nav-item" data-section="documents-shi">史</div>
+        <div class="nav-item" data-section="documents-zi">子</div>
+        <div class="nav-item" data-section="documents-ji">集</div>
+        <div class="nav-item" data-section="documents-zhanghuangku">章黃學庫</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">實用章黃學</div>
+        <div class="nav-item" data-section="zhanghuang-yuyanxue">語言學</div>
+        <div class="nav-item" data-section="zhanghuang-wenzixue">文字學</div>
+        <div class="nav-item" data-section="zhanghuang-zhexue">哲學</div>
+        <div class="nav-item" data-section="zhanghuang-shixue">史學</div>
+        <div class="nav-item" data-section="zhanghuang-jingjixue">經濟學</div>
+        <div class="nav-item" data-section="zhanghuang-wenxue">文學</div>
+        <div class="nav-item" data-section="zhanghuang-zhongyixue">中醫學</div>
+        <div class="nav-item" data-section="zhanghuang-xuanxue">玄學</div>
+      </div>
+      <div class="nav-group">
+        <div class="nav-group-label">其他</div>
+        <div class="nav-item" data-section="reading">樂讀會</div>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <strong id="sidebar-email">loading…</strong>
+      <button class="btn-logout" onclick="logout()">登出</button>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main id="dash-main">
+    <div class="dash-topbar">
+      <h2 id="topbar-title">歷史年表</h2>
+      <span class="badge" id="topbar-badge">管理員</span>
+    </div>
+    <div class="dash-content" id="dash-content">
+      <div class="empty-state"><div class="spinner"></div></div>
+    </div>
+  </main>
+</div>
+
+<!-- Figure form modal -->
+<div class="modal-overlay" id="figure-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="figure-modal-title">新增歷史人物</h3>
+      <button class="modal-close" onclick="closeFigureModal()">✕</button>
+    </div>
+    <form id="figure-form" onsubmit="submitFigureForm(event)">
+      <input type="hidden" id="fig-edit-id" />
+      <input type="hidden" id="fig-edit-dynasty" />
+      <div class="form-grid">
+        <div class="form-group">
+          <label>人物 ID（英文，唯一）</label>
+          <input type="text" id="fig-id" placeholder="e.g. kongzi" required />
+        </div>
+        <div class="form-group">
+          <label>朝代 Dynasty</label>
+          <select id="fig-dynasty">
+            <option value="Spring &amp; Autumn">春秋時代 · Spring &amp; Autumn</option>
+            <option value="Warring States">戰國時代 · Warring States</option>
+            <option value="Han Dynasty">漢朝 · Han Dynasty</option>
+            <option value="Tang Dynasty">唐朝 · Tang Dynasty</option>
+            <option value="Song Dynasty">宋朝 · Song Dynasty</option>
+            <option value="Yuan · Ming · Qing">元明清 · Yuan · Ming · Qing</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>中文名</label>
+          <input type="text" id="fig-name-zh" placeholder="孔子" required />
+        </div>
+        <div class="form-group">
+          <label>English Name</label>
+          <input type="text" id="fig-name-en" placeholder="Confucius" required />
+        </div>
+        <div class="form-group">
+          <label>朝代中文</label>
+          <input type="text" id="fig-dynasty-zh" placeholder="春秋時代" />
+        </div>
+        <div class="form-group">
+          <label>Category Label ZH</label>
+          <input type="text" id="fig-cat-zh" placeholder="儒家" />
+        </div>
+        <div class="form-group">
+          <label>Category Label EN</label>
+          <input type="text" id="fig-cat-en" placeholder="Confucianism" />
+        </div>
+        <div class="form-group">
+          <label>Section（Explore 按鈕）</label>
+          <select id="fig-section">
+            <option value="confucianism">儒家 confucianism</option>
+            <option value="taoism">道家 taoism</option>
+            <option value="buddhism">釋家 buddhism</option>
+            <option value="documents">典籍文獻 documents</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>緯度 Latitude</label>
+          <input type="number" id="fig-lat" step="0.01" placeholder="35.0" />
+        </div>
+        <div class="form-group">
+          <label>經度 Longitude</label>
+          <input type="number" id="fig-lng" step="0.01" placeholder="105.0" />
+        </div>
+        <div class="form-group">
+          <label>地點中文</label>
+          <input type="text" id="fig-loc-zh" placeholder="魯國曲阜" />
+        </div>
+        <div class="form-group">
+          <label>Location EN</label>
+          <input type="text" id="fig-loc-en" placeholder="Qufu, Lu State" />
+        </div>
+        <div class="form-group form-full">
+          <label>名句（中文）</label>
+          <textarea id="fig-quote-zh" rows="3" placeholder="學而時習之…"></textarea>
+        </div>
+        <div class="form-group form-full">
+          <label>Famous Quote (English)</label>
+          <textarea id="fig-quote-en" rows="3" placeholder="Is it not pleasant to learn…"></textarea>
+        </div>
+        <div class="form-group">
+          <label>出處（中文）</label>
+          <input type="text" id="fig-source-zh" placeholder="《論語·學而》" />
+        </div>
+        <div class="form-group">
+          <label>Source (English)</label>
+          <input type="text" id="fig-source-en" placeholder="Analects, Book I" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeFigureModal()">取消</button>
+        <button type="submit" class="btn btn-primary" id="fig-submit-btn">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Content block form modal -->
+<div class="modal-overlay" id="content-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="content-modal-title">新增內容</h3>
+      <button class="modal-close" onclick="closeContentModal()">✕</button>
+    </div>
+    <form id="content-form" onsubmit="submitContentForm(event)">
+      <input type="hidden" id="cnt-edit-id" />
+      <input type="hidden" id="cnt-section" />
+      <div class="form-grid">
+        <div class="form-group">
+          <label>標題（中文）</label>
+          <input type="text" id="cnt-title-zh" placeholder="標題" />
+        </div>
+        <div class="form-group">
+          <label>Title (English)</label>
+          <input type="text" id="cnt-title-en" placeholder="Title" />
+        </div>
+        <div class="form-group">
+          <label>類型 Type</label>
+          <select id="cnt-type" onchange="onContentTypeChange()">
+            <option value="html">文章 HTML</option>
+            <option value="concept">詞條 Concept</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>排序 Order</label>
+          <input type="number" id="cnt-order" value="0" min="0" />
+        </div>
+        <div class="form-group form-full" id="cnt-body-group">
+          <label>內容（支援 HTML）</label>
+          <div class="editor-toolbar">
+            <button type="button" onclick="edFmt('bold')" title="粗體"><b>B</b></button>
+            <button type="button" onclick="edFmt('italic')" title="斜體"><i>I</i></button>
+            <button type="button" onclick="edFmt('underline')" title="下劃線"><u>U</u></button>
+            <button type="button" onclick="edFmt('insertUnorderedList')" title="項目清單">≡</button>
+            <button type="button" onclick="edFmt('insertOrderedList')" title="數字清單">1.</button>
+            <button type="button" onclick="edLink()" title="連結">🔗</button>
+          </div>
+          <div class="editor-area" id="cnt-body-editor" contenteditable="true"></div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="closeContentModal()">取消</button>
+        <button type="submit" class="btn btn-primary" id="cnt-submit-btn">儲存</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast container -->
+<div id="toast"></div>
+
+<script src="js/dashboard.js?v=1"></script>
+</body>
+</html>

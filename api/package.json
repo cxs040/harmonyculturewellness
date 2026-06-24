@@ -1,0 +1,13 @@
+{
+  "name": "chinese-culture-website-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for Chinese Culture Website CMS",
+  "scripts": {
+    "start": "func start"
+  },
+  "dependencies": {
+    "@azure/data-tables": "^13.2.2",
+    "@azure/storage-blob": "^12.17.0",
+    "uuid": "^9.0.0"
+  }
+}
