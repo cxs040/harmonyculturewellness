@@ -2027,3 +2027,48 @@ body.dark .search-result-item:focus { background: rgba(201,169,110,0.07); }
 }
 .dark .cms-block-title { color: #c9a84c; }
 .dark .cms-block-body  { color: #e8dcc8; }
+
+/* ── CMS block footer (date + like) ── */
+.cms-block-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.8rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(139, 105, 20, 0.2);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.cms-block-date {
+  font-size: 0.78rem;
+  color: var(--ink-soft, #3a3a3a);
+  opacity: 0.6;
+}
+.cms-like-btn {
+  background: none;
+  border: 1px solid rgba(139, 105, 20, 0.3);
+  color: var(--ink-soft, #3a3a3a);
+  padding: 0.2rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.cms-like-btn:hover {
+  border-color: var(--gold-dark, #8b6914);
+  color: var(--gold-dark, #8b6914);
+}
+.cms-like-btn.liked {
+  background: rgba(139, 105, 20, 0.12);
+  border-color: var(--gold-dark, #8b6914);
+  color: var(--gold-dark, #8b6914);
+}
+.dark .cms-block-footer { border-top-color: rgba(201, 168, 76, 0.2); }
+.dark .cms-block-date   { color: #c9b08a; }
+.dark .cms-like-btn     { border-color: rgba(201, 168, 76, 0.3); color: #c9b08a; }
+.dark .cms-like-btn:hover,
+.dark .cms-like-btn.liked { border-color: #c9a84c; color: #c9a84c; }

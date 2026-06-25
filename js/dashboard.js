@@ -63,6 +63,7 @@ async function init() {
     document.getElementById('topbar-badge').textContent = user.isAdmin ? '管理員' : '編輯';
     setupNav();
     showSection('timeline');
+    loadSidebarCounts();
   } catch {
     // API unreachable — local dev fallback
     currentUser = { email: 'local-dev', isAdmin: true };
@@ -72,6 +73,7 @@ async function init() {
     document.getElementById('topbar-badge').textContent = '管理員';
     setupNav();
     showSection('timeline');
+    loadSidebarCounts();
   }
 }
 
@@ -391,12 +393,17 @@ async function renderContentSection(section) {
   if (!items.length) {
     html += `<div class="empty-state">尚無內容，點擊「新增內容」開始編輯。</div>`;
   } else {
-    items.forEach(item => {
+    items.forEach((item, i) => {
       const id = item.rowKey || item.id;
       html += `
         <div class="content-block">
+          <div class="move-btns">
+            <button class="btn-move" ${i === 0 ? 'disabled' : ''} onclick="moveContent('${esc(section)}','${esc(id)}','up')">▲</button>
+            <button class="btn-move" ${i === items.length - 1 ? 'disabled' : ''} onclick="moveContent('${esc(section)}','${esc(id)}','down')">▼</button>
+          </div>
           <div class="block-info">
             <div class="block-title">
+              ${item.published === false ? '<span class="badge-draft">草稿</span>' : ''}
               <span class="block-type type-${item.type}">${item.type}</span>
               ${esc(item.titleZh || item.titleEn || '（無標題）')}
             </div>
@@ -449,12 +456,17 @@ async function renderDocsSection(section) {
   if (!items.length) {
     html += `<div class="empty-state">尚無文章</div>`;
   } else {
-    items.forEach(item => {
+    items.forEach((item, i) => {
       const id = item.rowKey || item.id;
       html += `
         <div class="content-block">
+          <div class="move-btns">
+            <button class="btn-move" ${i === 0 ? 'disabled' : ''} onclick="moveContent('${esc(section)}','${esc(id)}','up')">▲</button>
+            <button class="btn-move" ${i === items.length - 1 ? 'disabled' : ''} onclick="moveContent('${esc(section)}','${esc(id)}','down')">▼</button>
+          </div>
           <div class="block-info">
             <div class="block-title">
+              ${item.published === false ? '<span class="badge-draft">草稿</span>' : ''}
               <span class="block-type type-${item.type}">${item.type}</span>
               ${esc(item.titleZh || item.titleEn || '（無標題）')}
             </div>
@@ -506,6 +518,8 @@ function openAddContentModal(section) {
   document.getElementById('cnt-edit-id').value = '';
   document.getElementById('cnt-section').value = section;
   document.getElementById('cnt-submit-btn').textContent = '新增';
+  switchEditorTab('edit');
+  updatePublishedLabel();
   document.getElementById('content-modal').classList.add('open');
 }
 
@@ -518,8 +532,11 @@ function openEditContentModal(item) {
   document.getElementById('cnt-title-en').value = item.titleEn || '';
   document.getElementById('cnt-type').value = item.type || 'html';
   document.getElementById('cnt-order').value = item.order || 0;
+  document.getElementById('cnt-published').checked = item.published !== false;
+  updatePublishedLabel();
   document.getElementById('cnt-body-editor').innerHTML = item.body || '';
   document.getElementById('cnt-submit-btn').textContent = '儲存更改';
+  switchEditorTab('edit');
   document.getElementById('content-modal').classList.add('open');
 }
 
@@ -537,11 +554,12 @@ async function submitContentForm(e) {
 
   const body = {
     section,
-    type:     document.getElementById('cnt-type').value,
-    titleZh:  document.getElementById('cnt-title-zh').value.trim(),
-    titleEn:  document.getElementById('cnt-title-en').value.trim(),
-    body:     document.getElementById('cnt-body-editor').innerHTML,
-    order:    parseInt(document.getElementById('cnt-order').value) || 0,
+    type:      document.getElementById('cnt-type').value,
+    titleZh:   document.getElementById('cnt-title-zh').value.trim(),
+    titleEn:   document.getElementById('cnt-title-en').value.trim(),
+    body:      document.getElementById('cnt-body-editor').innerHTML,
+    order:     parseInt(document.getElementById('cnt-order').value) || 0,
+    published: document.getElementById('cnt-published').checked,
   };
 
   const btn = document.getElementById('cnt-submit-btn');
@@ -760,6 +778,117 @@ async function apiFetch(url, method, body) {
   };
   if (body !== undefined) opts.body = JSON.stringify(body);
   return fetch(url, opts);
+}
+
+/* ── Editor tab + heading + image ──────── */
+function updatePublishedLabel() {
+  const checked = document.getElementById('cnt-published').checked;
+  const label = document.getElementById('cnt-published-label');
+  if (!label) return;
+  label.textContent = checked ? '已發布' : '草稿';
+  label.className = 'toggle-status' + (checked ? ' published' : '');
+}
+
+function switchEditorTab(tab) {
+  const editor = document.getElementById('cnt-body-editor');
+  const preview = document.getElementById('cnt-body-preview');
+  const toolbar = document.querySelector('.editor-toolbar');
+  if (!editor || !preview) return;
+  document.querySelectorAll('.modal-tab').forEach((t, i) =>
+    t.classList.toggle('active', (tab === 'edit' && i === 0) || (tab === 'preview' && i === 1))
+  );
+  if (tab === 'edit') {
+    editor.style.display = '';
+    if (toolbar) toolbar.style.display = '';
+    preview.classList.remove('visible');
+  } else {
+    preview.innerHTML = editor.innerHTML || '<em style="opacity:.5">（無內容）</em>';
+    editor.style.display = 'none';
+    if (toolbar) toolbar.style.display = 'none';
+    preview.classList.add('visible');
+  }
+}
+
+function edHeading(level) {
+  if (!level) return;
+  document.getElementById('cnt-body-editor').focus();
+  document.execCommand('formatBlock', false, `h${level}`);
+}
+
+function edImage() {
+  const url = prompt('圖片 URL：', 'https://');
+  if (!url) return;
+  const alt = prompt('圖片說明（可選）：', '') || '';
+  document.getElementById('cnt-body-editor').focus();
+  document.execCommand('insertHTML', false,
+    `<img src="${url}" alt="${alt.replace(/"/g, '&quot;')}" style="max-width:100%;border-radius:6px;margin:.5rem 0">`
+  );
+}
+
+/* ── Content ordering ───────────────────── */
+async function moveContent(section, id, dir) {
+  try {
+    const res = await apiGet(`/api/content?section=${encodeURIComponent(section)}`);
+    if (!res.ok) return;
+    let items = await res.json();
+    items.sort((a, b) => {
+      if ((a.order || 0) !== (b.order || 0)) return (a.order || 0) - (b.order || 0);
+      return (a.createdAt || '') < (b.createdAt || '') ? -1 : 1;
+    });
+    const idx = items.findIndex(i => (i.rowKey || i.id) === id);
+    if (idx === -1) return;
+    const swapIdx = dir === 'up' ? idx - 1 : idx + 1;
+    if (swapIdx < 0 || swapIdx >= items.length) return;
+    [items[idx], items[swapIdx]] = [items[swapIdx], items[idx]];
+    await Promise.all(items.map((item, i) =>
+      apiFetch(
+        `/api/content?id=${encodeURIComponent(item.rowKey || item.id)}&section=${encodeURIComponent(section)}`,
+        'PUT',
+        { ...item, order: i }
+      )
+    ));
+    renderContentSection(section);
+  } catch (err) {
+    toast('error', `移動失敗：${err.message}`);
+  }
+}
+
+/* ── Sidebar counts ─────────────────────── */
+async function loadSidebarCounts() {
+  try {
+    const res = await apiGet('/api/content');
+    if (!res.ok) return;
+    const all = await res.json();
+    const counts = {};
+    all.forEach(item => {
+      const sec = item.partitionKey || item.section;
+      counts[sec] = (counts[sec] || 0) + 1;
+    });
+    document.querySelectorAll('.nav-item[data-section]').forEach(el => {
+      const sec = el.dataset.section;
+      if (!counts[sec]) return;
+      let badge = el.querySelector('.nav-badge');
+      if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'nav-badge';
+        el.appendChild(badge);
+      }
+      badge.textContent = counts[sec];
+    });
+  } catch { /* non-critical */ }
+}
+
+/* ── Helpers ────────────────────────────── */
+function getSectionUrl(section) {
+  if (section.startsWith('zhanghuang-')) return '/#zhanghuang';
+  if (section.startsWith('documents-')) return '/#documents';
+  const map = {
+    confucianism: '/#confucianism',
+    taoism: '/#taoism',
+    buddhism: '/#buddhism',
+    reading: '/#leduhui',
+  };
+  return map[section] || '/';
 }
 
 /* ── Boot ───────────────────────────────── */

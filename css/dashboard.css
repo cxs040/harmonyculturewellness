@@ -507,6 +507,166 @@ body.dashboard-body::before {
 ::-webkit-scrollbar-thumb { background: var(--dash-border); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--dash-gold-dim); }
 
+/* ── Nav badges (item count) ───────────── */
+.nav-item { position: relative; }
+.nav-badge {
+  position: absolute;
+  right: .7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(212,170,80,.2);
+  color: var(--dash-gold);
+  font-size: 11px;
+  padding: .1rem .45rem;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+  line-height: 1.5;
+}
+
+/* ── Draft/Published toggle ────────────── */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: .25rem;
+}
+.toggle-label {
+  font-size: 13px;
+  color: var(--dash-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.toggle-switch {
+  position: relative;
+  width: 40px;
+  height: 22px;
+  flex-shrink: 0;
+}
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.toggle-track {
+  position: absolute;
+  inset: 0;
+  background: var(--dash-border);
+  border-radius: 22px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.toggle-track::after {
+  content: '';
+  position: absolute;
+  width: 16px; height: 16px;
+  left: 3px; top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform .2s;
+}
+.toggle-switch input:checked + .toggle-track { background: var(--dash-green); }
+.toggle-switch input:checked + .toggle-track::after { transform: translateX(18px); }
+.toggle-status {
+  font-size: 13px;
+  color: var(--dash-muted);
+  min-width: 3.5rem;
+}
+.toggle-status.published { color: var(--dash-green); }
+
+/* ── Draft badge on content blocks ─────── */
+.badge-draft {
+  display: inline-block;
+  font-size: 11px;
+  background: rgba(224,90,90,.18);
+  color: var(--dash-red);
+  border: 1px solid rgba(224,90,90,.3);
+  padding: .1rem .45rem;
+  border-radius: 3px;
+  margin-right: .4rem;
+  vertical-align: middle;
+}
+
+/* ── Order move buttons ─────────────────── */
+.move-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex-shrink: 0;
+}
+.btn-move {
+  background: none;
+  border: 1px solid var(--dash-border);
+  color: var(--dash-muted);
+  width: 24px; height: 24px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  line-height: 1;
+}
+.btn-move:hover { border-color: var(--dash-gold); color: var(--dash-gold); }
+.btn-move:disabled { opacity: .25; cursor: default; }
+
+/* ── Editor tab bar ─────────────────────── */
+.modal-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--dash-border);
+  margin-bottom: .9rem;
+}
+.modal-tab {
+  padding: .5rem 1.2rem;
+  font-size: 14px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--dash-muted);
+  cursor: pointer;
+  font-family: inherit;
+  margin-bottom: -1px;
+  transition: color .15s;
+}
+.modal-tab:hover { color: var(--dash-text); }
+.modal-tab.active {
+  color: var(--dash-gold);
+  border-bottom-color: var(--dash-gold);
+}
+
+/* ── Preview pane ───────────────────────── */
+.cms-preview-area {
+  display: none;
+  background: var(--dash-bg);
+  border: 1px solid var(--dash-border);
+  border-radius: 5px;
+  padding: 1.2rem 1.4rem;
+  min-height: 140px;
+  color: var(--dash-text);
+  font-size: 15px;
+  line-height: 1.9;
+  overflow-y: auto;
+}
+.cms-preview-area.visible { display: block; }
+.cms-preview-area h2,
+.cms-preview-area h3,
+.cms-preview-area h4 { color: var(--dash-gold); margin: .7rem 0 .4rem; }
+.cms-preview-area p { margin-bottom: .6rem; }
+.cms-preview-area ul,
+.cms-preview-area ol { margin: .4rem 0 .6rem 1.4rem; }
+
+/* ── Editor heading select ──────────────── */
+.editor-toolbar select {
+  background: var(--dash-bg);
+  border: 1px solid transparent;
+  color: var(--dash-muted);
+  padding: .2rem .4rem;
+  border-radius: 3px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.editor-toolbar select:hover { border-color: var(--dash-border); color: var(--dash-text); }
+.editor-toolbar select:focus { outline: none; border-color: var(--dash-gold); }
+
 /* ── Responsive ────────────────────────── */
 @media (max-width: 680px) {
   #dash-sidebar { width: 0; overflow: hidden; }

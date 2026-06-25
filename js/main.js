@@ -658,6 +658,51 @@ function initDocumentsTabs() {
    Fetches content blocks stored via the dashboard
    and appends them below each section's static content.
    ════════════════════════════════════════ */
+function renderCmsBlock(b, counts = {}) {
+  const id      = b.rowKey || b.id || '';
+  const section = b.partitionKey || b.section || '';
+  const likes   = counts[id] || 0;
+  const liked   = localStorage.getItem(`like_${section}_${id}`) === '1';
+  const dateStr = b.updatedAt
+    ? new Date(b.updatedAt).toLocaleDateString('zh-TW', { year: 'numeric', month: 'short', day: 'numeric' })
+    : '';
+  return `
+    <div class="cms-block" data-id="${id}" data-section="${section}">
+      ${(b.titleZh || b.titleEn) ? `
+        <h4 class="cms-block-title">
+          ${b.titleZh ? `<span class="zh">${b.titleZh}</span>` : ''}
+          ${b.titleEn ? `<span class="en">${b.titleEn}</span>` : ''}
+        </h4>` : ''}
+      ${b.body ? `<div class="cms-block-body">${b.body}</div>` : ''}
+      <div class="cms-block-footer">
+        <span class="cms-block-date">${dateStr}</span>
+        <button class="cms-like-btn${liked ? ' liked' : ''}"
+          onclick="likeCmsBlock('${section}','${id}',this)"
+          aria-label="讚">
+          ${liked ? '♥' : '♡'} <span>${likes}</span>
+        </button>
+      </div>
+    </div>`;
+}
+
+async function likeCmsBlock(section, id, btn) {
+  if (btn.classList.contains('liked')) return;
+  btn.disabled = true;
+  try {
+    const r = await fetch(
+      `/api/likes?section=${encodeURIComponent(section)}&id=${encodeURIComponent(id)}`,
+      { method: 'POST' }
+    );
+    if (!r.ok) return;
+    const data = await r.json();
+    btn.classList.add('liked');
+    btn.innerHTML = `♥ <span>${data.count}</span>`;
+    localStorage.setItem(`like_${section}_${id}`, '1');
+  } catch { /* silent */ } finally {
+    btn.disabled = false;
+  }
+}
+
 async function loadCmsSectionContent() {
   const targets = [
     { section: 'confucianism', containerId: 'confucianism-cms' },
@@ -666,26 +711,95 @@ async function loadCmsSectionContent() {
     { section: 'reading',      containerId: 'leduhui-cms'      },
   ];
 
+  // Fetch like counts for all target sections
+  const likesBySection = {};
+  await Promise.allSettled(targets.map(async ({ section }) => {
+    try {
+      const r = await fetch(`/api/likes?section=${encodeURIComponent(section)}`);
+      if (r.ok) likesBySection[section] = await r.json();
+    } catch {}
+  }));
+
   await Promise.allSettled(targets.map(async ({ section, containerId }) => {
     const el = document.getElementById(containerId);
     if (!el) return;
     try {
-      const res = await fetch(`/api/content?section=${section}`);
+      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`);
       if (!res.ok) return;
       const blocks = await res.json();
       if (!Array.isArray(blocks) || !blocks.length) return;
       const sorted = [...blocks].sort((a, b) => (a.order || 0) - (b.order || 0));
-      el.innerHTML = sorted.map(b => `
-        <div class="cms-block">
-          ${(b.titleZh || b.titleEn) ? `
-            <h4 class="cms-block-title">
-              ${b.titleZh ? `<span class="zh">${b.titleZh}</span>` : ''}
-              ${b.titleEn ? `<span class="en">${b.titleEn}</span>` : ''}
-            </h4>` : ''}
-          ${b.body ? `<div class="cms-block-body">${b.body}</div>` : ''}
-        </div>`).join('');
+      const counts = likesBySection[section] || {};
+      el.innerHTML = sorted.map(b => renderCmsBlock(b, counts)).join('');
     } catch { /* API not available — silent */ }
   }));
+}
+
+async function loadZhanghuangCmsContent() {
+  const catMap = {
+    yuyanxue:    'zhanghuang-yuyanxue',
+    wenzixue:    'zhanghuang-wenzixue',
+    zhexue:      'zhanghuang-zhexue',
+    shixue:      'zhanghuang-shixue',
+    jingjixue:   'zhanghuang-jingjixue',
+    wenxue:      'zhanghuang-wenxue',
+    zhongyixue:  'zhanghuang-zhongyixue',
+    xuanxue:     'zhanghuang-xuanxue',
+  };
+
+  for (const [cat, section] of Object.entries(catMap)) {
+    try {
+      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`);
+      if (!res.ok) continue;
+      const blocks = await res.json();
+      if (!Array.isArray(blocks) || !blocks.length) continue;
+
+      const catDiv = document.querySelector(`#zhanghuang-content [data-cat="${cat}"]`);
+      if (!catDiv) continue;
+
+      let cmsWrap = catDiv.querySelector('.zhanghuang-cms-blocks');
+      if (!cmsWrap) {
+        cmsWrap = document.createElement('div');
+        cmsWrap.className = 'zhanghuang-cms-blocks';
+        catDiv.appendChild(cmsWrap);
+      }
+
+      const sorted = [...blocks].sort((a, b) => (a.order || 0) - (b.order || 0));
+      cmsWrap.innerHTML = sorted.map(b => renderCmsBlock(b)).join('');
+    } catch {}
+  }
+}
+
+async function loadDocsCmsContent() {
+  const subcatMap = {
+    jing:         'documents-jing',
+    shi:          'documents-shi',
+    zi:           'documents-zi',
+    ji:           'documents-ji',
+    zhanghuangku: 'documents-zhanghuangku',
+  };
+
+  for (const [subcat, section] of Object.entries(subcatMap)) {
+    try {
+      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`);
+      if (!res.ok) continue;
+      const blocks = await res.json();
+      if (!Array.isArray(blocks) || !blocks.length) continue;
+
+      const subcatDiv = document.querySelector(`.docs-subcat-content[data-subcat="${subcat}"]`);
+      if (!subcatDiv) continue;
+
+      let cmsWrap = subcatDiv.querySelector('.docs-cms-blocks');
+      if (!cmsWrap) {
+        cmsWrap = document.createElement('div');
+        cmsWrap.className = 'docs-cms-blocks';
+        subcatDiv.appendChild(cmsWrap);
+      }
+
+      const sorted = [...blocks].sort((a, b) => (a.order || 0) - (b.order || 0));
+      cmsWrap.innerHTML = sorted.map(b => renderCmsBlock(b)).join('');
+    } catch {}
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -701,7 +815,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFigureMap();
   initZhanghuangTabs();
   initDocumentsTabs();
-  loadCmsSectionContent(); // runs in background, no await needed
+  loadCmsSectionContent();
+  loadZhanghuangCmsContent();
+  loadDocsCmsContent();
 });
 
 

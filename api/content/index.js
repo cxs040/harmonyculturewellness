@@ -44,27 +44,32 @@ module.exports = async function (context, req) {
   }
 
   const email = authorise(req);
-  if (!email) {
+
+  // GET is public — write operations require authentication
+  if (req.method !== 'GET' && !email) {
     json(context, 403, { error: 'Access denied' });
     return;
   }
 
   const client = getClient();
-
   try { await client.createTable(); } catch { /* already exists */ }
 
   switch (req.method) {
     case 'GET': {
       const { section } = req.query;
+      // Unauthenticated visitors → only show published; dashboard (auth'd) sees all
+      const publishedOnly = !email;
+
       const items = [];
       const opts = section
         ? { queryOptions: { filter: `PartitionKey eq '${section}'` } }
         : {};
       for await (const entity of client.listEntities(opts)) {
         const { etag, timestamp, ...item } = entity;
+        // published defaults to true for content that predates this field
+        if (publishedOnly && item.published === false) continue;
         items.push(item);
       }
-      // Sort by order then createdAt
       items.sort((a, b) => {
         if (a.order !== b.order) return (a.order || 0) - (b.order || 0);
         return (a.createdAt || '') < (b.createdAt || '') ? -1 : 1;
@@ -91,6 +96,7 @@ module.exports = async function (context, req) {
         body: item.body || '',
         fileUrl: item.fileUrl || '',
         order: item.order || 0,
+        published: item.published !== false,
         createdAt: new Date().toISOString(),
         createdBy: email,
         updatedAt: new Date().toISOString(),
@@ -119,6 +125,7 @@ module.exports = async function (context, req) {
         body: item.body || '',
         fileUrl: item.fileUrl || '',
         order: item.order || 0,
+        published: item.published !== false,
         updatedAt: new Date().toISOString(),
         updatedBy: email,
       };

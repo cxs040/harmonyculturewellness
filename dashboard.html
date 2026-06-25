@@ -214,17 +214,38 @@
           <label>排序 Order</label>
           <input type="number" id="cnt-order" value="0" min="0" />
         </div>
+        <div class="form-group" style="align-self:flex-end">
+          <label class="toggle-label">狀態 Status</label>
+          <div class="toggle-row">
+            <label class="toggle-switch">
+              <input type="checkbox" id="cnt-published" checked onchange="updatePublishedLabel()" />
+              <span class="toggle-track"></span>
+            </label>
+            <span class="toggle-status published" id="cnt-published-label">已發布</span>
+          </div>
+        </div>
         <div class="form-group form-full" id="cnt-body-group">
-          <label>內容（支援 HTML）</label>
+          <div class="modal-tabs">
+            <button type="button" class="modal-tab active" onclick="switchEditorTab('edit')">✏ 編輯</button>
+            <button type="button" class="modal-tab" onclick="switchEditorTab('preview')">👁 預覽</button>
+          </div>
           <div class="editor-toolbar">
+            <select onchange="edHeading(this.value);this.value=''" title="標題格式">
+              <option value="">¶ 標題</option>
+              <option value="2">H2 大標</option>
+              <option value="3">H3 中標</option>
+              <option value="4">H4 小標</option>
+            </select>
             <button type="button" onclick="edFmt('bold')" title="粗體"><b>B</b></button>
             <button type="button" onclick="edFmt('italic')" title="斜體"><i>I</i></button>
             <button type="button" onclick="edFmt('underline')" title="下劃線"><u>U</u></button>
             <button type="button" onclick="edFmt('insertUnorderedList')" title="項目清單">≡</button>
             <button type="button" onclick="edFmt('insertOrderedList')" title="數字清單">1.</button>
             <button type="button" onclick="edLink()" title="連結">🔗</button>
+            <button type="button" onclick="edImage()" title="插入圖片">🖼</button>
           </div>
           <div class="editor-area" id="cnt-body-editor" contenteditable="true"></div>
+          <div class="cms-preview-area" id="cnt-body-preview"></div>
         </div>
       </div>
       <div class="form-actions">
@@ -238,6 +259,6 @@
 <!-- Toast container -->
 <div id="toast"></div>
 
-<script src="js/dashboard.js?v=2"></script>
+<script src="js/dashboard.js?v=3"></script>
 </body>
 </html>
