@@ -653,13 +653,47 @@ function initDocumentsTabs() {
   });
 }
 
+/* ════════════════════════════════════════
+   CMS CONTENT LOADER
+   Fetches content blocks stored via the dashboard
+   and appends them below each section's static content.
+   ════════════════════════════════════════ */
+async function loadCmsSectionContent() {
+  const targets = [
+    { section: 'confucianism', containerId: 'confucianism-cms' },
+    { section: 'taoism',       containerId: 'taoism-cms'       },
+    { section: 'buddhism',     containerId: 'buddhism-cms'     },
+    { section: 'reading',      containerId: 'leduhui-cms'      },
+  ];
+
+  await Promise.allSettled(targets.map(async ({ section, containerId }) => {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    try {
+      const res = await fetch(`/api/content?section=${section}`);
+      if (!res.ok) return;
+      const blocks = await res.json();
+      if (!Array.isArray(blocks) || !blocks.length) return;
+      const sorted = [...blocks].sort((a, b) => (a.order || 0) - (b.order || 0));
+      el.innerHTML = sorted.map(b => `
+        <div class="cms-block">
+          ${(b.titleZh || b.titleEn) ? `
+            <h4 class="cms-block-title">
+              ${b.titleZh ? `<span class="zh">${b.titleZh}</span>` : ''}
+              ${b.titleEn ? `<span class="en">${b.titleEn}</span>` : ''}
+            </h4>` : ''}
+          ${b.body ? `<div class="cms-block-body">${b.body}</div>` : ''}
+        </div>`).join('');
+    } catch { /* API not available — silent */ }
+  }));
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   renderSectionContent();
   renderPoems();
   renderZhanghuang();
   renderLeduhui();
   renderDonorBanner();
-  // Load figures from CMS API first (updates timeline if storage is configured)
   await tryLoadApiFigures();
   renderTimeline();
   loadSectionShelves();
@@ -667,6 +701,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initFigureMap();
   initZhanghuangTabs();
   initDocumentsTabs();
+  loadCmsSectionContent(); // runs in background, no await needed
 });
 
 

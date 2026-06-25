@@ -1993,3 +1993,37 @@ body.dark .search-result-item:focus { background: rgba(201,169,110,0.07); }
   .zh-chart-social th,
   .zh-chart-social td { padding: 0.28rem 0.35rem; font-size: 0.78rem; }
 }
+
+/* ── CMS content blocks (from dashboard) ── */
+.cms-block {
+  margin: 1.4rem 0;
+  padding: 1.2rem 1.5rem;
+  border-left: 3px solid var(--gold-dark, #8b6914);
+  background: rgba(139, 105, 20, 0.07);
+  border-radius: 0 6px 6px 0;
+}
+.cms-block-title {
+  font-size: 1.05rem;
+  color: var(--gold-dark, #8b6914);
+  margin-bottom: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.cms-block-body {
+  font-size: 0.97rem;
+  line-height: 1.9;
+  color: var(--ink, #2c1810);
+}
+.cms-block-body p  { margin-bottom: 0.6em; }
+.cms-block-body ul,
+.cms-block-body ol { padding-left: 1.4em; margin-bottom: 0.6em; }
+.cms-block-body li { margin-bottom: 0.25em; }
+.cms-block-body a  { color: var(--gold-dark, #8b6914); }
+
+.dark .cms-block {
+  background: rgba(201, 168, 76, 0.07);
+  border-left-color: #c9a84c;
+}
+.dark .cms-block-title { color: #c9a84c; }
+.dark .cms-block-body  { color: #e8dcc8; }
