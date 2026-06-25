@@ -202,16 +202,7 @@
           <label>標題（中文）</label>
           <input type="text" id="cnt-title-zh" placeholder="標題" />
         </div>
-        <div class="form-group">
-          <label style="display:flex;align-items:center;gap:.5rem;">
-            Title (English) <span style="color:var(--dash-muted);font-size:11px;text-transform:none;letter-spacing:0">（選填）</span>
-            <button type="button" id="translate-btn" class="btn btn-sm btn-ghost"
-              onclick="translateTitle()" style="margin-left:auto;font-size:12px;padding:.2rem .6rem">
-              ✦ 自動翻譯
-            </button>
-          </label>
-          <input type="text" id="cnt-title-en" placeholder="留空則只顯示中文標題" />
-        </div>
+        <input type="hidden" id="cnt-title-en" value="" />
         <div class="form-group">
           <label>類型 Type</label>
           <select id="cnt-type" onchange="onContentTypeChange()">
