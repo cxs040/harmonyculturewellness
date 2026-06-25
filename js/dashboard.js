@@ -749,6 +749,47 @@ function toast(type, msg, duration = 3500) {
 }
 
 /* ── API helpers ────────────────────────── */
+/* ── Auto-translate Chinese title → English ── */
+async function translateTitle() {
+  const zhInput  = document.getElementById('cnt-title-zh');
+  const enInput  = document.getElementById('cnt-title-en');
+  const btn      = document.getElementById('translate-btn');
+  const text     = zhInput ? zhInput.value.trim() : '';
+
+  if (!text) { toast('error', '請先填寫中文標題'); return; }
+
+  btn.disabled = true;
+  btn.textContent = '翻譯中…';
+
+  try {
+    const res  = await fetch('/api/translate', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify({ text }),
+    });
+
+    if (res.status === 501) {
+      toast('error', '翻譯功能未設定（需要 ANTHROPIC_API_KEY）');
+      return;
+    }
+    if (!res.ok) {
+      toast('error', '翻譯失敗，請稍後再試');
+      return;
+    }
+
+    const data = await res.json();
+    if (data.translation && enInput) {
+      enInput.value = data.translation;
+      toast('success', '翻譯完成');
+    }
+  } catch (err) {
+    toast('error', `翻譯錯誤：${err.message}`);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '✦ 自動翻譯';
+  }
+}
+
 async function apiGet(url) {
   return fetch(url, { headers: { 'Accept': 'application/json' } });
 }
