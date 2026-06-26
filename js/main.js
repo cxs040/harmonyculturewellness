@@ -276,7 +276,7 @@ function renderPoems() {
 /* ── Try to load figures from CMS API, fall back to data.js ── */
 async function tryLoadApiFigures() {
   try {
-    const res = await fetch('/api/figures');
+    const res = await fetch('/api/figures', { cache: 'no-store' });
     if (!res.ok) return;
     const list = await res.json();
     if (!list.length) return;
@@ -715,7 +715,7 @@ async function loadCmsSectionContent() {
   const likesBySection = {};
   await Promise.allSettled(targets.map(async ({ section }) => {
     try {
-      const r = await fetch(`/api/likes?section=${encodeURIComponent(section)}`);
+      const r = await fetch(`/api/likes?section=${encodeURIComponent(section)}`, { cache: 'no-store' });
       if (r.ok) likesBySection[section] = await r.json();
     } catch {}
   }));
@@ -724,7 +724,7 @@ async function loadCmsSectionContent() {
     const el = document.getElementById(containerId);
     if (!el) return;
     try {
-      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`);
+      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`, { cache: 'no-store' });
       if (!res.ok) return;
       const blocks = await res.json();
       if (!Array.isArray(blocks) || !blocks.length) return;
@@ -749,7 +749,7 @@ async function loadZhanghuangCmsContent() {
 
   for (const [cat, section] of Object.entries(catMap)) {
     try {
-      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`);
+      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`, { cache: 'no-store' });
       if (!res.ok) continue;
       const blocks = await res.json();
       if (!Array.isArray(blocks) || !blocks.length) continue;
@@ -781,7 +781,7 @@ async function loadDocsCmsContent() {
 
   for (const [subcat, section] of Object.entries(subcatMap)) {
     try {
-      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`);
+      const res = await fetch(`/api/content?section=${encodeURIComponent(section)}`, { cache: 'no-store' });
       if (!res.ok) continue;
       const blocks = await res.json();
       if (!Array.isArray(blocks) || !blocks.length) continue;
