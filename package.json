@@ -2,6 +2,7 @@
   "name": "chinese-culture-website",
   "private": true,
   "scripts": {
+    "build": "echo 'static site — no build step required'",
     "test": "node --test tests/"
   }
 }
