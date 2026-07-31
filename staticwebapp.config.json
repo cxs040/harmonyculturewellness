@@ -16,6 +16,16 @@
       "allowedRoles": ["anonymous", "authenticated"]
     },
     {
+      "route": "/api/health",
+      "methods": ["GET"],
+      "allowedRoles": ["anonymous", "authenticated"]
+    },
+    {
+      "route": "/api/backup",
+      "methods": ["GET"],
+      "allowedRoles": ["authenticated"]
+    },
+    {
       "route": "/api/*",
       "allowedRoles": ["authenticated"]
     }
@@ -29,7 +39,7 @@
     "rewrite": "/index.html",
     "exclude": [
       "/api/*",
-      "*.{css,js,jpg,jpeg,png,ico,svg,pdf,woff,woff2,ttf,eot}"
+      "*.{css,js,jpg,jpeg,png,ico,svg,pdf,woff,woff2,ttf,eot,webmanifest,xml,txt}"
     ]
   }
 }
