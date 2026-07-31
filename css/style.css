@@ -27,6 +27,26 @@ a { text-decoration: none; }
 ul { list-style: none; }
 button { cursor: pointer; font-family: inherit; }
 
+/* ── SKIP LINK ── */
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 0;
+  z-index: 3000;
+  background: var(--red);
+  color: var(--gold-bright);
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  border-bottom-right-radius: 4px;
+  transition: top 0.2s ease;
+}
+.skip-link:focus {
+  top: 0;
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
+
 /* ── LANGUAGE SWITCH ──
    body.lang-zh hides .en elements
    body.lang-en hides .zh elements       */
@@ -1375,6 +1395,10 @@ body.dark .fig-quote-block { background: linear-gradient(to right, rgba(139,26,2
   color: rgba(201,169,110,0.45);
   font-size: 0.85rem;
 }
+#search-input:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 2px;
+}
 .search-close {
   background: transparent;
   border: 1px solid var(--gold);
@@ -1438,6 +1462,10 @@ body.dark .fig-quote-block { background: linear-gradient(to right, rgba(139,26,2
 .search-result-item:focus {
   background: rgba(201,169,110,0.1);
   outline: none;
+}
+.search-result-item:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: -2px;
 }
 .sr-badge {
   flex-shrink: 0;

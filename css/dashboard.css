@@ -416,6 +416,10 @@ body.dashboard-body::before {
   outline: none;
 }
 .editor-area:focus { border-color: var(--dash-gold); }
+.editor-area:focus-visible {
+  outline: 2px solid var(--dash-gold);
+  outline-offset: 2px;
+}
 
 /* ── Content blocks ────────────────────── */
 .content-block {
@@ -666,6 +670,10 @@ body.dashboard-body::before {
 }
 .editor-toolbar select:hover { border-color: var(--dash-border); color: var(--dash-text); }
 .editor-toolbar select:focus { outline: none; border-color: var(--dash-gold); }
+.editor-toolbar select:focus-visible {
+  outline: 2px solid var(--dash-gold);
+  outline-offset: 2px;
+}
 
 /* ── Responsive ────────────────────────── */
 @media (max-width: 680px) {

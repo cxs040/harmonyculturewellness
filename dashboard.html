@@ -92,11 +92,11 @@
 </div>
 
 <!-- Figure form modal -->
-<div class="modal-overlay" id="figure-modal">
+<div class="modal-overlay" id="figure-modal" role="dialog" aria-modal="true" aria-labelledby="figure-modal-title">
   <div class="modal-box">
     <div class="modal-header">
       <h3 id="figure-modal-title">新增歷史人物</h3>
-      <button class="modal-close" onclick="closeFigureModal()">✕</button>
+      <button class="modal-close" onclick="closeFigureModal()" aria-label="關閉 Close">✕</button>
     </div>
     <form id="figure-form" onsubmit="submitFigureForm(event)">
       <input type="hidden" id="fig-edit-id" />
@@ -188,11 +188,11 @@
 </div>
 
 <!-- Content block form modal -->
-<div class="modal-overlay" id="content-modal">
+<div class="modal-overlay" id="content-modal" role="dialog" aria-modal="true" aria-labelledby="content-modal-title">
   <div class="modal-box">
     <div class="modal-header">
       <h3 id="content-modal-title">新增內容</h3>
-      <button class="modal-close" onclick="closeContentModal()">✕</button>
+      <button class="modal-close" onclick="closeContentModal()" aria-label="關閉 Close">✕</button>
     </div>
     <form id="content-form" onsubmit="submitContentForm(event)">
       <input type="hidden" id="cnt-edit-id" />
@@ -236,13 +236,13 @@
               <option value="3">H3 中標</option>
               <option value="4">H4 小標</option>
             </select>
-            <button type="button" onclick="edFmt('bold')" title="粗體"><b>B</b></button>
-            <button type="button" onclick="edFmt('italic')" title="斜體"><i>I</i></button>
-            <button type="button" onclick="edFmt('underline')" title="下劃線"><u>U</u></button>
-            <button type="button" onclick="edFmt('insertUnorderedList')" title="項目清單">≡</button>
-            <button type="button" onclick="edFmt('insertOrderedList')" title="數字清單">1.</button>
-            <button type="button" onclick="edLink()" title="連結">🔗</button>
-            <button type="button" onclick="edImage()" title="插入圖片">🖼</button>
+            <button type="button" onclick="edFmt('bold')" title="粗體" aria-label="粗體 Bold"><b>B</b></button>
+            <button type="button" onclick="edFmt('italic')" title="斜體" aria-label="斜體 Italic"><i>I</i></button>
+            <button type="button" onclick="edFmt('underline')" title="下劃線" aria-label="下劃線 Underline"><u>U</u></button>
+            <button type="button" onclick="edFmt('insertUnorderedList')" title="項目清單" aria-label="項目清單 Bulleted list">≡</button>
+            <button type="button" onclick="edFmt('insertOrderedList')" title="數字清單" aria-label="數字清單 Numbered list">1.</button>
+            <button type="button" onclick="edLink()" title="連結" aria-label="插入連結 Insert link">🔗</button>
+            <button type="button" onclick="edImage()" title="插入圖片" aria-label="插入圖片 Insert image">🖼</button>
           </div>
           <div class="editor-area" id="cnt-body-editor" contenteditable="true"></div>
           <div class="cms-preview-area" id="cnt-body-preview"></div>

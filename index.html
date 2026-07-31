@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://atlas.microsoft.com/sdk/javascript/mapcontrol/3/atlas.min.css">
 </head>
 <body class="lang-zh">
+  <a href="#main-content" class="skip-link">跳至主要內容 / Skip to main content</a>
 
   <!-- Top decorative border -->
   <div class="border-stripe"></div>
@@ -83,7 +84,7 @@
   </nav>
 
   <!-- ═══ MAIN ═══ -->
-  <main class="main-content">
+  <main class="main-content" id="main-content">
 
     <!-- ── HOME ── -->
     <section id="home" class="page active">
@@ -443,7 +444,7 @@
 
   <!-- ═══ SEARCH ═══ -->
   <div id="search-overlay"></div>
-  <div id="search-modal" role="search" aria-label="Search">
+  <div id="search-modal" role="search" aria-label="Search" aria-modal="true">
     <div class="search-header">
       <span class="search-icon"><i class="ti ti-search"></i></span>
       <input type="text" id="search-input"
