@@ -40,6 +40,34 @@ function json(context, status, body) {
   };
 }
 
+// OData string literals delimit with single quotes; a literal quote must be
+// doubled to escape it, otherwise user input can break out of the filter.
+function escapeODataString(value) {
+  return String(value).replace(/'/g, "''");
+}
+
+function validateTextFields(item) {
+  if (item.titleZh !== undefined && typeof item.titleZh !== 'string') {
+    return 'titleZh must be a string';
+  }
+  if (item.titleEn !== undefined && typeof item.titleEn !== 'string') {
+    return 'titleEn must be a string';
+  }
+  if ((item.titleZh || '').length > 500) {
+    return 'titleZh must be 500 characters or fewer';
+  }
+  if ((item.titleEn || '').length > 500) {
+    return 'titleEn must be 500 characters or fewer';
+  }
+  if (item.body !== undefined && typeof item.body !== 'string') {
+    return 'body must be a string';
+  }
+  if ((item.body || '').length > 200000) {
+    return 'body must be 200000 characters or fewer';
+  }
+  return null;
+}
+
 module.exports = async function (context, req) {
   if (!process.env.STORAGE_CONNECTION_STRING) {
     json(context, 503, { error: 'Storage not configured. Set STORAGE_CONNECTION_STRING.' });
@@ -65,7 +93,7 @@ module.exports = async function (context, req) {
 
       const items = [];
       const opts = section
-        ? { queryOptions: { filter: `PartitionKey eq '${section}'` } }
+        ? { queryOptions: { filter: `PartitionKey eq '${escapeODataString(section)}'` } }
         : {};
       for await (const entity of client.listEntities(opts)) {
         const { etag, timestamp, ...item } = entity;
@@ -83,8 +111,13 @@ module.exports = async function (context, req) {
 
     case 'POST': {
       const item = req.body;
-      if (!item || !item.section) {
-        json(context, 400, { error: 'Body must include section' });
+      if (!item || typeof item.section !== 'string' || !item.section) {
+        json(context, 400, { error: 'Body must include a non-empty section string' });
+        return;
+      }
+      const validationError = validateTextFields(item);
+      if (validationError) {
+        json(context, 400, { error: validationError });
         return;
       }
       const id = randomUUID();
@@ -117,6 +150,11 @@ module.exports = async function (context, req) {
         json(context, 400, { error: 'Requires ?id= and ?section= query params and body' });
         return;
       }
+      const validationError = validateTextFields(item);
+      if (validationError) {
+        json(context, 400, { error: validationError });
+        return;
+      }
       const entity = {
         partitionKey: section,
         rowKey: id,
@@ -136,6 +174,7 @@ module.exports = async function (context, req) {
         await client.upsertEntity(entity, 'Merge');
         json(context, 200, entity);
       } catch (err) {
+        context.log.error(err);
         json(context, 500, { error: err.message });
       }
       break;
@@ -150,7 +189,8 @@ module.exports = async function (context, req) {
       try {
         await client.deleteEntity(section, id);
         json(context, 200, { deleted: id });
-      } catch {
+      } catch (err) {
+        context.log.error(err);
         json(context, 404, { error: `Item not found: ${id}` });
       }
       break;

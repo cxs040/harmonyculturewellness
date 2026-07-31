@@ -39,6 +39,31 @@ function json(context, status, body) {
   };
 }
 
+const TEXT_FIELD_LIMITS = {
+  nameZh: 200,
+  nameEn: 200,
+  dynastyZh: 200,
+  dynastyEn: 200,
+  catLabelZh: 200,
+  catLabelEn: 200,
+  quoteZh: 1000,
+  quoteEn: 1000,
+  sourceZh: 1000,
+  sourceEn: 1000,
+  locationZh: 200,
+  locationEn: 200,
+};
+
+function validateFigureFields(fig) {
+  for (const [field, limit] of Object.entries(TEXT_FIELD_LIMITS)) {
+    const value = fig[field];
+    if (value === undefined) continue;
+    if (typeof value !== 'string') return `${field} must be a string`;
+    if (value.length > limit) return `${field} must be ${limit} characters or fewer`;
+  }
+  return null;
+}
+
 module.exports = async function (context, req) {
   if (!process.env.STORAGE_CONNECTION_STRING) {
     json(context, 503, { error: 'Storage not configured. Set STORAGE_CONNECTION_STRING.' });
@@ -70,8 +95,13 @@ module.exports = async function (context, req) {
 
     case 'POST': {
       const fig = req.body;
-      if (!fig || !fig.id) {
-        json(context, 400, { error: 'Body must include id' });
+      if (!fig || typeof fig.id !== 'string' || !fig.id) {
+        json(context, 400, { error: 'Body must include a non-empty id string' });
+        return;
+      }
+      const validationError = validateFigureFields(fig);
+      if (validationError) {
+        json(context, 400, { error: validationError });
         return;
       }
       const entity = {
@@ -99,6 +129,7 @@ module.exports = async function (context, req) {
         await client.createEntity(entity);
         json(context, 201, entity);
       } catch (err) {
+        context.log.error(err);
         json(context, 409, { error: `Figure with id "${fig.id}" already exists` });
       }
       break;
@@ -109,6 +140,11 @@ module.exports = async function (context, req) {
       const fig = req.body;
       if (!id || !fig) {
         json(context, 400, { error: 'Requires ?id= query param and body' });
+        return;
+      }
+      const validationError = validateFigureFields(fig);
+      if (validationError) {
+        json(context, 400, { error: validationError });
         return;
       }
       const entity = {
@@ -136,6 +172,7 @@ module.exports = async function (context, req) {
         await client.upsertEntity(entity, 'Replace');
         json(context, 200, entity);
       } catch (err) {
+        context.log.error(err);
         json(context, 500, { error: err.message });
       }
       break;
@@ -151,6 +188,7 @@ module.exports = async function (context, req) {
         await client.deleteEntity(dynasty, id);
         json(context, 200, { deleted: id });
       } catch (err) {
+        context.log.error(err);
         json(context, 404, { error: `Figure not found: ${id}` });
       }
       break;

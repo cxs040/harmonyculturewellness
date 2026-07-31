@@ -18,6 +18,14 @@ function json(context, status, body) {
   };
 }
 
+// OData string literals delimit with single quotes; a literal quote must be
+// doubled to escape it, otherwise user input can break out of the filter.
+function escapeODataString(value) {
+  return String(value).replace(/'/g, "''");
+}
+
+const LIKE_COOLDOWN_MS = 1000;
+
 module.exports = async function (context, req) {
   if (!process.env.STORAGE_CONNECTION_STRING) {
     json(context, 503, { error: 'Storage not configured.' });
@@ -32,7 +40,7 @@ module.exports = async function (context, req) {
       const { section } = req.query;
       const result = {};
       const opts = section
-        ? { queryOptions: { filter: `PartitionKey eq '${section}'` } }
+        ? { queryOptions: { filter: `PartitionKey eq '${escapeODataString(section)}'` } }
         : {};
       for await (const entity of client.listEntities(opts)) {
         result[entity.rowKey] = entity.count || 0;
@@ -47,16 +55,30 @@ module.exports = async function (context, req) {
         json(context, 400, { error: 'Requires ?section= and ?id= query params' });
         return;
       }
-      let count = 1;
+      let existing = null;
       try {
-        const existing = await client.getEntity(section, id);
-        count = (existing.count || 0) + 1;
+        existing = await client.getEntity(section, id);
       } catch {
         // Entity doesn't exist yet; start at 1
       }
-      const entity = { partitionKey: section, rowKey: id, count };
-      await client.upsertEntity(entity, 'Replace');
-      json(context, 200, { section, id, count });
+      if (existing && existing.lastLikedAt && Date.now() - new Date(existing.lastLikedAt).getTime() < LIKE_COOLDOWN_MS) {
+        json(context, 429, { error: 'Too many requests' });
+        return;
+      }
+      const count = (existing ? existing.count || 0 : 0) + 1;
+      const entity = {
+        partitionKey: section,
+        rowKey: id,
+        count,
+        lastLikedAt: new Date().toISOString(),
+      };
+      try {
+        await client.upsertEntity(entity, 'Replace');
+        json(context, 200, { section, id, count });
+      } catch (err) {
+        context.log.error(err);
+        json(context, 500, { error: 'Failed to record like' });
+      }
       break;
     }
 

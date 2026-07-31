@@ -37,6 +37,17 @@ function getContainer() {
   return serviceClient.getContainerClient(CONTAINER_NAME);
 }
 
+const MAX_UPLOAD_BYTES = 20 * 1024 * 1024;
+
+// Matches the dashboard's file picker accept list (.pdf,.jpg,.jpeg,.png,.doc,.docx)
+const ALLOWED_CONTENT_TYPES = new Set([
+  'application/pdf',
+  'image/jpeg',
+  'image/png',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+]);
+
 module.exports = async function (context, req) {
   if (!process.env.STORAGE_CONNECTION_STRING) {
     json(context, 503, { error: 'Storage not configured. Set STORAGE_CONNECTION_STRING.' });
@@ -75,10 +86,20 @@ module.exports = async function (context, req) {
     }
 
     case 'POST': {
+      const contentLength = Number(req.headers['content-length'] || 0);
+      if (contentLength > MAX_UPLOAD_BYTES) {
+        json(context, 413, { error: 'File exceeds maximum upload size of 20MB' });
+        return;
+      }
+
       // Upload file — body is raw bytes, metadata from query params
       const { section, filename, contentType } = req.query;
       if (!section || !filename) {
         json(context, 400, { error: 'Requires ?section= and ?filename= query params' });
+        return;
+      }
+      if (!contentType || !ALLOWED_CONTENT_TYPES.has(contentType)) {
+        json(context, 400, { error: `Unsupported content type: ${contentType || '(none)'}` });
         return;
       }
       if (!req.body) {
@@ -93,7 +114,7 @@ module.exports = async function (context, req) {
 
       const buffer = Buffer.isBuffer(req.body) ? req.body : Buffer.from(req.rawBody || '', 'binary');
       await blockBlob.uploadData(buffer, {
-        blobHTTPHeaders: { blobContentType: contentType || 'application/octet-stream' },
+        blobHTTPHeaders: { blobContentType: contentType },
         metadata: { uploadedBy: email, section },
       });
 
@@ -114,7 +135,8 @@ module.exports = async function (context, req) {
       try {
         await container.deleteBlob(name);
         json(context, 200, { deleted: name });
-      } catch {
+      } catch (err) {
+        context.log.error(err);
         json(context, 404, { error: `Blob not found: ${name}` });
       }
       break;
