@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Chinese Philosophy and Literary Archives — Preserving millennia of cultural wisdom">
   <title>中華哲學文學典籍 | Chinese Philosophy & Literary Archives</title>
+  <meta property="og:title" content="中華哲學文學典籍 | Chinese Philosophy & Literary Archives">
+  <meta property="og:description" content="Chinese Philosophy and Literary Archives — Preserving millennia of cultural wisdom">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://black-meadow-0d81e2010.7.azurestaticapps.net">
+  <meta property="og:locale" content="zh_TW">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#8B1A1A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -524,5 +531,12 @@
   <script src="js/speech-config.js"></script>
   <script src="js/maps-config.js"></script>
   <script src="js/main.js?v=23"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => {});
+      });
+    }
+  </script>
 </body>
 </html>

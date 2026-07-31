@@ -1,0 +1,15 @@
+{
+  "name": "和諧文化養生 · Chinese Culture & Wellness",
+  "short_name": "和諧文化",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5E6CC",
+  "theme_color": "#8B1A1A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
